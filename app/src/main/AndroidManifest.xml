@@ -19,12 +19,21 @@
             android:label="@string/title_activity_connexion" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activities.InscriptionActivity"
             android:label="@string/title_activity_inscription" >
+        </activity>
+        <activity
+            android:name=".activities.Contract"
+            android:label="@string/title_activity_contract" >
+        </activity>
+        <activity
+            android:name=".activities.ContratActivity"
+            android:label="@string/title_activity_contrat" >
         </activity>
     </application>
 

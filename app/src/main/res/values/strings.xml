@@ -9,4 +9,6 @@
     <string name="password">Password</string>
     <string name="connexion">Connexion</string>
     <string name="title_activity_inscription">Inscription</string>
+    <string name="title_activity_contract">Contract</string>
+    <string name="title_activity_contrat">Contrat de location</string>
 </resources>
