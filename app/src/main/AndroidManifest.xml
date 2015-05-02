@@ -28,10 +28,6 @@
             android:label="@string/title_activity_inscription" >
         </activity>
         <activity
-            android:name=".activities.Contract"
-            android:label="@string/title_activity_contract" >
-        </activity>
-        <activity
             android:name=".activities.ContratActivity"
             android:label="@string/title_activity_contrat" >
         </activity>
