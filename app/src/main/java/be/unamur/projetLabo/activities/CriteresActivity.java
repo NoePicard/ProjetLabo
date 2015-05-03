@@ -71,7 +71,7 @@ public class CriteresActivity extends ActionBarActivity {
                             listCriteres,
                             android.R.layout.simple_list_item_multiple_choice,
                             new String[] {"critere"},
-                            new int[] {R.id.listView_criteres});
+                            new int[] {android.R.id.text1});
 
                     listViewCriteres.setAdapter(adapter);
                 } catch (JSONException e) {
