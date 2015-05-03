@@ -26,7 +26,7 @@ public class Criteres {
         this.type = type;
     }
     public String toString(){
-        return name + " " + type;
+        return name + "\n" + type;
     }
 
     public void hydrate(JSONObject criObj){
