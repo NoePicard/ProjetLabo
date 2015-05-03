@@ -12,4 +12,5 @@
     <string name="title_activity_contract">Contract</string>
     <string name="title_activity_contrat">Contrat de location</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_criteres">Choisissez vos critères</string>
 </resources>

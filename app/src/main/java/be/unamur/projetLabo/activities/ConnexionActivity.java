@@ -89,7 +89,8 @@ public class ConnexionActivity extends ActionBarActivity implements SnackBar.OnM
                                     error.setText("");
                                     //Nouvelle activity
                                     if(ProjetLabo.user.isContrated()){
-
+                                        startActivity(new Intent(ConnexionActivity.this, CriteresActivity.class));
+                                        ConnexionActivity.this.finish();
                                     }else{
                                         startActivity(new Intent(ConnexionActivity.this, ContratActivity.class));
                                         ConnexionActivity.this.finish();
