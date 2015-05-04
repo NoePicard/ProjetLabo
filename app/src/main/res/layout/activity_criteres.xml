@@ -6,7 +6,19 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="327dp"
         android:id="@+id/listView_criteres"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:choiceMode="multipleChoice"
+        android:layout_weight="0.91" />
+
+    <Button
+        android:layout_width="252dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_envoyer_criteres_activity"
+        android:id="@+id/btn_envoyer"
+        android:background="@color/primary"
+        android:textColor="@color/accent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp" />
 </LinearLayout>

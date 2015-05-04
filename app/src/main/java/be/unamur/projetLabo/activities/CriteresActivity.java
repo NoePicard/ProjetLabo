@@ -3,6 +3,9 @@ package be.unamur.projetLabo.activities;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseBooleanArray;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -26,10 +29,13 @@ import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
 import be.unamur.projetLabo.classes.Criteres;
 import be.unamur.projetLabo.request.OkHttpStack;
+import be.unamur.projetLabo.request.PostRequest;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CriteresActivity extends AppCompatActivity {
     private ListView listViewCriteres;
+    private Criteres[] criSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,34 +51,29 @@ public class CriteresActivity extends AppCompatActivity {
             @Override
             public void onResponse(String s) {
                 try {
+
                     JSONArray criArray = new JSONArray(s);
-
-                    List<HashMap<String, Criteres>> listCriteres = new ArrayList<HashMap<String, Criteres>>();
-
-                    HashMap<String, Criteres> element;
+                    List<String> listCriteres = new ArrayList<String>();
+                    criSave = new Criteres[criArray.length()];
 
                     for (int i = 0; i < criArray.length(); i++) {
 
                         JSONObject criObj = criArray.getJSONObject(i);
 
                         // Create new Object "Criteres" for each criterion in the DB
+                        Criteres cri = new Criteres(criObj.getInt("Id"),
+                                                    criObj.getString("Name"),
+                                                    criObj.getString("Type"));
+                        criSave[i] = cri;
 
-                        Criteres cri = new Criteres(criObj.getString("Nom"),criObj.getString("Type"));
-
-                        element = new HashMap<String, Criteres>();
-
-                        element.put("critere",cri);
-
-                        listCriteres.add(element);
+                        listCriteres.add(cri.getName() + "\n\n" + cri.getType());
                     }
 
-                    ListAdapter adapter = new SimpleAdapter(CriteresActivity.this,
-                            listCriteres,
-                            android.R.layout.simple_list_item_multiple_choice,
-                            new String[] {"critere"},
-                            new int[] {android.R.id.text1});
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(CriteresActivity.this,
+                            android.R.layout.simple_list_item_multiple_choice, listCriteres);
 
                     listViewCriteres.setAdapter(adapter);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -88,5 +89,29 @@ public class CriteresActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(CriteresActivity.this, new OkHttpStack());
         queue.add(request);
 
+    }
+
+    @OnClick (R.id.btn_envoyer)
+    public void onClickBtnEnvoyer(View view){
+
+        SparseBooleanArray CriteresChoisis = listViewCriteres.getCheckedItemPositions();
+
+        JSONArray criArrayChosen = new JSONArray();
+        try {
+
+            for (int i = 0; i < CriteresChoisis.size(); i++) {
+
+                JSONObject criObjChosen = new JSONObject();
+
+                criObjChosen.put("Id", criSave[CriteresChoisis.keyAt(i)].getId());
+                criObjChosen.put("Name",criSave[CriteresChoisis.keyAt(i)].getName());
+                criObjChosen.put("Type",criSave[CriteresChoisis.keyAt(i)].getType());
+
+                criArrayChosen.put(criObjChosen);
+            }
+
+            //criArrayChosen.toString();
+
+        } catch(JSONException e) {e.printStackTrace();}
     }
 }

@@ -32,9 +32,13 @@
             android:label="@string/title_activity_contrat" >
         </activity>
         <activity
-        android:name=".activities.CriteresActivity"
-        android:label="@string/title_activity_criteres" >
-    </activity>
+            android:name=".activities.CriteresActivity"
+            android:label="@string/title_activity_criteres" >
+        </activity>
+        <activity
+            android:name=".activities.VoituresActivity"
+            android:label="@string/title_activity_voitures" >
+        </activity>
     </application>
 
 </manifest>
