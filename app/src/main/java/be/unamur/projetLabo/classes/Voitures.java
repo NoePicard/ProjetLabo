@@ -11,6 +11,15 @@ public class Voitures {
     private boolean manualTransmission;
     private String path;
 
+    public Voitures(int id, String name, int nbSeat, int nbDoor, String path, boolean manualTransmission) {
+        this.id = id;
+        this.name = name;
+        this.nbSeat = nbSeat;
+        this.nbDoor = nbDoor;
+        this.path = path;
+        this.manualTransmission = manualTransmission;
+    }
+
     public int getId() {
         return id;
     }
@@ -59,7 +68,7 @@ public class Voitures {
         this.path = path;
     }
 
-    public Voitures(JSONObject voitObj){
+    public void hydrate(JSONObject voitObj){
         try {
             this.setId(voitObj.getInt("Id"));
             this.setName(voitObj.getString("Name"));

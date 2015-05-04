@@ -1,5 +1,6 @@
 package be.unamur.projetLabo.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -109,6 +110,8 @@ public class CriteresActivity extends AppCompatActivity {
             }
 
             //criArrayChosen.toString();
+
+            startActivity(new Intent(CriteresActivity.this, VoituresActivity.class));
 
         } catch(JSONException e) {e.printStackTrace();}
     }
