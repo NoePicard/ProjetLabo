@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import be.unamur.projetLabo.R;
@@ -25,11 +26,11 @@ public class VoituresActivity extends AppCompatActivity {
         setContentView(R.layout.activity_voitures);
         ButterKnife.inject(this);
 
-        boolean b = true;
+        voit = new ArrayList<>();
 
-        voit.add(new Voitures(1, "abc", 2, 2, "a", b));
-        voit.add(new Voitures(1, "def", 2 ,2, "a", b));
-        voit.add(new Voitures(1, "ghi", 2, 2, "a", b));
+        voit.add(new Voitures(1, "abc", 2, 2, "a", 1));
+        voit.add(new Voitures(1, "def", 2 ,2, "a", 0));
+        voit.add(new Voitures(1, "ghi", 2, 2, "a", 1));
 
         RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
 

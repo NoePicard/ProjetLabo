@@ -8,10 +8,10 @@ public class Voitures {
     private String name;
     private int nbSeat;
     private int nbDoor;
-    private boolean manualTransmission;
+    private int manualTransmission;
     private String path;
 
-    public Voitures(int id, String name, int nbSeat, int nbDoor, String path, boolean manualTransmission) {
+    public Voitures(int id, String name, int nbSeat, int nbDoor, String path, int manualTransmission) {
         this.id = id;
         this.name = name;
         this.nbSeat = nbSeat;
@@ -52,11 +52,11 @@ public class Voitures {
         this.nbDoor = nbDoor;
     }
 
-    public boolean isManualTransmission() {
+    public int isManualTransmission() {
         return manualTransmission;
     }
 
-    public void setManualTransmission(boolean manualTransmission) {
+    public void setManualTransmission(int manualTransmission) {
         this.manualTransmission = manualTransmission;
     }
 
@@ -74,7 +74,7 @@ public class Voitures {
             this.setName(voitObj.getString("Name"));
             this.setNbSeat(voitObj.getInt("NbSeat"));
             this.setNbDoor(voitObj.getInt("NbDoor"));
-            this.setManualTransmission(voitObj.getBoolean("manualTransmission"));
+            this.setManualTransmission(voitObj.getInt("manualTransmission"));
             this.setPath(voitObj.getString("Path"));
         } catch (JSONException e) {
             e.printStackTrace();
