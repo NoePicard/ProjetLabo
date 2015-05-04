@@ -10,11 +10,7 @@ public class Criteres {
     private String name;
     private String type;
 
-    public Criteres(int id, String name, String type){
-        this.id = id;
-        this.name = name;
-        this.type = type;
-    }
+
     public int getId() {
         return id;
     }
@@ -34,7 +30,7 @@ public class Criteres {
         this.type = type;
     }
 
-    public void hydrate(JSONObject criObj){
+    public Criteres(JSONObject criObj){
         try{
             this.setId(criObj.getInt("Id"));
             this.setName(criObj.getString("Name"));
@@ -42,14 +38,5 @@ public class Criteres {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Criteres{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                '}';
     }
 }

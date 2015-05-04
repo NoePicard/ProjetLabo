@@ -61,12 +61,10 @@ public class CriteresActivity extends AppCompatActivity {
                         JSONObject criObj = criArray.getJSONObject(i);
 
                         // Create new Object "Criteres" for each criterion in the DB
-                        Criteres cri = new Criteres(criObj.getInt("Id"),
-                                                    criObj.getString("Name"),
-                                                    criObj.getString("Type"));
+                        Criteres cri = new Criteres(criObj);
                         criSave[i] = cri;
 
-                        listCriteres.add(cri.getName() + "\n\n" + cri.getType());
+                        listCriteres.add(cri.getName() + "\n" + cri.getType());
                     }
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(CriteresActivity.this,
