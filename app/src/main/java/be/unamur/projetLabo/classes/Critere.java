@@ -3,9 +3,10 @@ package be.unamur.projetLabo.classes;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import be.unamur.projetLabo.ProjetLabo;
-
-public class Criteres {
+/**
+ * Created by Quentin on 05-05-15.
+ */
+public class Critere {
     private int id;
     private String name;
     private String type;
@@ -30,7 +31,7 @@ public class Criteres {
         this.type = type;
     }
 
-    public Criteres(JSONObject criObj){
+    public Critere(JSONObject criObj){
         try{
             this.setId(criObj.getInt("Id"));
             this.setName(criObj.getString("Name"));

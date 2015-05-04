@@ -2,14 +2,11 @@ package be.unamur.projetLabo.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -25,10 +22,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
-import be.unamur.projetLabo.classes.Criteres;
+import be.unamur.projetLabo.classes.Critere;
+import be.unamur.projetLabo.classes.Voiture;
 import be.unamur.projetLabo.request.OkHttpStack;
 import be.unamur.projetLabo.request.PostRequest;
 import butterknife.ButterKnife;
@@ -36,7 +35,7 @@ import butterknife.OnClick;
 
 public class CriteresActivity extends AppCompatActivity {
     private ListView listViewCriteres;
-    private Criteres[] criSave;
+    private Critere[] criSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +54,14 @@ public class CriteresActivity extends AppCompatActivity {
 
                     JSONArray criArray = new JSONArray(s);
                     List<String> listCriteres = new ArrayList<String>();
-                    criSave = new Criteres[criArray.length()];
+                    criSave = new Critere[criArray.length()];
 
                     for (int i = 0; i < criArray.length(); i++) {
 
                         JSONObject criObj = criArray.getJSONObject(i);
 
                         // Create new Object "Criteres" for each criterion in the DB
-                        Criteres cri = new Criteres(criObj);
+                        Critere cri = new Critere(criObj);
                         criSave[i] = cri;
 
                         listCriteres.add(cri.getName() + "\n" + cri.getType());
@@ -78,7 +77,7 @@ public class CriteresActivity extends AppCompatActivity {
                 }
 
             }
-        },new Response.ErrorListener() {
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 Toast.makeText(CriteresActivity.this, "Error : " + volleyError.getMessage(), Toast.LENGTH_LONG).show();
@@ -90,8 +89,8 @@ public class CriteresActivity extends AppCompatActivity {
 
     }
 
-    @OnClick (R.id.btn_envoyer)
-    public void onClickBtnEnvoyer(View view){
+    @OnClick(R.id.btn_envoyer)
+    public void onClickBtnEnvoyer(View view) {
 
         SparseBooleanArray CriteresChoisis = listViewCriteres.getCheckedItemPositions();
 
@@ -103,16 +102,54 @@ public class CriteresActivity extends AppCompatActivity {
                 JSONObject criObjChosen = new JSONObject();
 
                 criObjChosen.put("Id", criSave[CriteresChoisis.keyAt(i)].getId());
-                criObjChosen.put("Name",criSave[CriteresChoisis.keyAt(i)].getName());
-                criObjChosen.put("Type",criSave[CriteresChoisis.keyAt(i)].getType());
+                criObjChosen.put("Name", criSave[CriteresChoisis.keyAt(i)].getName());
+                criObjChosen.put("Type", criSave[CriteresChoisis.keyAt(i)].getType());
 
                 criArrayChosen.put(criObjChosen);
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-            //criArrayChosen.toString();
+        //Envoi des données a l'API
+        String URL = ProjetLabo.API_BASE_URL + "/criteres.json"; //url de l'api
 
-            startActivity(new Intent(CriteresActivity.this, VoituresActivity.class));
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("criteres", criArrayChosen.toString());
 
-        } catch(JSONException e) {e.printStackTrace();}
+        PostRequest request = new PostRequest(URL, params, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String responseData) {
+                try {
+                    JSONArray voitureArray = new JSONArray(responseData);
+                    Voiture[] voitures = new Voiture[voitureArray.length()];
+
+                    for (int i = 0; i < voitureArray.length(); i++) {
+
+                        JSONObject voitureObj = voitureArray.getJSONObject(i);
+
+                        // Create new Object "Criteres" for each criterion in the DB
+                        voitures[i] = new Voiture(voitureObj);
+                    }
+
+                    //Appel de la l'activity voiture
+                    Intent intent = new Intent(CriteresActivity.this, VoituresActivity.class);
+                    intent.putExtra("voitures", voitures);
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    //Erreur lors du décodage du json
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        //Requête à échoué
+                    }
+                });
+
+        RequestQueue queue = Volley.newRequestQueue(CriteresActivity.this, new OkHttpStack());
+        queue.add(request);
     }
 }

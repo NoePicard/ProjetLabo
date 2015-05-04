@@ -1,8 +1,10 @@
 package be.unamur.projetLabo.activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -12,13 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.unamur.projetLabo.R;
+import be.unamur.projetLabo.classes.Voiture;
 import be.unamur.projetLabo.adapters.RVAdapter;
-import be.unamur.projetLabo.classes.Voitures;
+import be.unamur.projetLabo.classes.Voiture;
 import butterknife.ButterKnife;
 
 public class VoituresActivity extends AppCompatActivity {
 
-    private List<Voitures> voit;
+    Voiture[] voitures;
+
+    private List<Voiture> voit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +31,16 @@ public class VoituresActivity extends AppCompatActivity {
         setContentView(R.layout.activity_voitures);
         ButterKnife.inject(this);
 
-        voit = new ArrayList<>();
+        Intent intent = getIntent();
+        voitures = (Voiture[]) intent.getSerializableExtra("voitures");
 
-        voit.add(new Voitures(1, "abc", 2, 2, "a", 1));
-        voit.add(new Voitures(1, "def", 2 ,2, "a", 0));
-        voit.add(new Voitures(1, "ghi", 2, 2, "a", 1));
+
+        boolean b = true;
+        voit = new ArrayList<>();
+        int i;
+        for(i=0; i<voitures.length; i++){
+            voit.add(voitures[i]);
+        }
 
         RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
 
@@ -39,8 +49,6 @@ public class VoituresActivity extends AppCompatActivity {
 
         RVAdapter adapter = new RVAdapter(voit);
         rv.setAdapter(adapter);
-
-
 
     }
 

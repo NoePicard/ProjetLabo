@@ -43,6 +43,7 @@ public class InscriptionActivity extends AppCompatActivity implements SnackBar.O
                 .withActionMessage("CONNECTEZ-VOUS")
                 .withBackgroundColorId(R.color.primary)
                 .withTextColorId(R.color.accent)
+                .withDuration((short) 0)
                 .show();
     }
 
@@ -85,18 +86,15 @@ public class InscriptionActivity extends AppCompatActivity implements SnackBar.O
                                 startActivity(new Intent(InscriptionActivity.this, ContratActivity.class));
                                 InscriptionActivity.this.finish();
                             }else{
-                                showSnackBar();
                                 password.setText("");
                                 login.setText("");
                                 error.setText("Ce login existe déjà ! Choississez-en un autre");
                             }
                         } else {
-                            showSnackBar();
                             password.setText("");
                             error.setText("Une erreur est survenue veuillez réessayer");
                         }
                     } catch (JSONException e) {
-                        showSnackBar();
                         password.setText("");
                         error.setText("Une erreur est survenue veuillez réessayer");
                     }
@@ -105,14 +103,12 @@ public class InscriptionActivity extends AppCompatActivity implements SnackBar.O
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
-                            showSnackBar();
                             Toast.makeText(InscriptionActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
                         }
                     });
             RequestQueue queue = Volley.newRequestQueue(InscriptionActivity.this, new OkHttpStack());
             queue.add(requestAddUser);
         }else{
-            showSnackBar();
             password.setText("");
             error.setText("Veuillez encoder votre Login et Password !");
         }

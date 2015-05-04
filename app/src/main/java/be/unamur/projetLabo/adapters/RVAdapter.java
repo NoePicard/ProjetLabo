@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import be.unamur.projetLabo.R;
-import be.unamur.projetLabo.classes.Voitures;
+import be.unamur.projetLabo.classes.Voiture;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
@@ -31,9 +31,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
         }
     }
 
-    List<Voitures> voit;
+    List<Voiture> voit;
 
-    public RVAdapter(List<Voitures> voit){
+    public RVAdapter(List<Voiture> voit){
         this.voit = voit;
     }
 

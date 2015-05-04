@@ -3,20 +3,22 @@ package be.unamur.projetLabo.classes;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Voitures {
+import java.io.Serializable;
+
+public class Voiture  implements Serializable {
     private int id;
     private String name;
     private int nbSeat;
     private int nbDoor;
-    private int manualTransmission;
+    private boolean manualTransmission;
     private String path;
 
-    public Voitures(int id, String name, int nbSeat, int nbDoor, String path, int manualTransmission) {
+    public Voiture( int id, String name, int nbSeat, int nbDoor, boolean manualTransmission) {
+        this.path = "";
         this.id = id;
         this.name = name;
         this.nbSeat = nbSeat;
         this.nbDoor = nbDoor;
-        this.path = path;
         this.manualTransmission = manualTransmission;
     }
 
@@ -52,11 +54,11 @@ public class Voitures {
         this.nbDoor = nbDoor;
     }
 
-    public int isManualTransmission() {
+    public boolean isManualTransmission() {
         return manualTransmission;
     }
 
-    public void setManualTransmission(int manualTransmission) {
+    public void setManualTransmission(boolean manualTransmission) {
         this.manualTransmission = manualTransmission;
     }
 
@@ -68,14 +70,14 @@ public class Voitures {
         this.path = path;
     }
 
-    public void hydrate(JSONObject voitObj){
+    public Voiture(JSONObject voitObj){
         try {
-            this.setId(voitObj.getInt("Id"));
-            this.setName(voitObj.getString("Name"));
-            this.setNbSeat(voitObj.getInt("NbSeat"));
-            this.setNbDoor(voitObj.getInt("NbDoor"));
-            this.setManualTransmission(voitObj.getInt("manualTransmission"));
-            this.setPath(voitObj.getString("Path"));
+            this.id = voitObj.getInt("Id");
+            this.name = voitObj.getString("Name");
+            this.nbSeat = voitObj.getInt("NbSeat");
+            this.nbDoor = voitObj.getInt("NbDoor");
+            this.manualTransmission = voitObj.getBoolean("ManualTransmission");
+            this.path = voitObj.getString("Path");
         } catch (JSONException e) {
             e.printStackTrace();
         }

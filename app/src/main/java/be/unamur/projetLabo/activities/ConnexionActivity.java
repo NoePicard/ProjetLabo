@@ -55,6 +55,7 @@ public class ConnexionActivity extends AppCompatActivity implements SnackBar.OnM
                 .withActionMessage("INSCRIVEZ-VOUS")
                 .withBackgroundColorId(R.color.primary)
                 .withTextColorId(R.color.accent)
+                .withDuration((short) 0)
                 .show();
     }
 
@@ -84,20 +85,20 @@ public class ConnexionActivity extends AppCompatActivity implements SnackBar.OnM
                                         startActivity(new Intent(ConnexionActivity.this, ContratActivity.class));
                                         ConnexionActivity.this.finish();
                                     }
+                                }else{
+                                    password.setText("");
+                                    error.setText("Votre compte n'existe pas !");
                                 }
                             }
                             else {
-                                showSnackBar();
                                 password.setText("");
                                 error.setText("Votre compte n'existe pas !");
                             }
                         } else {
-                            showSnackBar();
                             password.setText("");
                             error.setText("Veuilliez réessayer !");
                         }
                     } catch (JSONException e) {
-                        showSnackBar();
                         password.setText("");
                         error.setText("Veuilliez réessayer !");
                     }
@@ -106,7 +107,6 @@ public class ConnexionActivity extends AppCompatActivity implements SnackBar.OnM
             new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    showSnackBar();
                     Toast.makeText(ConnexionActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
                 }
             });
