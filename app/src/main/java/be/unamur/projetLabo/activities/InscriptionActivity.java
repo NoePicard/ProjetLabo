@@ -1,12 +1,10 @@
 package be.unamur.projetLabo.activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -32,7 +30,7 @@ import be.unamur.projetLabo.request.PostRequest;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class InscriptionActivity extends ActionBarActivity  implements SnackBar.OnMessageClickListener{
+public class InscriptionActivity extends AppCompatActivity implements SnackBar.OnMessageClickListener{
     private EditText login;
     private EditText password;
     private TextView error;

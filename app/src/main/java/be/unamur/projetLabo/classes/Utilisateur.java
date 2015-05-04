@@ -74,7 +74,6 @@ public class Utilisateur {
     public void deconnexion() {
         this.connected = false;
     }
-
     public boolean hydrate(JSONObject userJSON){
         try{
             ProjetLabo.user.setId(userJSON.getInt("id"));

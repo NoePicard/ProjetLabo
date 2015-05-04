@@ -1,10 +1,8 @@
 package be.unamur.projetLabo.activities;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -27,7 +25,7 @@ import be.unamur.projetLabo.request.PostRequest;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ContratActivity extends ActionBarActivity {
+public class ContratActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

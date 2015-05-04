@@ -2,10 +2,10 @@ package be.unamur.projetLabo.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -21,7 +21,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
@@ -29,7 +28,7 @@ import be.unamur.projetLabo.classes.Criteres;
 import be.unamur.projetLabo.request.OkHttpStack;
 import butterknife.ButterKnife;
 
-public class CriteresActivity extends ActionBarActivity {
+public class CriteresActivity extends AppCompatActivity {
     private ListView listViewCriteres;
 
     @Override
