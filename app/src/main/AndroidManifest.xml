@@ -19,7 +19,6 @@
             android:label="@string/title_activity_connexion" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -36,8 +35,12 @@
             android:label="@string/title_activity_criteres" >
         </activity>
         <activity
-            android:name=".activities.VoituresActivity"
+            android:name=".activities.ListeVoituresActivity"
             android:label="@string/title_activity_voitures" >
+        </activity>
+        <activity
+            android:name=".activities.VoitureActivity"
+            android:label="@string/title_activity_voiture" >
         </activity>
     </application>
 

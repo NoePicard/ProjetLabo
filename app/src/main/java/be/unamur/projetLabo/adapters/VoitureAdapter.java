@@ -2,6 +2,7 @@ package be.unamur.projetLabo.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,8 @@ import java.util.List;
 
 import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
+import be.unamur.projetLabo.activities.ListeVoituresActivity;
+import be.unamur.projetLabo.activities.VoitureActivity;
 import be.unamur.projetLabo.classes.Voiture;
 
 public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonViewHolder> {
@@ -80,23 +83,17 @@ public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonVi
         personViewHolder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Location de voiture");
-                builder.setMessage("Vous avez cliqué sur : " + itemVoiture.getName());
-                builder.setPositiveButton(android.R.string.ok, null);
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                Intent intent = new Intent(context, VoitureActivity.class);
+                intent.putExtra("voiture", itemVoiture);
+                context.startActivity(intent);
             }
         });
         personViewHolder.voiturePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Location de voiture");
-                builder.setMessage("Vous avez cliqué sur : " + itemVoiture.getName());
-                builder.setPositiveButton(android.R.string.ok, null);
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                Intent intent = new Intent(context, VoitureActivity.class);
+                intent.putExtra("voiture", itemVoiture);
+                context.startActivity(intent);
             }
         });
     }

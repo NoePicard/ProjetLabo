@@ -14,4 +14,5 @@
     <string name="title_activity_criteres">Choisissez vos critères</string>
     <string name="title_activity_voitures">Selectionnez votre voiture</string>
     <string name="btn_envoyer_criteres_activity">Envoyer</string>
+    <string name="title_activity_voiture">VoitureActivity</string>
 </resources>
