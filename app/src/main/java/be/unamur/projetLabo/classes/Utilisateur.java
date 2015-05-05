@@ -13,7 +13,7 @@ public class Utilisateur {
     private boolean fidele, connected, contrated;
     private int id;
     //private Voiture voiture;
-    //private Capital capital;
+    private int capital;
 
 
 
@@ -80,6 +80,7 @@ public class Utilisateur {
             ProjetLabo.user.setLogin(userJSON.getString("login"));
             ProjetLabo.user.setPassword(userJSON.getString("password"));
             ProjetLabo.user.setFidele(userJSON.getBoolean("fidele"));
+            ProjetLabo.user.setCapital(userJSON.getInt("capital"));
         } catch (JSONException e) {
             return false;
         }
@@ -89,5 +90,8 @@ public class Utilisateur {
 
         return true;
     }
-
+    public void setCapital (int capital){
+        this.capital = capital;
+    }
+    public int getCapital(){return this.capital;}
 }
