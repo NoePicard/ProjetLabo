@@ -9,5 +9,6 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
 
-    <color name="background">#fff</color>
+    <color name="background">#eeeeee</color>
+    <color name="cardview_initial_background">#fff</color>
 </resources>

@@ -12,6 +12,6 @@
     <string name="title_activity_contract">Contract</string>
     <string name="title_activity_contrat">Contrat de location</string>
     <string name="title_activity_criteres">Choisissez vos critères</string>
-    <string name="title_activity_voitures">VoituresActivity</string>
+    <string name="title_activity_voitures">Selectionnez votre voiture</string>
     <string name="btn_envoyer_criteres_activity">Envoyer</string>
 </resources>
