@@ -98,14 +98,13 @@ public class CriteresActivity extends AppCompatActivity {
         try {
 
             for (int i = 0; i < CriteresChoisis.size(); i++) {
-
-                JSONObject criObjChosen = new JSONObject();
-
-                criObjChosen.put("Id", criSave[CriteresChoisis.keyAt(i)].getId());
-                criObjChosen.put("Name", criSave[CriteresChoisis.keyAt(i)].getName());
-                criObjChosen.put("Type", criSave[CriteresChoisis.keyAt(i)].getType());
-
-                criArrayChosen.put(criObjChosen);
+                if(CriteresChoisis.valueAt(i)) {
+                    JSONObject criObjChosen = new JSONObject();
+                    criObjChosen.put("Id", criSave[CriteresChoisis.keyAt(i)].getId());
+                    criObjChosen.put("Name", criSave[CriteresChoisis.keyAt(i)].getName());
+                    criObjChosen.put("Type", criSave[CriteresChoisis.keyAt(i)].getType());
+                    criArrayChosen.put(criObjChosen);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
