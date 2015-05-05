@@ -39,6 +39,10 @@
             android:name=".activities.VoituresActivity"
             android:label="@string/title_activity_voitures" >
         </activity>
+        <activity
+            android:name=".activities.SoldeFidelisationAcitivity"
+            android:label="@string/title_activity_solde_fidelisation_acitivity" >
+        </activity>
     </application>
 
 </manifest>
