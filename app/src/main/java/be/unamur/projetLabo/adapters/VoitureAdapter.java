@@ -77,7 +77,7 @@ public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonVi
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Location de voiture");
-                builder.setMessage("vous avez cliqué sur : " + itemVoiture.getName());
+                builder.setMessage("Vous avez cliqué sur : " + itemVoiture.getName());
                 builder.setPositiveButton(android.R.string.ok, null);
                 AlertDialog dialog = builder.create();
                 dialog.show();
