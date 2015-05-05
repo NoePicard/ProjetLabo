@@ -72,7 +72,23 @@ public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonVi
         String url = ProjetLabo.BASE_URL + itemVoiture.getPath();
         Picasso.with(context).load(url).into(personViewHolder.voiturePhoto);
 
+        /**
+         *  Attention ici la cardview est cliquable
+         *  etant donnée que l'image se place au dessu de la cardview,
+         *  il faut aussi appliquer le clique sur l'image
+         */
         personViewHolder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Location de voiture");
+                builder.setMessage("Vous avez cliqué sur : " + itemVoiture.getName());
+                builder.setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+        personViewHolder.voiturePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
