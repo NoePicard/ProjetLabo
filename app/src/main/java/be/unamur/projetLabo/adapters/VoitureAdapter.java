@@ -1,45 +1,51 @@
 package be.unamur.projetLabo.adapters;
 
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import junit.framework.Test;
+
 import java.util.List;
 
 import be.unamur.projetLabo.R;
 import be.unamur.projetLabo.classes.Voiture;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
+public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonViewHolder> {
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
-        TextView personName;
-        TextView personAge;
-        ImageView personPhoto;
+        TextView voitureName;
+        TextView voitureNbSeat;
+        TextView voitureNbDoor;
+        //ImageView voiturePhoto;
 
         PersonViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv);
-            personName = (TextView)itemView.findViewById(R.id.person_name);
-            personAge = (TextView)itemView.findViewById(R.id.person_age);
-            personPhoto = (ImageView)itemView.findViewById(R.id.person_photo);
+            voitureName = (TextView) itemView.findViewById(R.id.voiture_name);
+            voitureNbSeat = (TextView) itemView.findViewById(R.id.voiture_nbSeat);
+            voitureNbDoor = (TextView) itemView.findViewById(R.id.voiture_nbDoor);
+            //voiturePhoto = (ImageView) itemView.findViewById(R.id.voiture_photo);
         }
     }
 
-    List<Voiture> voit;
+    List<Voiture> voituresList;
 
-    public RVAdapter(List<Voiture> voit){
-        this.voit = voit;
+    public VoitureAdapter(List<Voiture> voit){
+        this.voituresList = voit;
     }
 
     @Override
     public int getItemCount() {
-        return voit.size();
+        return voituresList.size();
     }
 
     @Override
@@ -51,8 +57,11 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
-        personViewHolder.personName.setText(voit.get(i).getName());
-        personViewHolder.personAge.setText(voit.get(i).getPath());
+        personViewHolder.voitureName.setText(voituresList.get(i).getName());
+        personViewHolder.voitureNbSeat.setText(Integer.toString(voituresList.get(i).getNbSeat()));
+        personViewHolder.voitureNbDoor.setText(Integer.toString(voituresList.get(i).getNbDoor()));
+        //personViewHolder.voiturePhoto.setImageResource(voit.get(i).getPath());
+
     }
 
     @Override

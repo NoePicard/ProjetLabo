@@ -9,13 +9,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import be.unamur.projetLabo.R;
 import be.unamur.projetLabo.classes.Voiture;
-import be.unamur.projetLabo.adapters.RVAdapter;
+import be.unamur.projetLabo.adapters.VoitureAdapter;
 import be.unamur.projetLabo.classes.Voiture;
 import butterknife.ButterKnife;
 
@@ -23,7 +24,6 @@ public class VoituresActivity extends AppCompatActivity {
 
     Voiture[] voitures;
 
-    private List<Voiture> voit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +34,25 @@ public class VoituresActivity extends AppCompatActivity {
         Intent intent = getIntent();
         voitures = (Voiture[]) intent.getSerializableExtra("voitures");
 
+        List<Voiture> voitureList;
 
-        boolean b = true;
-        voit = new ArrayList<>();
-        int i;
-        for(i=0; i<voitures.length; i++){
-            voit.add(voitures[i]);
+        voitureList = new ArrayList<>();
+
+        for (Voiture voiture : voitures) {
+            voitureList.add(voiture);
         }
 
-        RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
 
         LinearLayoutManager llm = new LinearLayoutManager(VoituresActivity.this);
         rv.setLayoutManager(llm);
 
-        RVAdapter adapter = new RVAdapter(voit);
+        VoitureAdapter adapter = new VoitureAdapter(voitureList);
         rv.setAdapter(adapter);
 
-    }
+        if (voitureList.isEmpty()) {
+            Toast.makeText(VoituresActivity.this, "Aucune voiture ne correspond à vos cirtères !", Toast.LENGTH_LONG).show();
+        }
 
+    }
 }
