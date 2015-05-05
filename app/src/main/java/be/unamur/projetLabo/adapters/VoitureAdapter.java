@@ -1,5 +1,7 @@
 package be.unamur.projetLabo.adapters;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,21 +13,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import junit.framework.Test;
 
 import java.util.List;
 
+import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
 import be.unamur.projetLabo.classes.Voiture;
 
 public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonViewHolder> {
+    Context context;
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
         TextView voitureName;
         TextView voitureNbSeat;
         TextView voitureNbDoor;
-        //ImageView voiturePhoto;
+        ImageView voiturePhoto;
 
         PersonViewHolder(View itemView) {
             super(itemView);
@@ -33,14 +39,15 @@ public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonVi
             voitureName = (TextView) itemView.findViewById(R.id.voiture_name);
             voitureNbSeat = (TextView) itemView.findViewById(R.id.voiture_nbSeat);
             voitureNbDoor = (TextView) itemView.findViewById(R.id.voiture_nbDoor);
-            //voiturePhoto = (ImageView) itemView.findViewById(R.id.voiture_photo);
+            voiturePhoto = (ImageView) itemView.findViewById(R.id.voiture_photo);
         }
     }
 
     List<Voiture> voituresList;
 
-    public VoitureAdapter(List<Voiture> voit){
+    public VoitureAdapter(Context context, List<Voiture> voit){
         this.voituresList = voit;
+        this.context = context;
     }
 
     @Override
@@ -57,11 +64,25 @@ public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonVi
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
-        personViewHolder.voitureName.setText(voituresList.get(i).getName());
-        personViewHolder.voitureNbSeat.setText(Integer.toString(voituresList.get(i).getNbSeat()));
-        personViewHolder.voitureNbDoor.setText(Integer.toString(voituresList.get(i).getNbDoor()));
-        //personViewHolder.voiturePhoto.setImageResource(voit.get(i).getPath());
+        final Voiture itemVoiture = voituresList.get(i);
+        personViewHolder.voitureName.setText(itemVoiture.getName());
+        personViewHolder.voitureNbSeat.setText(Integer.toString(itemVoiture.getNbSeat()));
+        personViewHolder.voitureNbDoor.setText(Integer.toString(itemVoiture.getNbDoor()));
 
+        String url = ProjetLabo.BASE_URL + itemVoiture.getPath();
+        Picasso.with(context).load(url).into(personViewHolder.voiturePhoto);
+
+        personViewHolder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Location de voiture");
+                builder.setMessage("vous avez cliqué sur : " + itemVoiture.getName());
+                builder.setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
     }
 
     @Override

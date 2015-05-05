@@ -1,5 +1,6 @@
 package be.unamur.projetLabo.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -47,12 +48,12 @@ public class VoituresActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(VoituresActivity.this);
         rv.setLayoutManager(llm);
 
-        VoitureAdapter adapter = new VoitureAdapter(voitureList);
+        VoitureAdapter adapter = new VoitureAdapter(this, voitureList);
         rv.setAdapter(adapter);
 
         if (voitureList.isEmpty()) {
             Toast.makeText(VoituresActivity.this, "Aucune voiture ne correspond à vos cirtères !", Toast.LENGTH_LONG).show();
+            VoituresActivity.this.finish();
         }
-
     }
 }
