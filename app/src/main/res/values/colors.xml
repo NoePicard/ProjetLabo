@@ -11,4 +11,5 @@
 
     <color name="background">#fff</color>
     <color name="primary_green_hugh">#ffc0ff42</color>
+    <color name="primary_green_title_hugh">#FF6DD40A</color>
 </resources>
