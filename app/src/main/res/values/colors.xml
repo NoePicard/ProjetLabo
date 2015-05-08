@@ -10,5 +10,5 @@
     <color name="divider">#B6B6B6</color>
 
     <color name="background">#eeeeee</color>
-    <color name="cardview_initial_background">#fff</color>
+    <color name="price">#ff0000</color>
 </resources>

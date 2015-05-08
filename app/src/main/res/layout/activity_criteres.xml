@@ -17,8 +17,8 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_envoyer_criteres_activity"
         android:id="@+id/btn_envoyer"
-        android:background="@color/primary"
-        android:textColor="@color/accent"
+        android:background="@drawable/button_background"
+        android:textColor="@android:color/white"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp" />
 </LinearLayout>
