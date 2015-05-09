@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import be.unamur.projetLabo.R;
@@ -19,9 +20,6 @@ import be.unamur.projetLabo.adapters.VoitureAdapter;
 import butterknife.ButterKnife;
 
 public class ListeVoituresActivity extends AppCompatActivity {
-
-    Voiture[] voitures;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,9 @@ public class ListeVoituresActivity extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
-        voitures = (Voiture[]) intent.getSerializableExtra("voitures");
+        //Passer par une variable Object pour ensuite caster pour éviter bug sur ancienne version
+        Object[] tmp = (Object[]) intent.getSerializableExtra("voitures");
+        Voiture[] voitures = Arrays.copyOf(tmp, tmp.length, Voiture[].class);;
 
         List<Voiture> voitureList;
 
@@ -57,11 +57,6 @@ public class ListeVoituresActivity extends AppCompatActivity {
 
         VoitureAdapter adapter = new VoitureAdapter(ListeVoituresActivity.this, voitureList);
         rv.setAdapter(adapter);
-
-        if (voitureList.isEmpty()) {
-            Toast.makeText(ListeVoituresActivity.this, "Aucune voiture ne correspond à vos cirtères !", Toast.LENGTH_LONG).show();
-            ListeVoituresActivity.this.finish();
-        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

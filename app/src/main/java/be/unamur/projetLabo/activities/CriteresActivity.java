@@ -133,9 +133,13 @@ public class CriteresActivity extends AppCompatActivity {
                     }
 
                     //Appel de la l'activity voiture
-                    Intent intent = new Intent(CriteresActivity.this, ListeVoituresActivity.class);
-                    intent.putExtra("voitures", voitures);
-                    startActivity(intent);
+                    if (voitures.length == 0) {
+                        Toast.makeText(CriteresActivity.this, "Aucune voiture ne correspond à vos cirtères !", Toast.LENGTH_LONG).show();
+                    }else {
+                        Intent intent = new Intent(CriteresActivity.this, ListeVoituresActivity.class);
+                        intent.putExtra("voitures", voitures);
+                        startActivity(intent);
+                    }
                 } catch (JSONException e) {
                     //Erreur lors du décodage du json
                 }
