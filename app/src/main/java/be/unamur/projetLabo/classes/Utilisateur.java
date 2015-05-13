@@ -12,7 +12,7 @@ public class Utilisateur {
     private String password;
     private boolean fidele, connected, contrated;
     private int id;
-    //private Voiture voiture;
+    private VoitureLoue voiture;
     private int capital;
 
 
@@ -94,4 +94,11 @@ public class Utilisateur {
         this.capital = capital;
     }
     public int getCapital(){return this.capital;}
+
+    public VoitureLoue getVoiture() {
+        return voiture;
+    }
+    public void setVoiture(VoitureLoue voiture) {
+        this.voiture = voiture;
+    }
 }
