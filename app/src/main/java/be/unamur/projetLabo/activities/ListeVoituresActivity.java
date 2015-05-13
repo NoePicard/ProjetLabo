@@ -40,7 +40,7 @@ public class ListeVoituresActivity extends AppCompatActivity {
         Intent intent = getIntent();
         //Passer par une variable Object pour ensuite caster pour éviter bug sur ancienne version
         Object[] tmp = (Object[]) intent.getSerializableExtra("voitures");
-        Voiture[] voitures = Arrays.copyOf(tmp, tmp.length, Voiture[].class);;
+        Voiture[] voitures = Arrays.copyOf(tmp, tmp.length, Voiture[].class);
 
         List<Voiture> voitureList;
 
