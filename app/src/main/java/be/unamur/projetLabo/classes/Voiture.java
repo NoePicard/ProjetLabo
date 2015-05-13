@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class Voiture  implements Serializable {
     private int id;
-    private String name;
+    private String name; //modèle, nom voiture.
     private int nbSeat;
     private int nbDoor;
     private boolean manualTransmission;
