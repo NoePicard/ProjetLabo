@@ -12,14 +12,29 @@ public class Voiture  implements Serializable {
     private int nbDoor;
     private boolean manualTransmission;
     private String path;
+    private float price; //Per day
 
-    public Voiture( int id, String name, int nbSeat, int nbDoor, boolean manualTransmission) {
+    public Voiture(JSONObject voitObj){
+        try {
+            this.id = voitObj.getInt("Id");
+            this.name = voitObj.getString("Name");
+            this.nbSeat = voitObj.getInt("NbSeat");
+            this.nbDoor = voitObj.getInt("NbDoor");
+            this.manualTransmission = voitObj.getBoolean("ManualTransmission");
+            this.path = voitObj.getString("Path");
+            this.price = voitObj.getLong("Price");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public Voiture( int id, String name, int nbSeat, int nbDoor, boolean manualTransmission, float price) {
         this.path = "";
         this.id = id;
         this.name = name;
         this.nbSeat = nbSeat;
         this.nbDoor = nbDoor;
         this.manualTransmission = manualTransmission;
+        this.price = price;
     }
 
     public int getId() {
@@ -69,17 +84,12 @@ public class Voiture  implements Serializable {
     public void setPath(String path) {
         this.path = path;
     }
-
-    public Voiture(JSONObject voitObj){
-        try {
-            this.id = voitObj.getInt("Id");
-            this.name = voitObj.getString("Name");
-            this.nbSeat = voitObj.getInt("NbSeat");
-            this.nbDoor = voitObj.getInt("NbDoor");
-            this.manualTransmission = voitObj.getBoolean("ManualTransmission");
-            this.path = voitObj.getString("Path");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public float getPrice() {
+        return price;
     }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
 }

@@ -34,7 +34,10 @@ public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonVi
         TextView voitureName;
         TextView voitureNbSeat;
         TextView voitureNbDoor;
+        TextView voiturePrix;
+        TextView voiturePlusDetails;
         ImageView voiturePhoto;
+        View view;
 
         PersonViewHolder(View itemView) {
             super(itemView);
@@ -43,6 +46,15 @@ public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonVi
             voitureNbSeat = (TextView) itemView.findViewById(R.id.voiture_nbSeat);
             voitureNbDoor = (TextView) itemView.findViewById(R.id.voiture_nbDoor);
             voiturePhoto = (ImageView) itemView.findViewById(R.id.voiture_photo);
+            voiturePrix = (TextView) itemView.findViewById(R.id.voiture_prix);
+            voiturePlusDetails = (TextView) itemView.findViewById(R.id.voiture_plusDetails);
+            view = itemView;
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    // item clicked
+                }
+            });
         }
     }
 
@@ -66,29 +78,18 @@ public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonVi
     }
 
     @Override
-    public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
+    public void onBindViewHolder(final PersonViewHolder personViewHolder, int i) {
         final Voiture itemVoiture = voituresList.get(i);
         personViewHolder.voitureName.setText(itemVoiture.getName());
         personViewHolder.voitureNbSeat.setText(Integer.toString(itemVoiture.getNbSeat()));
         personViewHolder.voitureNbDoor.setText(Integer.toString(itemVoiture.getNbDoor()));
+        personViewHolder.voiturePrix.setText(itemVoiture.getPrice() + "€");
+        personViewHolder.voiturePlusDetails.setText("Plus de détails...");
 
         String url = ProjetLabo.BASE_URL + itemVoiture.getPath();
         Picasso.with(context).load(url).into(personViewHolder.voiturePhoto);
 
-        /**
-         *  Attention ici la cardview est cliquable
-         *  etant donnée que l'image se place au dessu de la cardview,
-         *  il faut aussi appliquer le clique sur l'image
-         */
         personViewHolder.cv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, VoitureActivity.class);
-                intent.putExtra("voiture", itemVoiture);
-                context.startActivity(intent);
-            }
-        });
-        personViewHolder.voiturePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, VoitureActivity.class);

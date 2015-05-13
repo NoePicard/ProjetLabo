@@ -14,8 +14,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/wv_contrat"
         android:layout_alignEnd="@+id/wv_contrat"
-        android:background="@color/primary"
-        android:textColor="@color/accent"
+        android:background="@drawable/button_background"
+        android:textColor="@android:color/white"
         android:layout_marginTop="5dp" />
 
     <WebView
