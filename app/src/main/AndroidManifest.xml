@@ -44,6 +44,10 @@
             android:label="@string/title_activity_solde_fidelisation_acitivity" >
         </activity>
         <activity
+            android:name=".activities.ListeVoituresActivity"
+            android:label="@string/title_activity_liste_voitures" >
+        </activity>
+        <activity
             android:name=".activities.InfoVehiculeActivity"
             android:label="@string/title_activity_info_vehicule" >
         </activity>
