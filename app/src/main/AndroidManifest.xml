@@ -36,8 +36,8 @@
             android:label="@string/title_activity_criteres" >
         </activity>
         <activity
-            android:name=".activities.VoituresActivity"
-            android:label="@string/title_activity_voitures" >
+            android:name=".activities.VoitureActivity"
+            android:label="@string/title_activity_voiture" >
         </activity>
         <activity
             android:name=".activities.SoldeFidelisationAcitivity"
