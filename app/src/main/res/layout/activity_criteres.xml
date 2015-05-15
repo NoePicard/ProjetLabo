@@ -10,7 +10,7 @@
         android:id="@+id/listView_criteres"
         android:layout_gravity="center_horizontal"
         android:choiceMode="multipleChoice"
-        android:layout_weight="0.91" />
+        android:layout_weight="0.92" />
 
     <Button
         android:layout_width="252dp"

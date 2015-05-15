@@ -14,7 +14,6 @@ public class VoitureLoue extends Voiture {
     public VoitureLoue(JSONObject voitObj) {
         super(voitObj);
         try {
-
             //a tester :D
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
             this.start = formatter.parse(voitObj.getString("Start"));

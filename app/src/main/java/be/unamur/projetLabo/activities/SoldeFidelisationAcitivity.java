@@ -25,25 +25,27 @@ public class SoldeFidelisationAcitivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solde_fidelisation_acitivity);
+
+        //Récupération de la vue
         lbl_solde_capital = (TextView) findViewById(R.id.points_fidelisation);
-        int solde_capital = ProjetLabo.user.getCapital();
-        lbl_solde_capital.setText(solde_capital);
         iv_correct_gps = (ImageView) findViewById(R.id.points_gps_fidelisation);
         iv_correct_plein = (ImageView) findViewById(R.id.points_plein_fidelisation);
         iv_correct_conseils = (ImageView) findViewById(R.id.points_conseils_fidelisation);
-        // l'utilisateur a toujours accès aux conseils.
+
+        int solde_capital = ProjetLabo.user.getCapital();
+        lbl_solde_capital.setText(solde_capital);
+
+        // Valeur par défaut
         iv_correct_conseils.setBackground(getResources().getDrawable(R.drawable.correct_v));
-        //tests d'affichage pour GPS et Plein.
+        iv_correct_gps.setBackground(getResources().getDrawable(R.drawable.wrong_x));
+        iv_correct_plein.setBackground(getResources().getDrawable(R.drawable.wrong_x));
+
+        //Application des contraintes
         if (solde_capital >= 3) {
             iv_correct_gps.setBackground(getResources().getDrawable(R.drawable.correct_v));
-        } else {
-            iv_correct_gps.setBackground(getResources().getDrawable(R.drawable.wrong_x));
-            iv_correct_plein.setBackground(getResources().getDrawable(R.drawable.wrong_x));
         }
         if (solde_capital >= 5) {
             iv_correct_plein.setBackground(getResources().getDrawable(R.drawable.correct_v));
-        } else {
-            iv_correct_plein.setBackground(getResources().getDrawable(R.drawable.wrong_x));
         }
     }
 

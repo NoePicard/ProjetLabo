@@ -1,7 +1,10 @@
 package be.unamur.projetLabo;
 
 import android.app.Application;
+import android.content.Intent;
 
+import be.unamur.projetLabo.activities.InfoVehiculeActivity;
+import be.unamur.projetLabo.activities.InscriptionActivity;
 import be.unamur.projetLabo.classes.Utilisateur;
 
 public class ProjetLabo extends Application {

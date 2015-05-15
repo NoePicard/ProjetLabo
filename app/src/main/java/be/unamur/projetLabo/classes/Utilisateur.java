@@ -81,6 +81,9 @@ public class Utilisateur {
             ProjetLabo.user.setPassword(userJSON.getString("password"));
             ProjetLabo.user.setFidele(userJSON.getBoolean("fidele"));
             ProjetLabo.user.setCapital(userJSON.getInt("capital"));
+            if(userJSON.has("voiture")){
+                this.voiture = new VoitureLoue(userJSON.getJSONObject("voiture"));
+            }
         } catch (JSONException e) {
             return false;
         }

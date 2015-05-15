@@ -18,28 +18,43 @@
         android:layout_centerHorizontal="true" >
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/iv_voiture_photo"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
-            <Button
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/btn_louer"
-                android:background="@drawable/button_background"
-                android:textColor="@android:color/white"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:text="Caractéristique du véhicule :"
+                android:id="@+id/lbl_Titre_1"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/title_1" />
 
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/lbl_Description_Vehicule"
+                android:text="Ce véhicule comporte x sièges, muni de y portes il vous conduira où vous le souhaitez." />
         </LinearLayout>
 
 
 
     </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Louer cette voiture !"
+        android:id="@+id/btn_louer"
+        android:background="@drawable/button_background"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
