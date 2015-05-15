@@ -41,7 +41,7 @@ public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonVi
 
         PersonViewHolder(View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cv);
+            cv = (CardView) itemView.findViewById(R.id.cv);
             voitureName = (TextView) itemView.findViewById(R.id.voiture_name);
             voitureNbSeat = (TextView) itemView.findViewById(R.id.voiture_nbSeat);
             voitureNbDoor = (TextView) itemView.findViewById(R.id.voiture_nbDoor);
