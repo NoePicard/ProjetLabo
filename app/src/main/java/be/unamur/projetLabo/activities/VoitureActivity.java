@@ -31,6 +31,8 @@ public class VoitureActivity extends AppCompatActivity implements DatePickerFrag
 
     private Voiture voiture;
     private TextView lblDescriptionVoiture;
+    private long start;
+    private long end;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,8 @@ public class VoitureActivity extends AppCompatActivity implements DatePickerFrag
 
         Intent intent = getIntent();
         voiture = (Voiture) intent.getSerializableExtra("voiture");
+        start = intent.getLongExtra("Debut",0);
+        end = intent.getLongExtra("Fin",0);
 
         ImageView voiturePhoto = (ImageView) findViewById(R.id.iv_voiture_photo);
 
@@ -63,8 +67,7 @@ public class VoitureActivity extends AppCompatActivity implements DatePickerFrag
 
     @OnClick(R.id.btn_louer)
     public void onClickBtnLouer(View v){
-        DialogFragment dateFragment = new DatePickerFragment();
-        dateFragment.show(getSupportFragmentManager(), "timePicker");
+
     }
 
 

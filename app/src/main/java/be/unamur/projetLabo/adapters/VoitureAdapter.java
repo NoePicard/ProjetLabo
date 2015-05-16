@@ -27,7 +27,9 @@ import be.unamur.projetLabo.activities.VoitureActivity;
 import be.unamur.projetLabo.classes.Voiture;
 
 public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonViewHolder> {
-    Context context;
+    private Context context;
+    private long start;
+    private long end;
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
@@ -60,9 +62,11 @@ public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonVi
 
     List<Voiture> voituresList;
 
-    public VoitureAdapter(Context context, List<Voiture> voit){
+    public VoitureAdapter(Context context, List<Voiture> voit, long start, long end){
         this.voituresList = voit;
         this.context = context;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
@@ -94,6 +98,8 @@ public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonVi
             public void onClick(View v) {
                 Intent intent = new Intent(context, VoitureActivity.class);
                 intent.putExtra("voiture", itemVoiture);
+                intent.putExtra("Debut",start);
+                intent.putExtra("Fin",end);
                 context.startActivity(intent);
             }
         });

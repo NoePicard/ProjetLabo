@@ -23,6 +23,9 @@ import butterknife.ButterKnife;
 
 public class ListeVoituresActivity extends AppCompatActivity {
 
+    private long start;
+    private long end;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,8 @@ public class ListeVoituresActivity extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
+        start = intent.getLongExtra("Debut",0);
+        end = intent.getLongExtra("Fin",0);
         //Passer par une variable Object pour ensuite caster pour éviter bug sur ancienne version
         Object[] tmp = (Object[]) intent.getSerializableExtra("voitures");
         Voiture[] voitures = Arrays.copyOf(tmp, tmp.length, Voiture[].class);
@@ -57,7 +62,7 @@ public class ListeVoituresActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(ListeVoituresActivity.this);
         rv.setLayoutManager(llm);
 
-        VoitureAdapter adapter = new VoitureAdapter(ListeVoituresActivity.this, voitureList);
+        VoitureAdapter adapter = new VoitureAdapter(ListeVoituresActivity.this, voitureList, start, end);
         rv.setAdapter(adapter);
     }
     @Override

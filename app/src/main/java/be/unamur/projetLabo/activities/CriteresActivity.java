@@ -135,7 +135,7 @@ public class CriteresActivity extends AppCompatActivity implements DatePickerFra
                 break;
             default:
                 start = 0;
-                start = 0;
+                end = 0;
                 break;
         }
     }
@@ -191,6 +191,8 @@ public class CriteresActivity extends AppCompatActivity implements DatePickerFra
                     }else {
                         Intent intent = new Intent(CriteresActivity.this, ListeVoituresActivity.class);
                         intent.putExtra("voitures", voitures);
+                        intent.putExtra("Debut",start);
+                        intent.putExtra("Fin",end);
                         startActivity(intent);
                     }
                 } catch (JSONException e) {
