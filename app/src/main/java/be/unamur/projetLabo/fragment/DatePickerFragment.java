@@ -36,7 +36,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
         // Vérifier que la fonction callback est implémenté dans l'activité parente
         try {
             mCallback = (OnDatePickerSetListener) activity;
