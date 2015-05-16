@@ -14,7 +14,9 @@ import be.unamur.projetLabo.R;
 
 public class InfoVehiculeActivity extends ActionBarActivity {
 
-    //public var for layout.
+   /*
+   //public var for layout.
+    */
     public TextView lbl_car_model;
     public TextView lbl_renting_end_date;
     public ImageView iv_renting;
@@ -24,6 +26,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             getVoiture.getDate() -- date format : jj-mm-aa
             getVoiture.getRentingStatus()
      */
+    /*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,5 +53,6 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             iv_renting.setBackground(getResources().getDrawable(R.drawable.wrong_x));
 
     }
+    */
 
 }

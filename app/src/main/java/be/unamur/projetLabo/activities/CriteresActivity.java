@@ -3,6 +3,7 @@ package be.unamur.projetLabo.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,6 +26,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,14 +37,20 @@ import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
 import be.unamur.projetLabo.classes.Critere;
 import be.unamur.projetLabo.classes.Voiture;
+import be.unamur.projetLabo.fragment.DatePickerFragment;
 import be.unamur.projetLabo.request.OkHttpStack;
 import be.unamur.projetLabo.request.PostRequest;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CriteresActivity extends AppCompatActivity {
+public class CriteresActivity extends AppCompatActivity implements DatePickerFragment.OnDatePickerSetListener {
     private ListView listViewCriteres;
+    private EditText btnStart;
+    private EditText btnEnd;
     private Critere[] criSave;
+    private long start;
+    private long end;
+    private String StartOrEnd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +59,8 @@ public class CriteresActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         listViewCriteres = (ListView) findViewById(R.id.listView_criteres);
+        btnStart = (EditText) findViewById(R.id.txt_startDate);
+        btnEnd = (EditText) findViewById(R.id.txt_endDate);
 
         String URL = ProjetLabo.API_BASE_URL + "/criteres.json";
 
@@ -93,8 +106,42 @@ public class CriteresActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.btn_envoyer)
-    public void onClickBtnEnvoyer(View view) {
+    @OnClick(R.id.txt_startDate)
+    public void onClickTxtStartDate(View v){
+        DialogFragment dateFragment = new DatePickerFragment();
+        dateFragment.show(getSupportFragmentManager(), "timePicker");
+        StartOrEnd = "start";
+    }
+
+    @OnClick(R.id.txt_endDate)
+    public void onClickTxtEndDate(View v){
+        DialogFragment dateFragment = new DatePickerFragment();
+        dateFragment.show(getSupportFragmentManager(), "timePicker");
+        StartOrEnd = "end";
+    }
+
+    @Override
+    public void onDatePickerSet(int year, int monthOfYear, int dayOfMonth) {
+        Calendar date = new GregorianCalendar();
+        date.set(year, monthOfYear, dayOfMonth);
+        switch (StartOrEnd) {
+            case "start":
+                start = date.getTime().getTime();
+                btnStart.setText(date.get(Calendar.DAY_OF_MONTH) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR));
+                break;
+            case "end":
+                end = date.getTime().getTime();
+                btnEnd.setText(date.get(Calendar.DAY_OF_MONTH) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR));
+                break;
+            default:
+                start = 0;
+                start = 0;
+                break;
+        }
+    }
+
+    @OnClick(R.id.btn_next)
+    public void onClickBtnNext(View view) {
 
         SparseBooleanArray CriteresChoisis = listViewCriteres.getCheckedItemPositions();
 
@@ -119,6 +166,8 @@ public class CriteresActivity extends AppCompatActivity {
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("criteres", criArrayChosen.toString());
+        params.put("start",Long.toString(start));
+        params.put("end",Long.toString(end));
 
         PostRequest request = new PostRequest(URL, params, new Response.Listener<String>() {
 
