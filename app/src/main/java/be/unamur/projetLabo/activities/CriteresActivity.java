@@ -107,14 +107,14 @@ public class CriteresActivity extends AppCompatActivity implements DatePickerFra
     }
 
     @OnClick(R.id.txt_startDate)
-    public void onClickTxtStartDate(View v){
+    public void onClickTxtStartDate(View v) {
         DialogFragment dateFragment = new DatePickerFragment();
         dateFragment.show(getSupportFragmentManager(), "timePicker");
         StartOrEnd = "start";
     }
 
     @OnClick(R.id.txt_endDate)
-    public void onClickTxtEndDate(View v){
+    public void onClickTxtEndDate(View v) {
         DialogFragment dateFragment = new DatePickerFragment();
         dateFragment.show(getSupportFragmentManager(), "timePicker");
         StartOrEnd = "end";
@@ -138,78 +138,93 @@ public class CriteresActivity extends AppCompatActivity implements DatePickerFra
                 end = 0;
                 break;
         }
+        if (start != 0 && end != 0) {
+            if (start > end && end != 0) {
+                Toast.makeText(CriteresActivity.this, "Veuillez choisir une date de fin correcte.", Toast.LENGTH_LONG).show();
+                end = 0;
+                btnEnd.setText("");
+            }
+        }
     }
 
     @OnClick(R.id.btn_next)
     public void onClickBtnNext(View view) {
+        if (start != 0 && end != 0) {
+            if (start < end) {
+                SparseBooleanArray CriteresChoisis = listViewCriteres.getCheckedItemPositions();
 
-        SparseBooleanArray CriteresChoisis = listViewCriteres.getCheckedItemPositions();
-
-        JSONArray criArrayChosen = new JSONArray();
-        try {
-
-            for (int i = 0; i < CriteresChoisis.size(); i++) {
-                if(CriteresChoisis.valueAt(i)) {
-                    JSONObject criObjChosen = new JSONObject();
-                    criObjChosen.put("Id", criSave[CriteresChoisis.keyAt(i)].getId());
-                    criObjChosen.put("Name", criSave[CriteresChoisis.keyAt(i)].getName());
-                    criObjChosen.put("Type", criSave[CriteresChoisis.keyAt(i)].getType());
-                    criArrayChosen.put(criObjChosen);
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        //Envoi des données a l'API
-        String URL = ProjetLabo.API_BASE_URL + "/criteres.json"; //url de l'api
-
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("criteres", criArrayChosen.toString());
-        params.put("start",Long.toString(start));
-        params.put("end",Long.toString(end));
-
-        PostRequest request = new PostRequest(URL, params, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String responseData) {
+                JSONArray criArrayChosen = new JSONArray();
                 try {
-                    JSONArray voitureArray = new JSONArray(responseData);
-                    Voiture[] voitures = new Voiture[voitureArray.length()];
 
-                    for (int i = 0; i < voitureArray.length(); i++) {
-
-                        JSONObject voitureObj = voitureArray.getJSONObject(i);
-
-                        // Create new Object "Criteres" for each criterion in the DB
-                        voitures[i] = new Voiture(voitureObj);
-                    }
-
-                    //Appel de la l'activity voiture
-                    if (voitures.length == 0) {
-                        Toast.makeText(CriteresActivity.this, "Aucune voiture ne correspond à vos cirtères !", Toast.LENGTH_LONG).show();
-                    }else {
-                        Intent intent = new Intent(CriteresActivity.this, ListeVoituresActivity.class);
-                        intent.putExtra("voitures", voitures);
-                        intent.putExtra("Debut",start);
-                        intent.putExtra("Fin",end);
-                        startActivity(intent);
+                    for (int i = 0; i < CriteresChoisis.size(); i++) {
+                        if (CriteresChoisis.valueAt(i)) {
+                            JSONObject criObjChosen = new JSONObject();
+                            criObjChosen.put("Id", criSave[CriteresChoisis.keyAt(i)].getId());
+                            criObjChosen.put("Name", criSave[CriteresChoisis.keyAt(i)].getName());
+                            criObjChosen.put("Type", criSave[CriteresChoisis.keyAt(i)].getType());
+                            criArrayChosen.put(criObjChosen);
+                        }
                     }
                 } catch (JSONException e) {
-                    //Erreur lors du décodage du json
+                    e.printStackTrace();
                 }
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        //Requête à échoué
-                    }
-                });
 
-        RequestQueue queue = Volley.newRequestQueue(CriteresActivity.this, new OkHttpStack());
-        queue.add(request);
+                //Envoi des données a l'API
+                String URL = ProjetLabo.API_BASE_URL + "/criteres.json"; //url de l'api
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("criteres", criArrayChosen.toString());
+                params.put("start", Long.toString(start));
+                params.put("end", Long.toString(end));
+
+                PostRequest request = new PostRequest(URL, params, new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String responseData) {
+                        try {
+                            JSONArray voitureArray = new JSONArray(responseData);
+                            Voiture[] voitures = new Voiture[voitureArray.length()];
+
+                            for (int i = 0; i < voitureArray.length(); i++) {
+
+                                JSONObject voitureObj = voitureArray.getJSONObject(i);
+
+                                // Create new Object "Criteres" for each criterion in the DB
+                                voitures[i] = new Voiture(voitureObj);
+                            }
+
+                            //Appel de la l'activity voiture
+                            if (voitures.length == 0) {
+                                Toast.makeText(CriteresActivity.this, "Aucune voiture ne correspond à vos cirtères !", Toast.LENGTH_LONG).show();
+                            } else {
+                                Intent intent = new Intent(CriteresActivity.this, ListeVoituresActivity.class);
+                                intent.putExtra("voitures", voitures);
+                                intent.putExtra("Debut", start);
+                                intent.putExtra("Fin", end);
+                                startActivity(intent);
+                            }
+                        } catch (JSONException e) {
+                            //Erreur lors du décodage du json
+                        }
+                    }
+                },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                //Requête à échoué
+                            }
+                        });
+
+                RequestQueue queue = Volley.newRequestQueue(CriteresActivity.this, new OkHttpStack());
+                queue.add(request);
+            } else {
+                Toast.makeText(CriteresActivity.this, "Veuilliez indiquer des dates de début et de fin de location correcte", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(CriteresActivity.this, "Veuilliez indiquer des dates de début et de fin de location correcte", Toast.LENGTH_LONG).show();
+        }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -220,6 +235,7 @@ public class CriteresActivity extends AppCompatActivity implements DatePickerFra
                 return super.onOptionsItemSelected(item);
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
