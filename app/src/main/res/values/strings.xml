@@ -18,4 +18,5 @@
     <string name="title_activity_solde_fidelisation_acitivity">Ma Fidélisation</string>
     <string name="title_activity_info_vehicule">InfoVehiculeActivity</string>
     <string name="MyProfile">Mon profil</string>
+    <string name="title_activity_profile">Mon profil</string>
 </resources>

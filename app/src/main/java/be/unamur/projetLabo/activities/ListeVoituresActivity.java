@@ -68,7 +68,7 @@ public class ListeVoituresActivity extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.action_profile:
-                //Lancer activité profil
+                startActivity(new Intent(ListeVoituresActivity.this, ProfileActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

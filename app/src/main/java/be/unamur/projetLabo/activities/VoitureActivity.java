@@ -76,7 +76,7 @@ public class VoitureActivity extends AppCompatActivity implements DatePickerFrag
                 this.finish();
                 return true;
             case R.id.action_profile:
-                //Lancer activité profil
+                startActivity(new Intent(VoitureActivity.this, ProfileActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
