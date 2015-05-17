@@ -16,18 +16,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
 import be.unamur.projetLabo.classes.Voiture;
+import be.unamur.projetLabo.classes.VoitureLoue;
 import be.unamur.projetLabo.fragment.DatePickerFragment;
+import be.unamur.projetLabo.request.OkHttpStack;
+import be.unamur.projetLabo.request.PostRequest;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class VoitureActivity extends AppCompatActivity implements DatePickerFragment.OnDatePickerSetListener {
+public class VoitureActivity extends AppCompatActivity {
 
     private Voiture voiture;
     private TextView lblDescriptionVoiture;
@@ -62,12 +77,56 @@ public class VoitureActivity extends AppCompatActivity implements DatePickerFrag
         Picasso.with(this).load(url).into(voiturePhoto);
 
         VoitureActivity.this.setTitle("Votre selection : " + voiture.getName());
-        lblDescriptionVoiture.setText("Ce véhicule comporte "+ voiture.getNbSeat() +" sièges, muni de "+ voiture.getNbDoor() +"  portes il vous conduira où vous le souhaitez.");
+        lblDescriptionVoiture.setText("Ce véhicule comporte " + voiture.getNbSeat() + " sièges, muni de " + voiture.getNbDoor() + "  portes il vous conduira où vous le souhaitez.");
     }
 
     @OnClick(R.id.btn_louer)
     public void onClickBtnLouer(View v){
+        String URL = ProjetLabo.API_BASE_URL + "/criteres.json"; //url de l'api
 
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("isUser", Integer.toString(ProjetLabo.user.getId()));
+        params.put("idVoiture", Integer.toString(voiture.getId()));
+        params.put("start", Long.toString(start));
+        params.put("end", Long.toString(end));
+
+        PostRequest request = new PostRequest(URL, params, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String responseData) {
+                try {
+                    JSONObject louerJSON = new JSONObject(responseData);
+                    if (louerJSON.has("response")){
+                        if (louerJSON.getBoolean("response")){
+                            Calendar calStart = new GregorianCalendar();
+                            Calendar calEnd = new GregorianCalendar();
+                            calStart.setTimeInMillis(start);
+                            calEnd.setTimeInMillis(start);
+                            ProjetLabo.user.setVoiture((VoitureLoue) voiture);
+                            ProjetLabo.user.getVoiture().setStart(calStart);
+                            ProjetLabo.user.getVoiture().setStart(calEnd);
+                            startActivity(new Intent(VoitureActivity.this, ProfileActivity.class));
+                            VoitureActivity.this.finish();
+                        } else {
+                            Toast.makeText(VoitureActivity.this, "Une erreur est survenue veuillez réessayer", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(VoitureActivity.this, "Une erreur est survenue veuillez réessayer", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(VoitureActivity.this, "Une erreur est survenue veuillez réessayer", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        //Requête à échoué
+                    }
+                });
+        RequestQueue queue = Volley.newRequestQueue(VoitureActivity.this, new OkHttpStack());
+        queue.add(request);
     }
 
 
@@ -94,8 +153,4 @@ public class VoitureActivity extends AppCompatActivity implements DatePickerFrag
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public void onDatePickerSet(int year, int monthOfYear, int dayOfMonth) {
-        //Action après sélection de la date.
-    }
 }

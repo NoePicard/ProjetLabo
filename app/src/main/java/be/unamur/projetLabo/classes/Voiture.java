@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
-public class Voiture  implements Serializable {
+public class Voiture implements Serializable {
     private int id;
     private String name; //modèle, nom voiture.
     private int nbSeat;

@@ -98,11 +98,13 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerFrag
     }
     @OnClick(R.id.cvVoitureLoue)
     public void onClickCvVoiture(View view) {
-        startActivity(new Intent(ProfileActivity.this, InfoVehiculeActivity.class));
+        /*startActivity(new Intent(ProfileActivity.this, InfoVehiculeActivity.class));*/
+        Toast.makeText(ProfileActivity.this, "Activité non disponible pour le moment", Toast.LENGTH_LONG).show();
     }
     @OnClick(R.id.btnFidele)
     public void onClickBtnFidele(View view) {
-        startActivity(new Intent(ProfileActivity.this, SoldeFidelisationAcitivity.class));
+        /*startActivity(new Intent(ProfileActivity.this, SoldeFidelisationAcitivity.class));*/
+        Toast.makeText(ProfileActivity.this, "Activité non disponible pour le moment", Toast.LENGTH_LONG).show();
     }
 
     private void rendreVoiture(){

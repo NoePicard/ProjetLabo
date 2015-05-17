@@ -14,7 +14,6 @@ public class VoitureLoue extends Voiture {
     private int idLocation;
 
 
-
     public VoitureLoue(JSONObject voitObj) {
         super(voitObj);
         try {
