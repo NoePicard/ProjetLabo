@@ -88,6 +88,7 @@ public class Voiture  implements Serializable {
     public void setPath(String path) {
         this.path = path;
     }
+
     public float getPrice() {
         return price;
     }

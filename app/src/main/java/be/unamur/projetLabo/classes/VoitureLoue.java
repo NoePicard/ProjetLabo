@@ -11,6 +11,9 @@ import java.util.Date;
 public class VoitureLoue extends Voiture {
     private Calendar start;
     private Calendar  end;
+    private int idLocation;
+
+
 
     public VoitureLoue(JSONObject voitObj) {
         super(voitObj);
@@ -21,13 +24,22 @@ public class VoitureLoue extends Voiture {
             end = Calendar.getInstance();
             this.start.setTime(formatter.parse(voitObj.getString("Start")));
             this.end.setTime(formatter.parse(voitObj.getString("End")));
-
+            this.idLocation = voitObj.getInt("IdLocation");
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
+
+    public int getIdLocation() {
+        return idLocation;
+    }
+
+    public void setIdLocation(int idLocation) {
+        this.idLocation = idLocation;
+    }
+
     public Calendar getStart() {
         return start;
     }
