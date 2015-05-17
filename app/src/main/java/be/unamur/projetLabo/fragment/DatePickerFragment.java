@@ -21,14 +21,13 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     private OnDatePickerSetListener mCallback;
     private String title;
     private Calendar cal;
-    private int month = -1;
-    private int day = -1;
 
     public DatePickerFragment(String title) {
         this.title = title;
     }
     public DatePickerFragment() {
         this.title = null;
+        this.cal = Calendar.getInstance();
     }
     public DatePickerFragment(Calendar cal) {
         this.cal = cal;
@@ -54,9 +53,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        if(cal == null){
-            final Calendar cal = Calendar.getInstance();
-        }
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
