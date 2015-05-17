@@ -9,9 +9,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
+import be.unamur.projetLabo.request.OkHttpStack;
+import be.unamur.projetLabo.request.PostRequest;
 import butterknife.OnClick;
 
 public class SoldeFidelisationAcitivity extends ActionBarActivity {
@@ -32,6 +46,42 @@ public class SoldeFidelisationAcitivity extends ActionBarActivity {
         iv_correct_plein = (ImageView) findViewById(R.id.points_plein_fidelisation);
         iv_correct_conseils = (ImageView) findViewById(R.id.points_conseils_fidelisation);
 
+        //SETTING USER FIDELE -> TRUE
+        if (ProjetLabo.user.isFidele()== false){
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("fidele", Boolean.toString(true));
+
+            int usrID = ProjetLabo.user.getId();
+            String URL = ProjetLabo.API_BASE_URL + "/fideles/"+ usrID+".json";
+            PostRequest requestAddUser = new PostRequest(URL, params, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String s) {
+                    try {
+                        JSONObject userJSON = new JSONObject(s);
+                        if (userJSON.has("response")) {
+                            if(userJSON.getBoolean("response")) {
+                                ProjetLabo.user.setFidele(true);
+                            }
+                            else{
+                                SoldeFidelisationAcitivity.this.finish();
+                            }
+                        } else {
+                           SoldeFidelisationAcitivity.this.finish();
+                        }
+                    } catch (JSONException e) {
+                        SoldeFidelisationAcitivity.this.finish();
+                    }
+                }
+            },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            Toast.makeText(SoldeFidelisationAcitivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
+                        }
+                    });
+            RequestQueue queue = Volley.newRequestQueue(SoldeFidelisationAcitivity.this, new OkHttpStack());
+            queue.add(requestAddUser);
+        }
         int solde_capital = ProjetLabo.user.getCapital();
         lbl_solde_capital.setText(solde_capital);
 
