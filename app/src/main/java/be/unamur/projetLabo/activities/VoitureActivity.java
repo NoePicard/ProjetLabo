@@ -122,7 +122,7 @@ public class VoitureActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        //Requête à échoué
+                        Toast.makeText(VoitureActivity.this, "Une erreur réseau est survenue veuillez réessayer", Toast.LENGTH_LONG).show();
                     }
                 });
         RequestQueue queue = Volley.newRequestQueue(VoitureActivity.this, new OkHttpStack());

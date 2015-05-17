@@ -183,7 +183,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="mon compte fidélité"
+                    android:text="Mon compte fidélité"
                     android:id="@+id/textView11"
                     android:layout_gravity="bottom"
                     android:textSize="@dimen/title_2"
