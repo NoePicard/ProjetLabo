@@ -13,6 +13,10 @@ public class Voiture  implements Serializable {
     private boolean manualTransmission;
     private String path;
     private float price; //Per day
+    private boolean openDoor;
+    private boolean openEtui;
+    private boolean keyInEtui;
+    private float fuelQuantity;
 
     public Voiture(JSONObject voitObj){
         try {
@@ -90,6 +94,38 @@ public class Voiture  implements Serializable {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public boolean isOpenDoor() {
+        return openDoor;
+    }
+
+    public void setOpenDoor(boolean openDoor) {
+        this.openDoor = openDoor;
+    }
+
+    public boolean isOpenEtui() {
+        return openEtui;
+    }
+
+    public void setOpenEtui(boolean openEtui) {
+        this.openEtui = openEtui;
+    }
+
+    public boolean isKeyInEtui() {
+        return keyInEtui;
+    }
+
+    public void setKeyInEtui(boolean keyInEtui) {
+        this.keyInEtui = keyInEtui;
+    }
+
+    public float getFuelQuantity() {
+        return fuelQuantity;
+    }
+
+    public void setFuelQuantity(float fuelQuantity) {
+        this.fuelQuantity = fuelQuantity;
     }
 
 }
