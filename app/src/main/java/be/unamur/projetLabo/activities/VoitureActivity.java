@@ -82,7 +82,7 @@ public class VoitureActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_louer)
     public void onClickBtnLouer(View v){
-        String URL = ProjetLabo.API_BASE_URL + "/criteres.json"; //url de l'api
+        String URL = ProjetLabo.API_BASE_URL + "/louers.json"; //url de l'api
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("isUser", Integer.toString(ProjetLabo.user.getId()));
