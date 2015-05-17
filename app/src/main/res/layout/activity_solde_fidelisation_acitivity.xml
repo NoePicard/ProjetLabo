@@ -71,13 +71,15 @@
                 android:layout_height="fill_parent"
                 android:text="Accès GPS "
                 android:id="@+id/textView2"
+                android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:paddingLeft="10dp"
                 android:textSize="25dp"
                 android:paddingTop="13dp"
-                android:textColor="@android:color/white"
-                android:layout_alignParentBottom="true" />
+                android:textColor="@android:color/white" />
+
+
 
             <ImageView
                 android:layout_width="60dp"
