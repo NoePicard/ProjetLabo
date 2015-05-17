@@ -85,7 +85,7 @@ public class VoitureActivity extends AppCompatActivity {
         String URL = ProjetLabo.API_BASE_URL + "/louers.json"; //url de l'api
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("isUser", Integer.toString(ProjetLabo.user.getId()));
+        params.put("idUser", Integer.toString(ProjetLabo.user.getId()));
         params.put("idVoiture", Integer.toString(voiture.getId()));
         params.put("start", Long.toString(start));
         params.put("end", Long.toString(end));
@@ -102,9 +102,20 @@ public class VoitureActivity extends AppCompatActivity {
                             Calendar calEnd = new GregorianCalendar();
                             calStart.setTimeInMillis(start);
                             calEnd.setTimeInMillis(start);
-                            ProjetLabo.user.setVoiture((VoitureLoue) voiture);
+
+                            //à modifier
+                            VoitureLoue voit = new VoitureLoue();
+                            voit.setId(voiture.getId());
+                            voit.setName(voiture.getName());
+                            voit.setPrice(voiture.getPrice());
+                            voit.setNbDoor(voiture.getNbDoor());
+                            voit.setNbSeat(voiture.getNbSeat());
+                            voit.setPath(voiture.getPath());
+
+                            ProjetLabo.user.setVoiture(voit);
                             ProjetLabo.user.getVoiture().setStart(calStart);
                             ProjetLabo.user.getVoiture().setStart(calEnd);
+                            ProjetLabo.user.getVoiture().setIdLocation(louerJSON.getInt("idLocation"));
                             startActivity(new Intent(VoitureActivity.this, ProfileActivity.class));
                             VoitureActivity.this.finish();
                         } else {

@@ -18,6 +18,10 @@ public class Voiture implements Serializable {
     private boolean keyInEtui;
     private float fuelQuantity;
 
+    public Voiture(){
+
+    }
+
     public Voiture(JSONObject voitObj){
         try {
             this.id = voitObj.getInt("Id");

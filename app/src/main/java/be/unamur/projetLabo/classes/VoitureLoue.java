@@ -13,6 +13,9 @@ public class VoitureLoue extends Voiture {
     private Calendar  end;
     private int idLocation;
 
+    public VoitureLoue(){
+
+    }
 
     public VoitureLoue(JSONObject voitObj) {
         super(voitObj);
