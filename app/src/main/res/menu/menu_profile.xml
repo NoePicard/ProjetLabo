@@ -2,6 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="be.unamur.projetLabo.activities.ProfileActivity">
+    <item
+        android:id="@+id/action_bar_progress"
+        android:title="Loading..."
+        android:visible="false"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        app:actionLayout="@layout/action_view_progress" />
     <item android:id="@+id/action_logout"
         android:icon="@drawable/logout_white"
         android:title="@string/Logout"

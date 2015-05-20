@@ -32,7 +32,7 @@ import be.unamur.projetLabo.request.PostRequest;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class InscriptionActivity extends AppCompatActivity implements SnackBar.OnMessageClickListener{
+public class InscriptionActivity extends BaseActivity implements SnackBar.OnMessageClickListener{
     private EditText login;
     private EditText password;
     private TextView error;
@@ -49,7 +49,6 @@ public class InscriptionActivity extends AppCompatActivity implements SnackBar.O
                 .show();
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,11 +62,13 @@ public class InscriptionActivity extends AppCompatActivity implements SnackBar.O
 
         showSnackBar();
     }
+
     @OnClick(R.id.btn_inscription)
     public void onClickBtnInscription(View view) {
         String strLogin = login.getText().toString();
         String strPassword = password.getText().toString();
         if(!strLogin.isEmpty() || !strPassword.isEmpty()) {
+            showProgressBar();
             Map<String, String> params = new HashMap<String, String>();
             params.put("login", login.getText().toString());
             params.put("password", password.getText().toString());
@@ -92,15 +93,18 @@ public class InscriptionActivity extends AppCompatActivity implements SnackBar.O
                                 }
 
                             }else{
+                                hideProgressBar();
                                 password.setText("");
                                 login.setText("");
                                 error.setText("Ce login existe déjà ! Choississez-en un autre");
                             }
                         } else {
+                            hideProgressBar();
                             password.setText("");
                             error.setText("Une erreur est survenue veuillez réessayer");
                         }
                     } catch (JSONException e) {
+                        hideProgressBar();
                         password.setText("");
                         error.setText("Une erreur est survenue veuillez réessayer");
                     }
@@ -109,6 +113,7 @@ public class InscriptionActivity extends AppCompatActivity implements SnackBar.O
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
+                            hideProgressBar();
                             Toast.makeText(InscriptionActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
                         }
                     });

@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class ConnexionActivity extends AppCompatActivity implements SnackBar.OnMessageClickListener {
+public class ConnexionActivity extends BaseActivity implements SnackBar.OnMessageClickListener {
 
     private EditText login;
     private EditText password;
@@ -67,6 +67,7 @@ public class ConnexionActivity extends AppCompatActivity implements SnackBar.OnM
         String strLogin = login.getText().toString();
         String strPassword = password.getText().toString();
         if(!strLogin.isEmpty() || !strPassword.isEmpty()) {
+            showProgressBar();
             String URL = ProjetLabo.API_BASE_URL + "/users/" +strLogin+ ".json";
             StringRequest request = new StringRequest(URL, new Response.Listener<String>() {
                 @Override
@@ -88,22 +89,27 @@ public class ConnexionActivity extends AppCompatActivity implements SnackBar.OnM
                                             ConnexionActivity.this.finish();
                                         }
                                     } catch (UserConnectionException e) {
+                                        hideProgressBar(); 
                                         Toast.makeText(ConnexionActivity.this, "Impossible de récupérer vos données", Toast.LENGTH_LONG).show();
                                     }
                                 }else{
+                                    hideProgressBar(); 
                                     password.setText("");
                                     error.setText("Votre compte n'existe pas !");
                                 }
                             }
                             else {
+                                hideProgressBar(); 
                                 password.setText("");
                                 error.setText("Votre compte n'existe pas !");
                             }
                         } else {
+                            hideProgressBar(); 
                             password.setText("");
                             error.setText("Veuilliez réessayer !");
                         }
                     } catch (JSONException e) {
+                        hideProgressBar(); 
                         password.setText("");
                         error.setText("Veuilliez réessayer !");
                     }
@@ -112,6 +118,7 @@ public class ConnexionActivity extends AppCompatActivity implements SnackBar.OnM
             new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
+                    hideProgressBar(); 
                     Toast.makeText(ConnexionActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
                 }
             });

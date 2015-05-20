@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -40,13 +42,16 @@ import be.unamur.projetLabo.request.PostRequest;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProfileActivity extends AppCompatActivity implements DatePickerFragment.OnDatePickerSetListener  {
+public class ProfileActivity extends BaseActivity implements DatePickerFragment.OnDatePickerSetListener {
     private CardView cvVoitureLoue;
     private Button btnLouer;
     private ImageView voiturePhoto;
     private TextView voitureName;
     private TextView lblLogin;
+    private TextView lblDateLocation;
     private Button btnFidele;
+    private Button btnRendre;
+    private LinearLayout llTitleVoiture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,105 +60,91 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerFrag
         ButterKnife.inject(this);
 
 
-        cvVoitureLoue = (CardView)findViewById(R.id.cvVoitureLoue);
+        cvVoitureLoue = (CardView) findViewById(R.id.cvVoitureLoue);
         btnLouer = (Button) findViewById(R.id.btnLouer);
         btnFidele = (Button) findViewById(R.id.btnFidele);
+        btnRendre = (Button) findViewById(R.id.btnRendre);
         voiturePhoto = (ImageView) findViewById(R.id.voiture_photo);
         voitureName = (TextView) findViewById(R.id.voiture_name);
         lblLogin = (TextView) findViewById(R.id.lblLogin);
+        lblDateLocation = (TextView) findViewById(R.id.date_location);
+        llTitleVoiture = (LinearLayout) findViewById(R.id.TitleVoiture);
 
         lblLogin.setText(ProjetLabo.user.getLogin());
 
         VoitureLoue voiture = ProjetLabo.user.getVoiture();
-        if(voiture != null){
+        if (voiture != null) {
             //On affiche les infos sur la voiture
             cvVoitureLoue.setVisibility(View.VISIBLE);
             btnLouer.setVisibility(View.GONE);
             voitureName.setText(voiture.getName());
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            lblDateLocation.setText("Loué du " + dateFormat.format(voiture.getStart().getTime()) + " au " + dateFormat.format(voiture.getEnd().getTime()));
+
             String url = ProjetLabo.BASE_URL + voiture.getPath();
             Picasso.with(ProfileActivity.this).load(url).into(voiturePhoto);
-        }else{
+
+            if (ProjetLabo.NOW().compareTo(ProjetLabo.user.getVoiture().getStart()) < 0) {
+                btnRendre.setText("Annuler");
+            } else if (ProjetLabo.NOW().compareTo(ProjetLabo.user.getVoiture().getEnd()) > 0) {
+                llTitleVoiture.setBackgroundColor(getResources().getColor(R.color.warning));
+            }
+        } else {
             //On cache la carte et on affiche le btn "Louer"
             cvVoitureLoue.setVisibility(View.GONE);
             btnLouer.setVisibility(View.VISIBLE);
         }
 
-        if(ProjetLabo.user.isFidele()){
+        if (ProjetLabo.user.isFidele()) {
             btnFidele.setText("Mon compte fidélisation");
-        }else{
+        } else {
             btnFidele.setText("Devenir fidéle");
         }
 
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_profile, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
     @OnClick(R.id.btnLouer)
     public void onClickBtnLouer(View view) {
         startActivity(new Intent(ProfileActivity.this, CriteresActivity.class));
     }
+
     @OnClick(R.id.cvVoitureLoue)
     public void onClickCvVoiture(View view) {
         /*startActivity(new Intent(ProfileActivity.this, InfoVehiculeActivity.class));*/
         Toast.makeText(ProfileActivity.this, "Activité non disponible pour le moment", Toast.LENGTH_LONG).show();
     }
+
     @OnClick(R.id.btnFidele)
     public void onClickBtnFidele(View view) {
         startActivity(new Intent(ProfileActivity.this, SoldeFidelisationAcitivity.class));
-        Toast.makeText(ProfileActivity.this, "Activité non disponible pour le moment", Toast.LENGTH_LONG).show();
-    }
-
-    private void rendreVoiture(){
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("idLocation", Integer.toString(ProjetLabo.user.getVoiture().getIdLocation()));
-
-        String URL = ProjetLabo.API_BASE_URL + "/rendres/voitures.json";
-
-        PostRequest requestAddUser = new PostRequest(URL, params, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String s) {
-                try {
-                    JSONObject userJSON = new JSONObject(s);
-                    if (userJSON.has("response")) {
-                        if(userJSON.getBoolean("response")) {
-                            ProjetLabo.user.setVoiture(null);
-                            ProfileActivity.this.recreate();
-                        }else{
-                            Toast.makeText(ProfileActivity.this, "Impossible de rendre votre véhicule pour le moment", Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        Toast.makeText(ProfileActivity.this, "Impossible de rendre votre véhicule pour le moment", Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    Toast.makeText(ProfileActivity.this, "Impossible de rendre votre véhicule pour le moment", Toast.LENGTH_LONG).show();
-                }
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(ProfileActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
-                    }
-                });
-        RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this, new OkHttpStack());
-        queue.add(requestAddUser);
-
     }
 
     @OnClick(R.id.btnRendre)
     public void onClickBtnRendre(View view) {
-        Calendar date = Calendar.getInstance();
-        if(date.compareTo(ProjetLabo.user.getVoiture().getEnd()) < 0){
+        if (ProjetLabo.NOW().compareTo(ProjetLabo.user.getVoiture().getStart()) < 0) {
+            //Rendre le véhicule avant que la location n'ai commencer.
             new AlertDialog.Builder(this)
-                    .setTitle("Rendre ce véhicule")
-                    .setMessage("Êtes-vous sur de vouloir rendre ce véhicule avant la date prévue ?")
+                    .setTitle("Annuler votre location")
+                    .setMessage("Êtes-vous sur de vouloir annuler cette location avant la date prévue ?")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            rendreVoiture();
+                            //rendreVoiture();
+                            ProjetLabo.user.getVoiture().setRendu(true);
+                            ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
+                            ProjetLabo.user.setVoiture(null);
+                            ProjetLabo.user.setToApi(ProfileActivity.this);
+                            ProfileActivity.this.recreate();
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -163,14 +154,68 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerFrag
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
-        }else{
-            rendreVoiture();
+
+        } else {
+            if (ProjetLabo.NOW().compareTo(ProjetLabo.user.getVoiture().getEnd()) < 0) {
+                //Date avant la fin
+                new AlertDialog.Builder(this)
+                        .setTitle("Rendre ce véhicule")
+                        .setMessage("Êtes-vous sur de vouloir rendre ce véhicule avant la date prévue ?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //rendreVoiture();
+                                ProjetLabo.user.getVoiture().setRendu(true);
+                                ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
+                                ProjetLabo.user.setVoiture(null);
+                                ProjetLabo.user.setToApi(ProfileActivity.this);
+                                ProfileActivity.this.recreate();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            } else {
+                if (ProjetLabo.NOW().compareTo(ProjetLabo.user.getVoiture().getEnd()) > 0) {
+                    //retard
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    int nbDays = Math.round((ProjetLabo.NOW().getTimeInMillis() - ProjetLabo.user.getVoiture().getEnd().getTimeInMillis()) / (1000 * 60 * 60 * 24));
+                    float prixRetard = ProjetLabo.user.getVoiture().getPrice() * nbDays;
+                    new AlertDialog.Builder(this)
+                            .setTitle("Retard")
+                            .setMessage("Cette voiture devait être rendue pour le " + dateFormat.format(ProjetLabo.user.getVoiture().getEnd().getTime()) + ". \n " +
+                                    "Veuillez payer la somme de " + prixRetard + " € pour le retard")
+                            .setPositiveButton("Payer", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //rendreVoiture();
+                                    ProjetLabo.user.getVoiture().setRendu(true);
+                                    ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
+                                    ProjetLabo.user.setVoiture(null);
+                                    ProjetLabo.user.setToApi(ProfileActivity.this);
+                                    ProfileActivity.this.recreate();
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                } else {
+                    ProjetLabo.user.getVoiture().setRendu(true);
+                    ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
+                    ProjetLabo.user.setVoiture(null);
+                    ProjetLabo.user.setToApi(ProfileActivity.this);
+                    ProfileActivity.this.recreate();
+                }
+            }
         }
     }
+
     @OnClick(R.id.btnPlain)
     public void onClickBtnPlain(View view) {
 
     }
+
     @OnClick(R.id.btnProlonger)
     public void onClickBtnProlonger(View view) {
         DialogFragment dateFragment = new DatePickerFragment(ProjetLabo.user.getVoiture().getEnd());
@@ -182,7 +227,7 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerFrag
         final Calendar calProlongation = new GregorianCalendar();
         calProlongation.set(year, monthOfYear, dayOfMonth);
         long prolongation = calProlongation.getTime().getTime();
-        if(prolongation > ProjetLabo.user.getVoiture().getEnd().getTime().getTime()){
+        if (prolongation > ProjetLabo.user.getVoiture().getEnd().getTime().getTime()) {
             Map<String, String> params = new HashMap<String, String>();
             params.put("idLocation", Integer.toString(ProjetLabo.user.getVoiture().getIdLocation()));
             params.put("end", Long.toString(prolongation));
@@ -195,9 +240,14 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerFrag
                     try {
                         JSONObject userJSON = new JSONObject(s);
                         if (userJSON.has("response")) {
-                            if(userJSON.getBoolean("response")) {
+                            if (userJSON.getBoolean("response")) {
+                                int nbDays = Math.round((calProlongation.getTimeInMillis() - ProjetLabo.user.getVoiture().getEnd().getTimeInMillis()) / (1000 * 60 * 60 * 24));
+                                //1 point pas semaine de location
+                                ProjetLabo.user.addCapital(((float) 1 / 7) * (float) nbDays);
                                 ProjetLabo.user.getVoiture().setEnd(calProlongation);
-                            }else{
+                                ProjetLabo.user.setToApi(ProfileActivity.this);
+                                ProfileActivity.this.recreate();
+                            } else {
                                 Toast.makeText(ProfileActivity.this, "Ce véhicule ne peut pas être prolongé jusqu'a la date voulue !", Toast.LENGTH_LONG).show();
                             }
                         } else {
@@ -216,23 +266,8 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerFrag
                     });
             RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this, new OkHttpStack());
             queue.add(requestAddUser);
-        }else{
+        } else {
             Toast.makeText(ProfileActivity.this, "Votre nouvelle date de fin de location doit être suppérieur a l'ancienne.", Toast.LENGTH_LONG).show();
         }
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_logout:
-                ProjetLabo.user = null;
-                Intent intent = new Intent(ProfileActivity.this, ConnexionActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                ProfileActivity.this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    }
+}

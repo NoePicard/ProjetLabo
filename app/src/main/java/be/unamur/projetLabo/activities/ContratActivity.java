@@ -26,7 +26,7 @@ import be.unamur.projetLabo.request.PostRequest;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ContratActivity extends AppCompatActivity {
+public class ContratActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class ContratActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_contrat_accepte)
     public void onClickBtnInscription(View view) {
+        showProgressBar();
         Map<String, String> params = new HashMap<String, String>();
         params.put("contrat", "true");
 
@@ -56,10 +57,16 @@ public class ContratActivity extends AppCompatActivity {
                             Toast.makeText(ContratActivity.this, "Contrat accepté !", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(ContratActivity.this, ProfileActivity.class));
                             ContratActivity.this.finish();
-
+                        }else{
+                            Toast.makeText(ContratActivity.this, "Impossible de valider votre contrat!", Toast.LENGTH_LONG).show();
+                            hideProgressBar();
                         }
+                    }else{
+                        Toast.makeText(ContratActivity.this, "Impossible de valider votre contrat!", Toast.LENGTH_LONG).show();
+                        hideProgressBar();
                     }
                 } catch (JSONException e) {
+                    hideProgressBar();
                     Toast.makeText(ContratActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
                 }
             }
@@ -67,6 +74,7 @@ public class ContratActivity extends AppCompatActivity {
         new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                hideProgressBar();
                 Toast.makeText(ContratActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
             }
         });

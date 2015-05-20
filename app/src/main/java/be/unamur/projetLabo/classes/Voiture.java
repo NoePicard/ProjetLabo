@@ -1,9 +1,25 @@
 package be.unamur.projetLabo.classes;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import be.unamur.projetLabo.ProjetLabo;
+import be.unamur.projetLabo.exception.SetToAPIException;
+import be.unamur.projetLabo.request.OkHttpStack;
+import be.unamur.projetLabo.request.PostRequest;
 
 public class Voiture implements Serializable {
     protected int id;
@@ -133,4 +149,50 @@ public class Voiture implements Serializable {
         this.fuelQuantity = fuelQuantity;
     }
 
+    public boolean setToApi(final Context context){
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("id", Integer.toString(this.id));
+        params.put("name", this.name);
+        params.put("nbSeat", Integer.toString(this.nbSeat));
+        params.put("nbDoor", Integer.toString(this.nbDoor));
+        params.put("manualTransmission", Boolean.toString(this.manualTransmission));
+        params.put("path", this.path);
+        params.put("price", Float.toString(this.price));
+        params.put("openDoor", Boolean.toString(this.openDoor));
+        params.put("openEtui", Boolean.toString(this.openEtui));
+        params.put("keyInEtui", Boolean.toString(this.keyInEtui));
+        params.put("fuelQuantity", Float.toString(this.fuelQuantity));
+
+        String URL = ProjetLabo.API_BASE_URL + "/objects/voitures.json";
+
+        PostRequest requestAddUser = new PostRequest(URL, params, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                try {
+                    JSONObject userJSON = new JSONObject(s);
+                    if (userJSON.has("response")) {
+                        if(userJSON.getBoolean("response")) {
+
+                        }else{
+                            Toast.makeText(context, "Impossible de mettre à jour votre voiture", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(context, "Impossible de mettre à jour votre voiture", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(context, "Impossible de mettre à jour votre voiture", Toast.LENGTH_LONG).show();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(context, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
+                    }
+                });
+        RequestQueue queue = Volley.newRequestQueue(context, new OkHttpStack());
+        queue.add(requestAddUser);
+
+        return true;
+    }
 }

@@ -8,8 +8,4 @@
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
         app:actionLayout="@layout/action_view_progress" />
-    <item android:id="@+id/action_profile"
-        android:icon="@drawable/profile_white"
-        android:title="@string/MyProfile"
-        app:showAsAction="always" />
 </menu>

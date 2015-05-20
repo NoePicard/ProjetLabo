@@ -41,7 +41,7 @@ import be.unamur.projetLabo.request.PostRequest;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CriteresActivity extends AppCompatActivity implements DatePickerFragment.OnDatePickerSetListener {
+public class CriteresActivity extends BaseActivity implements DatePickerFragment.OnDatePickerSetListener {
     private ListView listViewCriteres;
     private EditText btnStart;
     private EditText btnEnd;
@@ -60,13 +60,13 @@ public class CriteresActivity extends AppCompatActivity implements DatePickerFra
         btnStart = (EditText) findViewById(R.id.txt_startDate);
         btnEnd = (EditText) findViewById(R.id.txt_endDate);
 
-        String URL = ProjetLabo.API_BASE_URL + "/criteres.json";
+        showProgressBar();
 
+        String URL = ProjetLabo.API_BASE_URL + "/criteres.json";
         StringRequest request = new StringRequest(URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 try {
-
                     JSONArray criArray = new JSONArray(s);
                     List<String> listCriteres = new ArrayList<String>();
                     criSave = new Critere[criArray.length()];
@@ -82,19 +82,19 @@ public class CriteresActivity extends AppCompatActivity implements DatePickerFra
                         listCriteres.add(cri.getName() + "\n" + cri.getType());
                     }
 
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(CriteresActivity.this,
-                            android.R.layout.simple_list_item_multiple_choice, listCriteres);
-
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(CriteresActivity.this, android.R.layout.simple_list_item_multiple_choice, listCriteres);
                     listViewCriteres.setAdapter(adapter);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                hideProgressBar();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                hideProgressBar();
                 Toast.makeText(CriteresActivity.this, "Error : " + volleyError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
@@ -166,7 +166,7 @@ public class CriteresActivity extends AppCompatActivity implements DatePickerFra
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
+                action_bar_progress.setVisible(true);
                 //Envoi des données a l'API
                 String URL = ProjetLabo.API_BASE_URL + "/criteres.json"; //url de l'api
 
@@ -193,6 +193,7 @@ public class CriteresActivity extends AppCompatActivity implements DatePickerFra
 
                             //Appel de la l'activity voiture
                             if (voitures.length == 0) {
+                                action_bar_progress.setVisible(false);
                                 Toast.makeText(CriteresActivity.this, "Aucune voiture ne correspond à vos cirtères !", Toast.LENGTH_LONG).show();
                             } else {
                                 Intent intent = new Intent(CriteresActivity.this, ListeVoituresActivity.class);
@@ -202,6 +203,7 @@ public class CriteresActivity extends AppCompatActivity implements DatePickerFra
                                 startActivity(intent);
                             }
                         } catch (JSONException e) {
+                            action_bar_progress.setVisible(false);
                             //Erreur lors du décodage du json
                         }
                     }
@@ -209,6 +211,7 @@ public class CriteresActivity extends AppCompatActivity implements DatePickerFra
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError volleyError) {
+                                action_bar_progress.setVisible(false);
                                 //Requête à échoué
                             }
                         });
@@ -216,6 +219,7 @@ public class CriteresActivity extends AppCompatActivity implements DatePickerFra
                 RequestQueue queue = Volley.newRequestQueue(CriteresActivity.this, new OkHttpStack());
                 queue.add(request);
             } else {
+
                 Toast.makeText(CriteresActivity.this, "Veuilliez indiquer des dates de début et de fin de location correcte", Toast.LENGTH_LONG).show();
             }
         } else {

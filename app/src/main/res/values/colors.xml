@@ -12,4 +12,5 @@
     <color name="primary_green_title_hugh">#FF6DD40A</color>
     <color name="background">#eeeeee</color>
     <color name="price">#ff0000</color>
+    <color name="warning">#ffa800</color>
 </resources>

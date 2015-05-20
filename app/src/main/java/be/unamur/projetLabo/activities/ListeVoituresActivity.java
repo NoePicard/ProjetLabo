@@ -21,7 +21,7 @@ import be.unamur.projetLabo.classes.Voiture;
 import be.unamur.projetLabo.adapters.VoitureAdapter;
 import butterknife.ButterKnife;
 
-public class ListeVoituresActivity extends AppCompatActivity {
+public class ListeVoituresActivity extends BaseActivity {
 
     private long start;
     private long end;
@@ -65,27 +65,18 @@ public class ListeVoituresActivity extends AppCompatActivity {
         VoitureAdapter adapter = new VoitureAdapter(ListeVoituresActivity.this, voitureList, start, end);
         rv.setAdapter(adapter);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                // app icon in action bar clicked; goto parent activity.
-                this.finish();
-                return true;
-            case R.id.action_profile:
-                startActivity(new Intent(ListeVoituresActivity.this, ProfileActivity.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        return super.onOptionsItemSelected(item);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_default, menu);
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_default, menu);
+        return true;
     }
+
 
 
 }
