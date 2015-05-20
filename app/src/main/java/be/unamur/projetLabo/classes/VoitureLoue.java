@@ -13,8 +13,21 @@ public class VoitureLoue extends Voiture {
     private Calendar  end;
     private int idLocation;
 
-    public VoitureLoue(){
+    public VoitureLoue(Voiture voiture, int idLocation, Calendar start, Calendar end){
+        this.id = voiture.id;
+        this.name = voiture.name;
+        this.nbSeat = voiture.nbSeat;
+        this.nbDoor = voiture.nbDoor;
+        this.manualTransmission = voiture.manualTransmission;
+        this.path = voiture.path;
+        this.price = voiture.price;
+        this.openEtui = voiture.openEtui;
+        this.keyInEtui = voiture.keyInEtui;
+        this.fuelQuantity = voiture.fuelQuantity;
 
+        this.idLocation = idLocation;
+        this.start = start;
+        this.end = end;
     }
 
     public VoitureLoue(JSONObject voitObj) {

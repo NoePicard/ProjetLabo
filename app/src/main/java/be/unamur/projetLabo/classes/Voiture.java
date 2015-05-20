@@ -6,17 +6,17 @@ import org.json.JSONObject;
 import java.io.Serializable;
 
 public class Voiture implements Serializable {
-    private int id;
-    private String name; //modèle, nom voiture.
-    private int nbSeat;
-    private int nbDoor;
-    private boolean manualTransmission;
-    private String path;
-    private float price; //Per day
-    private boolean openDoor;
-    private boolean openEtui;
-    private boolean keyInEtui;
-    private float fuelQuantity;
+    protected int id;
+    protected String name; //modèle, nom voiture.
+    protected int nbSeat;
+    protected int nbDoor;
+    protected boolean manualTransmission;
+    protected String path;
+    protected float price; //Per day
+    protected boolean openDoor;
+    protected boolean openEtui;
+    protected boolean keyInEtui;
+    protected float fuelQuantity;
 
     public Voiture(){
 

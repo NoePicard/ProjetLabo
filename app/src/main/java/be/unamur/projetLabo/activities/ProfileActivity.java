@@ -220,5 +220,19 @@ public class ProfileActivity extends AppCompatActivity implements DatePickerFrag
             Toast.makeText(ProfileActivity.this, "Votre nouvelle date de fin de location doit être suppérieur a l'ancienne.", Toast.LENGTH_LONG).show();
         }
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                ProjetLabo.user = null;
+                Intent intent = new Intent(ProfileActivity.this, ConnexionActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                ProfileActivity.this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     }

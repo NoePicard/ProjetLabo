@@ -23,6 +23,8 @@ import org.json.JSONObject;
 import be.unamur.projetLabo.R;
 import be.unamur.projetLabo.ProjetLabo;
 
+import be.unamur.projetLabo.classes.Utilisateur;
+import be.unamur.projetLabo.exception.UserConnectionException;
 import be.unamur.projetLabo.request.OkHttpStack;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -74,16 +76,19 @@ public class ConnexionActivity extends AppCompatActivity implements SnackBar.OnM
                         if (userJSON.has("response")) {
                             if (userJSON.getBoolean("response")) {
                                 if(password.getText().toString().equals(userJSON.getString("password"))){
-                                    ProjetLabo.user.connexion();
-                                    ProjetLabo.user.hydrate(userJSON);
-                                    error.setText("");
-                                    //Nouvelle activity
-                                    if(ProjetLabo.user.isContrated()){
-                                        startActivity(new Intent(ConnexionActivity.this, ProfileActivity.class));
-                                        ConnexionActivity.this.finish();
-                                    }else{
-                                        startActivity(new Intent(ConnexionActivity.this, ContratActivity.class));
-                                        ConnexionActivity.this.finish();
+                                    try {
+                                        ProjetLabo.user = new Utilisateur(userJSON);
+                                        error.setText("");
+                                        //Nouvelle activity
+                                        if(ProjetLabo.user.isContrated()){
+                                            startActivity(new Intent(ConnexionActivity.this, ProfileActivity.class));
+                                            ConnexionActivity.this.finish();
+                                        }else{
+                                            startActivity(new Intent(ConnexionActivity.this, ContratActivity.class));
+                                            ConnexionActivity.this.finish();
+                                        }
+                                    } catch (UserConnectionException e) {
+                                        Toast.makeText(ConnexionActivity.this, "Impossible de récupérer vos données", Toast.LENGTH_LONG).show();
                                     }
                                 }else{
                                     password.setText("");

@@ -83,7 +83,7 @@ public class SoldeFidelisationAcitivity extends ActionBarActivity {
             queue.add(requestAddUser);
         }
         int solde_capital = ProjetLabo.user.getCapital();
-        lbl_solde_capital.setText(solde_capital);
+        lbl_solde_capital.setText(Integer.toString(solde_capital));
 
         // Valeur par défaut
         iv_correct_conseils.setBackground(getResources().getDrawable(R.drawable.correct_v));

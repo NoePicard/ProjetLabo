@@ -103,20 +103,14 @@ public class VoitureActivity extends AppCompatActivity {
                             calStart.setTimeInMillis(start);
                             calEnd.setTimeInMillis(start);
 
-                            //à modifier
-                            VoitureLoue voit = new VoitureLoue();
-                            voit.setId(voiture.getId());
-                            voit.setName(voiture.getName());
-                            voit.setPrice(voiture.getPrice());
-                            voit.setNbDoor(voiture.getNbDoor());
-                            voit.setNbSeat(voiture.getNbSeat());
-                            voit.setPath(voiture.getPath());
-
+                            VoitureLoue voit = new VoitureLoue(voiture, louerJSON.getInt("idLocation"), calStart, calEnd);
                             ProjetLabo.user.setVoiture(voit);
-                            ProjetLabo.user.getVoiture().setStart(calStart);
-                            ProjetLabo.user.getVoiture().setStart(calEnd);
-                            ProjetLabo.user.getVoiture().setIdLocation(louerJSON.getInt("idLocation"));
-                            startActivity(new Intent(VoitureActivity.this, ProfileActivity.class));
+
+                            //Lancer l'actitité profile et fermet toutes les autres activité.
+                            // Cela évite de revenir avec le btn retour dans la liste des véhicules à loué
+                            Intent intent = new Intent(VoitureActivity.this, ProfileActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
                             VoitureActivity.this.finish();
                         } else {
                             Toast.makeText(VoitureActivity.this, "Une erreur est survenue veuillez réessayer", Toast.LENGTH_LONG).show();

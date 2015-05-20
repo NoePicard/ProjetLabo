@@ -25,6 +25,8 @@ import java.util.Map;
 
 import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
+import be.unamur.projetLabo.classes.Utilisateur;
+import be.unamur.projetLabo.exception.UserConnectionException;
 import be.unamur.projetLabo.request.OkHttpStack;
 import be.unamur.projetLabo.request.PostRequest;
 import butterknife.ButterKnife;
@@ -80,11 +82,15 @@ public class InscriptionActivity extends AppCompatActivity implements SnackBar.O
                         JSONObject userJSON = new JSONObject(s);
                         if (userJSON.has("response")) {
                             if(userJSON.getBoolean("response")) {
-                                ProjetLabo.user.connexion();
-                                ProjetLabo.user.hydrate(userJSON);
-                                error.setText("");
-                                startActivity(new Intent(InscriptionActivity.this, ContratActivity.class));
-                                InscriptionActivity.this.finish();
+                                try{
+                                    ProjetLabo.user = new Utilisateur(userJSON);
+                                    error.setText("");
+                                    startActivity(new Intent(InscriptionActivity.this, ContratActivity.class));
+                                    InscriptionActivity.this.finish();
+                                } catch (UserConnectionException e) {
+                                    Toast.makeText(InscriptionActivity.this, "Impossible de récupérer vos données", Toast.LENGTH_LONG).show();
+                                }
+
                             }else{
                                 password.setText("");
                                 login.setText("");
