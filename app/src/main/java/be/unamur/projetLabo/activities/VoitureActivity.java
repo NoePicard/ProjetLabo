@@ -120,6 +120,11 @@ public class VoitureActivity extends BaseActivity {
                                             //1 point pas semaine de location
                                             ProjetLabo.user.addCapital(((float) 1 / 7) * nbDays);
                                             VoitureLoue voit = new VoitureLoue(voiture, louerJSON.getInt("idLocation"), calStart, calEnd);
+                                            if(ProjetLabo.user.isFidele()){
+                                                voit.setFuelQuantity(50);
+                                            }else{
+                                                voit.setFuelQuantity(25);
+                                            }
                                             ProjetLabo.user.setVoiture(voit);
                                             ProjetLabo.user.setToApi(VoitureActivity.this);
                                             //Lancer l'actitité profile et fermet toutes les autres activité.
