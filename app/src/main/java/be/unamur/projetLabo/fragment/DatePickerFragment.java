@@ -1,5 +1,6 @@
 package be.unamur.projetLabo.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -19,16 +20,14 @@ import java.util.Calendar;
  */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     private OnDatePickerSetListener mCallback;
-    private String title;
     private Calendar cal;
 
-    public DatePickerFragment(String title) {
-        this.title = title;
-    }
+    @SuppressLint("ValidFragment")
     public DatePickerFragment() {
-        this.title = null;
         this.cal = Calendar.getInstance();
     }
+
+    @SuppressLint("ValidFragment")
     public DatePickerFragment(Calendar cal) {
         this.cal = cal;
     }
@@ -58,7 +57,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
-        if(title != null) { dialog.setTitle(title + "\n"); }
         return dialog;
     }
 

@@ -2,18 +2,19 @@ package be.unamur.projetLabo.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,6 @@ import java.util.Map;
 
 import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
-import be.unamur.projetLabo.classes.Utilisateur;
 import be.unamur.projetLabo.classes.VoitureLoue;
 import be.unamur.projetLabo.fragment.DatePickerFragment;
 import be.unamur.projetLabo.request.OkHttpStack;
@@ -103,6 +103,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
         }
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_profile, menu);
@@ -130,6 +131,23 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
         startActivity(new Intent(ProfileActivity.this, SoldeFidelisationAcitivity.class));
     }
 
+    private boolean rendreVerifPlain() {
+        if (ProjetLabo.user.getVoiture().getFuelQuantity() < 25) {
+            new AlertDialog.Builder(ProfileActivity.this)
+                    .setTitle("Faites le plain !")
+                    .setMessage("Vous devez rendre un véhicule contenant au minimum 25 litres de carburant.")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+            return false;
+        }
+        return true;
+    }
+
     @OnClick(R.id.btnRendre)
     public void onClickBtnRendre(View view) {
         if (ProjetLabo.NOW().compareTo(ProjetLabo.user.getVoiture().getStart()) < 0) {
@@ -139,12 +157,13 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                     .setMessage("Êtes-vous sur de vouloir annuler cette location avant la date prévue ?")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            //rendreVoiture();
-                            ProjetLabo.user.getVoiture().setRendu(true);
-                            ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
-                            ProjetLabo.user.setVoiture(null);
-                            ProjetLabo.user.setToApi(ProfileActivity.this);
-                            ProfileActivity.this.recreate();
+                            if (ProfileActivity.this.rendreVerifPlain()) {
+                                ProjetLabo.user.getVoiture().setRendu(true);
+                                ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
+                                ProjetLabo.user.setVoiture(null);
+                                ProjetLabo.user.setToApi(ProfileActivity.this);
+                                ProfileActivity.this.recreate();
+                            }
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -163,12 +182,13 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                         .setMessage("Êtes-vous sur de vouloir rendre ce véhicule avant la date prévue ?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                //rendreVoiture();
-                                ProjetLabo.user.getVoiture().setRendu(true);
-                                ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
-                                ProjetLabo.user.setVoiture(null);
-                                ProjetLabo.user.setToApi(ProfileActivity.this);
-                                ProfileActivity.this.recreate();
+                                if (ProfileActivity.this.rendreVerifPlain()) {
+                                    ProjetLabo.user.getVoiture().setRendu(true);
+                                    ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
+                                    ProjetLabo.user.setVoiture(null);
+                                    ProjetLabo.user.setToApi(ProfileActivity.this);
+                                    ProfileActivity.this.recreate();
+                                }
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -190,30 +210,101 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                                     "Veuillez payer la somme de " + prixRetard + " € pour le retard")
                             .setPositiveButton("Payer", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    //rendreVoiture();
-                                    ProjetLabo.user.getVoiture().setRendu(true);
-                                    ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
-                                    ProjetLabo.user.setVoiture(null);
-                                    ProjetLabo.user.setToApi(ProfileActivity.this);
-                                    ProfileActivity.this.recreate();
+                                    if (ProfileActivity.this.rendreVerifPlain()) {
+                                        ProjetLabo.user.getVoiture().setRendu(true);
+                                        ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
+                                        ProjetLabo.user.setVoiture(null);
+                                        ProjetLabo.user.setToApi(ProfileActivity.this);
+                                        ProfileActivity.this.recreate();
+                                    }
                                 }
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
                 } else {
-                    ProjetLabo.user.getVoiture().setRendu(true);
-                    ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
-                    ProjetLabo.user.setVoiture(null);
-                    ProjetLabo.user.setToApi(ProfileActivity.this);
-                    ProfileActivity.this.recreate();
+                    if (ProfileActivity.this.rendreVerifPlain()) {
+                        ProjetLabo.user.getVoiture().setRendu(true);
+                        ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
+                        ProjetLabo.user.setVoiture(null);
+                        ProjetLabo.user.setToApi(ProfileActivity.this);
+                        ProfileActivity.this.recreate();
+                    }
                 }
             }
         }
     }
 
     @OnClick(R.id.btnPlain)
-    public void onClickBtnPlain(View view) {
+    public void onClickBtnPlain(final View view) {
+        final SeekBar input = new SeekBar(this);
+        input.setMax(50);
+        input.setProgress((int) Math.floor(ProjetLabo.user.getVoiture().getFuelQuantity()));
+        final AlertDialog dialog = new AlertDialog.Builder(ProfileActivity.this)
+                .setTitle("Faire le plain")
+                .setMessage("Reservoir : " + (int) ProjetLabo.user.getVoiture().getFuelQuantity() + "/50 litres")
+                .setView(input)
+                .setPositiveButton("Payer", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        if (input.getProgress() > ProjetLabo.user.getVoiture().getFuelQuantity()) {
+                            final float prixFidele = (input.getProgress() - ProjetLabo.user.getVoiture().getFuelQuantity()) * 1 / 10;
+                            if (prixFidele < ProjetLabo.user.getCapital()) {
+                                new AlertDialog.Builder(ProfileActivity.this)
+                                        .setTitle("Payer avec votre compte fidélité")
+                                        .setMessage("Vous possèdez " + ProjetLabo.user.getCapital() + " points sur votre compte fidélité. Souhaitez vous payer votre plain (" + prixFidele + " points) avec ces points ?")
+                                        .setPositiveButton("Compte fidélité", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                ProjetLabo.user.subCapital(prixFidele);
+                                            }
+                                        })
+                                        .setNegativeButton("Cash", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                // do nothing
+                                            }
+                                        })
+                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .show();
+                                ProjetLabo.user.getVoiture().setFuelQuantity((int) Math.floor(ProjetLabo.user.getVoiture().getFuelQuantity() + input.getProgress()));
+                                ProjetLabo.user.setToApi(ProfileActivity.this);
+                            }
+                        } else {
+                            new AlertDialog.Builder(ProfileActivity.this)
+                                    .setTitle("Plain négatif")
+                                    .setMessage("Vous ne pouvez pas vendre de l'essence, uniquement en acheter.")
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            ProfileActivity.this.onClickBtnPlain(view);
+                                        }
+                                    })
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+                        }
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Do nothing.
+                    }
+                }).show();
 
+        input.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                // TODO Auto-generated method stub
+                dialog.setMessage("Reservoir : " + String.valueOf(progress) + "/50 litres");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+        });
     }
 
     @OnClick(R.id.btnProlonger)
