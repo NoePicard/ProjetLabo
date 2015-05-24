@@ -99,7 +99,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
         if (ProjetLabo.user.isFidele()) {
             btnFidele.setText("Mon compte fidélisation");
         } else {
-            btnFidele.setText("Devenir fidéle");
+            btnFidele.setText("Devenir fidèle");
         }
 
     }
@@ -123,7 +123,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
     @OnClick(R.id.cvVoitureLoue)
     public void onClickCvVoiture(View view) {
         /*startActivity(new Intent(ProfileActivity.this, InfoVehiculeActivity.class));*/
-        Toast.makeText(ProfileActivity.this, "Activité non disponible pour le moment", Toast.LENGTH_LONG).show();
+        Toast.makeText(ProfileActivity.this, "Activité actuellement indisponible", Toast.LENGTH_LONG).show();
     }
 
     @OnClick(R.id.btnFidele)
@@ -134,7 +134,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
     private boolean rendreVerifPlain() {
         if (ProjetLabo.user.getVoiture().getFuelQuantity() < 25) {
             new AlertDialog.Builder(ProfileActivity.this)
-                    .setTitle("Faites le plain !")
+                    .setTitle("Faites le plein !")
                     .setMessage("Vous devez rendre un véhicule contenant au minimum 25 litres de carburant.")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -154,7 +154,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
             //Rendre le véhicule avant que la location n'ai commencer.
             new AlertDialog.Builder(this)
                     .setTitle("Annuler votre location")
-                    .setMessage("Êtes-vous sur de vouloir annuler cette location avant la date prévue ?")
+                    .setMessage("Êtes-vous sûr de vouloir annuler cette location avant la date prévue ?")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             if (ProfileActivity.this.rendreVerifPlain()) {
@@ -179,7 +179,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                 //Date avant la fin
                 new AlertDialog.Builder(this)
                         .setTitle("Rendre ce véhicule")
-                        .setMessage("Êtes-vous sur de vouloir rendre ce véhicule avant la date prévue ?")
+                        .setMessage("Êtes-vous sûr de vouloir rendre ce véhicule avant la date prévue ?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (ProfileActivity.this.rendreVerifPlain()) {
@@ -240,8 +240,8 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
         input.setMax(50);
         input.setProgress((int) Math.floor(ProjetLabo.user.getVoiture().getFuelQuantity()));
         final AlertDialog dialog = new AlertDialog.Builder(ProfileActivity.this)
-                .setTitle("Faire le plain")
-                .setMessage("Reservoir : " + (int) ProjetLabo.user.getVoiture().getFuelQuantity() + "/50 litres")
+                .setTitle("Faire le plein")
+                .setMessage("Réservoir : " + (int) ProjetLabo.user.getVoiture().getFuelQuantity() + "/50 litres")
                 .setView(input)
                 .setPositiveButton("Payer", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -250,7 +250,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                             if (prixFidele < ProjetLabo.user.getCapital()) {
                                 new AlertDialog.Builder(ProfileActivity.this)
                                         .setTitle("Payer avec votre compte fidélité")
-                                        .setMessage("Vous possèdez " + ProjetLabo.user.getCapital() + " points sur votre compte fidélité. Souhaitez vous payer votre plain (" + prixFidele + " points) avec ces points ?")
+                                        .setMessage("Vous possédez " + ProjetLabo.user.getCapital() + " points sur votre compte fidélité. Souhaitez-vous payer votre plein (" + prixFidele + " points) avec ces points ?")
                                         .setPositiveButton("Compte fidélité", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 ProjetLabo.user.subCapital(prixFidele);
@@ -268,7 +268,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                             }
                         } else {
                             new AlertDialog.Builder(ProfileActivity.this)
-                                    .setTitle("Plain négatif")
+                                    .setTitle("Plein négatif")
                                     .setMessage("Vous ne pouvez pas vendre de l'essence, uniquement en acheter.")
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
@@ -292,7 +292,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
             public void onProgressChanged(SeekBar seekBar, int progress,
                                           boolean fromUser) {
                 // TODO Auto-generated method stub
-                dialog.setMessage("Reservoir : " + String.valueOf(progress) + "/50 litres");
+                dialog.setMessage("Réservoir : " + String.valueOf(progress) + "/50 litres");
             }
 
             @Override
@@ -339,13 +339,13 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                                 ProjetLabo.user.setToApi(ProfileActivity.this);
                                 ProfileActivity.this.recreate();
                             } else {
-                                Toast.makeText(ProfileActivity.this, "Ce véhicule ne peut pas être prolongé jusqu'a la date voulue !", Toast.LENGTH_LONG).show();
+                                Toast.makeText(ProfileActivity.this, "Ce véhicule ne peut pas être prolongé jusqu'à la date voulue !", Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(ProfileActivity.this, "Impossible de prolonger votre véhicule pour le moment", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProfileActivity.this, "Il est actuellement impossible de prolonger votre véhicule", Toast.LENGTH_LONG).show();
                         }
                     } catch (JSONException e) {
-                        Toast.makeText(ProfileActivity.this, "Impossible de prolonger votre véhicule pour le moment", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ProfileActivity.this, "Il est actuellement impossible de prolonger votre véhicule", Toast.LENGTH_LONG).show();
                     }
                 }
             },
@@ -358,7 +358,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
             RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this, new OkHttpStack());
             queue.add(requestAddUser);
         } else {
-            Toast.makeText(ProfileActivity.this, "Votre nouvelle date de fin de location doit être suppérieur a l'ancienne.", Toast.LENGTH_LONG).show();
+            Toast.makeText(ProfileActivity.this, "Votre nouvelle date de fin de location doit être supérieure a l'ancienne.", Toast.LENGTH_LONG).show();
         }
     }
 }

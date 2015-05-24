@@ -19,6 +19,12 @@ android {
     productFlavors {
     }
 }
+/*
+//to be added for gauge
+repositories {
+    maven { url 'https://dl.bintray.com/sule/maven/' }
+}
+*/
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -32,4 +38,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.+'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:cardview-v7:22.1.1'
+    //to be added for gauge
+    //compile 'io.sule:gaugelibrary:1.0.0'
 }
