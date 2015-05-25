@@ -18,6 +18,7 @@ import com.cardiomood.android.controls.gauge.SpeedometerGauge;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import be.unamur.projetLabo.ProjetLabo;
@@ -56,8 +57,8 @@ public class InfoVehiculeActivity extends ActionBarActivity {
         /*
             SETTING END OF RENT DATE
         */
-        String renting_end_date = ProjetLabo.user.getVoiture().getEnd().toString();
-        lbl_renting_end_date.setText(renting_end_date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        lbl_renting_end_date.setText(dateFormat.format(ProjetLabo.user.getVoiture().getEnd().getTime()));
 
        /*
             SETTING CAR MODEL
@@ -207,7 +208,6 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             // setting img button to "GONE" (unclickable)
             ib_car_case.setVisibility(View.GONE);
             ib_car_key.setVisibility(View.GONE);
-
         }
         if ((ProjetLabo.user.getVoiture().isOpenDoor()) && (!ProjetLabo.user.getVoiture().isOpenEtui())){
             // setting drawable and OpenDoor to false

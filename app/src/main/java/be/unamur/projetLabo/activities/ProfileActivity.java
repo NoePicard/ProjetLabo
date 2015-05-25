@@ -122,8 +122,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
 
     @OnClick(R.id.cvVoitureLoue)
     public void onClickCvVoiture(View view) {
-        /*startActivity(new Intent(ProfileActivity.this, InfoVehiculeActivity.class));*/
-        Toast.makeText(ProfileActivity.this, "Activité actuellement indisponible", Toast.LENGTH_LONG).show();
+        startActivity(new Intent(ProfileActivity.this, InfoVehiculeActivity.class));
     }
 
     @OnClick(R.id.btnFidele)
