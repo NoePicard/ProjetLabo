@@ -37,7 +37,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
     public ImageButton ib_car_case;
     BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter(); //SETTING BT ADAPTER
     private final static int REQUEST_CODE_ENABLE_BLUETOOTH = 0;
-    private SpeedometerGauge sv_speedometer;
+   // private SpeedometerGauge sv_speedometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
         ib_car_case = (ImageButton) findViewById(R.id.car_case);
         ib_car_doors = (ImageButton) findViewById(R.id.car_doors);
         ib_car_key = (ImageButton) findViewById(R.id.car_key);
-        sv_speedometer = (SpeedometerGauge) findViewById(R.id.speedometer);
+        //sv_speedometer = (SpeedometerGauge) findViewById(R.id.speedometer);
 
         /*
             SETTING END OF RENT DATE
@@ -120,7 +120,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
 
                 /*
                     SET fuel_gauge TO VISIBLE.
-                 */
+
                 // Add label converter
                 sv_speedometer.setLabelConverter(new com.cardiomood.android.controls.gauge.SpeedometerGauge.LabelConverter() {
                     @Override
@@ -141,6 +141,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
 
                 // Configure needle
                 sv_speedometer.setSpeed(ProjetLabo.user.getVoiture().getFuelQuantity(), false);
+                */
 
             }
         }
@@ -163,7 +164,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             ib_car_doors.getBackground().setAlpha(128);
             ib_car_case.getBackground().setAlpha(128);
             ib_car_key.getBackground().setAlpha(128);;
-            sv_speedometer.getBackground().setAlpha(128);
+            //sv_speedometer.getBackground().setAlpha(128);
         }
     }
 
