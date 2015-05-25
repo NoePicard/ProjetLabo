@@ -3,6 +3,7 @@ package be.unamur.projetLabo.activities;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -36,7 +37,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
     public ImageButton ib_car_case;
     BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter(); //SETTING BT ADAPTER
     private final static int REQUEST_CODE_ENABLE_BLUETOOTH = 0;
-    public SpeedometerGauge sv_speedometer;
+    private SpeedometerGauge sv_speedometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +83,9 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             if (!bluetoothAdapter.isEnabled()){
                 ib_bluetooth_activated.setBackground(getResources().getDrawable(R.drawable.blueetooth_red));
                 // setting every img button to "gone" (unclickable)
-                ib_car_doors.setVisibility(View.GONE);
-                ib_car_case.setVisibility(View.GONE);
-                ib_car_key.setVisibility(View.GONE);
+                ib_car_doors.getBackground().setAlpha(128);
+                ib_car_case.getBackground().setAlpha(128);
+                ib_car_key.getBackground().setAlpha(128);
                 /*
                     SETTING GAUGE TO GONE
                  */
@@ -94,8 +95,8 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                 if (ProjetLabo.user.getVoiture().isOpenDoor()) {
                     ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_red));
                     // setting img button to "gone" (unclickable)
-                    ib_car_case.setVisibility(View.GONE);
-                    ib_car_key.setVisibility(View.GONE);
+                    ib_car_case.getBackground().setAlpha(128);
+                    ib_car_key.getBackground().setAlpha(128);
 
                 }
                 else {
@@ -111,8 +112,8 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                     }
                     else {
                         ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
-                        // setting img button to "gone" (unclickable)
-                        ib_car_key.setVisibility(View.GONE);
+                        // setting img button to unclickable
+                        ib_car_key.getBackground().setAlpha(128);
                     }
 
                 }
@@ -122,8 +123,9 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                  */
                 // Add label converter
                 sv_speedometer.setLabelConverter(new com.cardiomood.android.controls.gauge.SpeedometerGauge.LabelConverter() {
+                    @Override
                     public String getLabelFor(double progress, double maxProgress) {
-                        return String.valueOf(ProjetLabo.user.getVoiture().getFuelQuantity());
+                        return String.valueOf((int) Math.round(progress));
                     }
                 });
 
@@ -136,6 +138,9 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                 sv_speedometer.addColoredRange(0, 10, Color.RED);
                 sv_speedometer.addColoredRange(15, 25, Color.YELLOW);
                 sv_speedometer.addColoredRange(25, 60, Color.GREEN);
+
+                // Configure needle
+                sv_speedometer.setSpeed(ProjetLabo.user.getVoiture().getFuelQuantity(), false);
 
             }
         }
@@ -155,10 +160,10 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             bluetoothAdapter.disable();
             ib_bluetooth_activated.setBackground(getResources().getDrawable(R.drawable.blueetooth_red));
             // setting every img button to "gone" (unclickable)
-            ib_car_doors.setVisibility(View.GONE);
-            ib_car_case.setVisibility(View.GONE);
-            ib_car_key.setVisibility(View.GONE);
-            sv_speedometer.setVisibility(View.GONE);
+            ib_car_doors.getBackground().setAlpha(128);
+            ib_car_case.getBackground().setAlpha(128);
+            ib_car_key.getBackground().setAlpha(128);;
+            sv_speedometer.getBackground().setAlpha(128);
         }
     }
 
@@ -174,8 +179,8 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             if (ProjetLabo.user.getVoiture().isOpenDoor()) {
                 ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_red));
                 // setting img button to "GONE" (unclickable)
-                ib_car_case.setVisibility(View.GONE);
-                ib_car_key.setVisibility(View.GONE);
+                ib_car_case.getBackground().setAlpha(128);
+                ib_car_key.getBackground().setAlpha(128);
             }
             else {
                 ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_green));
@@ -191,7 +196,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                 else {
                     ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
                     // setting img button to "GONE" (unclickable)
-                    ib_car_key.setVisibility(View.GONE);
+                    ib_car_key.getBackground().setAlpha(128);
                 }
 
             }
@@ -206,8 +211,8 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             ProjetLabo.user.getVoiture().setOpenDoor(true);
             ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_red));
             // setting img button to "GONE" (unclickable)
-            ib_car_case.setVisibility(View.GONE);
-            ib_car_key.setVisibility(View.GONE);
+            ib_car_case.getBackground().setAlpha(128);
+            ib_car_key.getBackground().setAlpha(128);
         }
         if ((ProjetLabo.user.getVoiture().isOpenDoor()) && (!ProjetLabo.user.getVoiture().isOpenEtui())){
             // setting drawable and OpenDoor to false
@@ -216,7 +221,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             // setting car_case and car_key
             ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
             // setting img button to "GONE" (unclickable)
-            ib_car_key.setVisibility(View.GONE);
+            ib_car_key.getBackground().setAlpha(128);
         }
     }
 
@@ -228,7 +233,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             ProjetLabo.user.getVoiture().setOpenEtui(false);
             ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
             // setting img button to "GONE" (unclickable)
-            ib_car_key.setVisibility(View.GONE);
+            ib_car_key.getBackground().setAlpha(128);
         }
         if ((!ProjetLabo.user.getVoiture().isOpenDoor())&& (!ProjetLabo.user.getVoiture().isOpenEtui())){
             // setting drawable and OpenEtui to true

@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    xmlns:speedometerView="com.cardiomood.android.controls.gauge.SpeedometerGauge"
     android:layout_height="fill_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -150,14 +151,15 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
-        <com.cardiomood.android.controls.gauge.SpeedometerGauge
+        <speedometerView
             android:layout_width="fill_parent"
             android:layout_height="150dp"
             class="com.cardiomood.android.controls.gauge.SpeedometerGauge"
             android:id="@+id/speedometer"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp" />
+            android:layout_marginBottom="50dp"
+            />
 
     </RelativeLayout>
 
