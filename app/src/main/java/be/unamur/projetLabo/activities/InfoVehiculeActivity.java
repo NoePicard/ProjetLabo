@@ -58,7 +58,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
         /*
             SETTING END OF RENT DATE
         */
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
         lbl_renting_end_date.setText(dateFormat.format(ProjetLabo.user.getVoiture().getEnd().getTime()));
 
        /*
