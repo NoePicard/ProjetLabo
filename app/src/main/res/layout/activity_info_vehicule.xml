@@ -156,11 +156,14 @@
             android:background="@drawable/car_case"
             android:clickable="true" />
 
-        <com.cardiomood.android.speedometer.SpeedometerView
-            android:layout_height="120dp"
-            android:layout_width="match_parent"
-            android:padding="8dp"
-            android:id="@+id/speedometer" />
+        <com.cardiomood.android.controls.gauge.SpeedometerGauge
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            class="com.cardiomood.android.controls.gauge.SpeedometerGauge"
+            android:id="@+id/speedometer"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp" />
 
     </RelativeLayout>
 
