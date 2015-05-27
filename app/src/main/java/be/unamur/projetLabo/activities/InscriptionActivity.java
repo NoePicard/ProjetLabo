@@ -105,10 +105,10 @@ public class InscriptionActivity extends BaseActivity implements SnackBar.OnMess
                                 try{
                                     ProjetLabo.user = new Utilisateur(userJSON);
                                     error.setText("");
-                                    /*layout1.setVisibility(View.GONE);
+                                    layout1.setVisibility(View.GONE);
                                     login.setText(strLogin);
                                     password.setText(strPassword);
-                                    layout2.setVisibility(View.VISIBLE);*/
+                                    layout2.setVisibility(View.VISIBLE);
                                 } catch (UserConnectionException e) {
                                     Toast.makeText(InscriptionActivity.this, "Impossible de récupérer vos données", Toast.LENGTH_LONG).show();
                                 }
@@ -138,11 +138,6 @@ public class InscriptionActivity extends BaseActivity implements SnackBar.OnMess
                             Toast.makeText(InscriptionActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
                         }
                     });
-
-            layout1.setVisibility(View.GONE);
-            login.setText(strLogin);
-            password.setText(strPassword);
-            layout2.setVisibility(View.VISIBLE);
 
             RequestQueue queue = Volley.newRequestQueue(InscriptionActivity.this, new OkHttpStack());
             queue.add(requestAddUser);
