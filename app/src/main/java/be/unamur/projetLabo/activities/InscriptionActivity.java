@@ -1,11 +1,13 @@
 package be.unamur.projetLabo.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -35,8 +37,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class InscriptionActivity extends BaseActivity implements SnackBar.OnMessageClickListener{
-    private LinearLayout layout1;
-    private LinearLayout layout2;
+    private LinearLayout layoutGet;
+    private LinearLayout layoutDisplay;
     private EditText login;
     private EditText password;
     private TextView error;
@@ -62,31 +64,35 @@ public class InscriptionActivity extends BaseActivity implements SnackBar.OnMess
         ButterKnife.inject(this);
         //Récupération vue
 
-        layout1 = (LinearLayout) findViewById(R.id.layout1_inscription);
-        layout2 = (LinearLayout) findViewById(R.id.layout2_inscription);
+        layoutGet = (LinearLayout) findViewById(R.id.layoutGetInfo_inscription);
+        layoutDisplay = (LinearLayout) findViewById(R.id.layoutDisplayLoginPassword_inscription);
 
-        name = (EditText) layout1.findViewById(R.id.txt_name);
-        firstName = (EditText) layout1.findViewById(R.id.txt_firstName);
-        fidele = (CheckBox) layout1.findViewById(R.id.chb_fidele);
-        login = (EditText) layout2.findViewById(R.id.txt_login);
-        password = (EditText) layout2.findViewById(R.id.txt_password);
-        error = (TextView) layout2.findViewById(R.id.lbl_error);
+        firstName = (EditText) layoutGet.findViewById(R.id.txt_firstName);
+        name = (EditText) layoutGet.findViewById(R.id.txt_name);
+        fidele = (CheckBox) layoutGet.findViewById(R.id.chb_fidele);
+        error = (TextView) layoutGet.findViewById(R.id.lbl_error);
+
+        login = (EditText) layoutDisplay.findViewById(R.id.txt_login);
+        password = (EditText) layoutDisplay.findViewById(R.id.txt_password);
 
         showSnackBar();
     }
 
     @OnClick(R.id.btn_inscription)
     public void onClickBtnInscription(View view) {
-        String strName = name.getText().toString();
-        String strFirstName = firstName.getText().toString();
+        final String strName = name.getText().toString();
+        final String strFirstName = firstName.getText().toString();
         final String strLogin;
         final String strPassword;
 
         if(!strName.isEmpty() || !strFirstName.isEmpty()) {
             showProgressBar();
 
-            strLogin = strFirstName.substring(0,1).toLowerCase() + strName.toLowerCase();
-            strPassword = randomString(8);
+            /* J'ai rajouter 3 chiffres aléatoires à la fin du login pour pas avoir de problèmes quand du utilisateur
+                ont le même prénom et nom
+             */
+            strLogin = strFirstName.substring(0,1).toLowerCase() + strName.toLowerCase() + randomString(3,false);
+            strPassword = randomString(8,true);
 
             Map<String, String> params = new HashMap<String, String>();
             params.put("login", strLogin);
@@ -105,28 +111,31 @@ public class InscriptionActivity extends BaseActivity implements SnackBar.OnMess
                                 try{
                                     ProjetLabo.user = new Utilisateur(userJSON);
                                     error.setText("");
-                                    layout1.setVisibility(View.GONE);
+                                    layoutGet.setVisibility(View.GONE);
                                     login.setText(strLogin);
                                     password.setText(strPassword);
-                                    layout2.setVisibility(View.VISIBLE);
+                                    layoutDisplay.setVisibility(View.VISIBLE);
+                                    hideProgressBar();
+
+                                    /*Fermer le clavier*/
+                                    InputMethodManager imm = (InputMethodManager)getSystemService(
+                                            Context.INPUT_METHOD_SERVICE);
+                                    imm.hideSoftInputFromWindow(password.getWindowToken(), 0);
+
                                 } catch (UserConnectionException e) {
                                     Toast.makeText(InscriptionActivity.this, "Impossible de récupérer vos données", Toast.LENGTH_LONG).show();
                                 }
 
                             }else{
                                 hideProgressBar();
-                                password.setText("");
-                                login.setText("");
-                                error.setText("Ce login existe déjà ! Choississez-en un autre");
+                                error.setText("Une erreur est survenue veuillez réessayer");
                             }
                         } else {
                             hideProgressBar();
-                            password.setText("");
                             error.setText("Une erreur est survenue veuillez réessayer");
                         }
                     } catch (JSONException e) {
                         hideProgressBar();
-                        password.setText("");
                         error.setText("Une erreur est survenue veuillez réessayer");
                     }
                 }
@@ -160,13 +169,19 @@ public class InscriptionActivity extends BaseActivity implements SnackBar.OnMess
         InscriptionActivity.this.finish();
     }
 
-    private static final String passwordDomain = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String passwordDomain = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmopqrstuvwxyz";
+    private static final String endLoginDomain = "0123456789";
     private static Random rnd = new Random();
-    private String randomString(int passwordSize)
+    private String randomString(int strSize , boolean passwordOrLogin)
     {
-        StringBuilder sb = new StringBuilder( passwordSize );
-        for( int i = 0; i < passwordSize; i++ )
-            sb.append(passwordDomain.charAt(rnd.nextInt(passwordDomain.length())));
+        StringBuilder sb = new StringBuilder( strSize );
+        if (passwordOrLogin) {
+            for (int i = 0; i < strSize; i++)
+                sb.append(passwordDomain.charAt(rnd.nextInt(passwordDomain.length())));
+        } else {
+            for (int i = 0; i < strSize; i++)
+                sb.append(passwordDomain.charAt(rnd.nextInt(endLoginDomain.length())));
+        }
         return sb.toString();
     }
 }
