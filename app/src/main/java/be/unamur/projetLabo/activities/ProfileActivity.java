@@ -70,6 +70,12 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
         lblDateLocation = (TextView) findViewById(R.id.date_location);
         llTitleVoiture = (LinearLayout) findViewById(R.id.TitleVoiture);
 
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         lblLogin.setText(ProjetLabo.user.getLogin());
 
         VoitureLoue voiture = ProjetLabo.user.getVoiture();
@@ -101,9 +107,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
         } else {
             btnFidele.setText("Devenir fidèle");
         }
-
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_profile, menu);
