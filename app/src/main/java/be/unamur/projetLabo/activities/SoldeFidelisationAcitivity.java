@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
 import be.unamur.projetLabo.request.OkHttpStack;
 import be.unamur.projetLabo.request.PostRequest;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SoldeFidelisationAcitivity extends ActionBarActivity {
@@ -39,6 +41,7 @@ public class SoldeFidelisationAcitivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solde_fidelisation_acitivity);
+        ButterKnife.inject(this);
 
         //Récupération de la vue
         lbl_solde_capital = (TextView) findViewById(R.id.points_fidelisation);
@@ -47,7 +50,7 @@ public class SoldeFidelisationAcitivity extends ActionBarActivity {
         iv_correct_conseils = (ImageView) findViewById(R.id.points_conseils_fidelisation);
 
         //SETTING USER FIDELE -> TRUE
-        if (ProjetLabo.user.isFidele()== false){
+        if (!ProjetLabo.user.isFidele()){
             Map<String, String> params = new HashMap<String, String>();
             params.put("fidele", Boolean.toString(true));
 
@@ -100,8 +103,7 @@ public class SoldeFidelisationAcitivity extends ActionBarActivity {
     }
 
     @OnClick(R.id.btn_retour)
-    public void OnReturnButton (Parcelable token){
-        startActivity(new Intent(SoldeFidelisationAcitivity.this, ConnexionActivity.class));
+    public void OnReturnButton (View view){
         SoldeFidelisationAcitivity.this.finish();
     }
 }

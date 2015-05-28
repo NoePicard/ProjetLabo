@@ -24,6 +24,7 @@ import java.util.Date;
 
 import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class InfoVehiculeActivity extends ActionBarActivity {
@@ -43,6 +44,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_vehicule);
+        ButterKnife.inject(this);
 
         /*
             LINKING VAR TO LAYOUT
@@ -163,7 +165,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             // setting every img button to "gone" (unclickable)
             ib_car_doors.getBackground().setAlpha(128);
             ib_car_case.getBackground().setAlpha(128);
-            ib_car_key.getBackground().setAlpha(128);;
+            ib_car_key.getBackground().setAlpha(128);
             //sv_speedometer.getBackground().setAlpha(128);
         }
     }
