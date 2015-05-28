@@ -63,24 +63,36 @@
         android:id="@+id/linearLayout2"
         android:background="@color/primary">
 
-        <TextView
-            android:layout_width="250dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Accès GPS"
-            android:id="@+id/textView2"
-            android:paddingTop="13dp"
-            android:paddingLeft="10dp"
-            android:textColor="@android:color/white"
-            android:textSize="25sp" />
+            android:background="@color/primary">
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="fill_parent"
-            android:id="@+id/points_gps_fidelisation"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/correct_v"
-            android:layout_gravity="right"
-            android:layout_marginLeft="17dp" />
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="fill_parent"
+                android:text="Accès GPS"
+                android:id="@+id/textView2"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:paddingTop="13dp"
+                android:paddingLeft="10dp"
+                android:textColor="@android:color/white"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/points_gps_fidelisation"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/correct_v"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="right"
+                android:layout_marginLeft="17dp" />
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -183,20 +195,27 @@
         android:layout_below="@+id/linearLayout4"
         android:layout_marginTop="100dp"
         android:onClick="@string/title_activity_main"
-        android:background="@color/primary_dark"
         android:clickable="true"
         android:gravity="bottom">
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="Retour"
-            android:id="@+id/btn_retour"
-            android:clickable="false"
-            android:textColor="@android:color/white"
-            android:textSize="25sp"
-            android:paddingTop="10dp"
-            android:paddingLeft="130dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/primary_dark">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Retour"
+                android:id="@+id/btn_retour"
+                android:clickable="false"
+                android:textColor="@android:color/white"
+                android:textSize="25sp"
+                android:paddingTop="10dp"
+                android:paddingLeft="130dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
     </LinearLayout>
 
 
