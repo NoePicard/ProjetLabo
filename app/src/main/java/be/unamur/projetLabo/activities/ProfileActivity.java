@@ -132,24 +132,9 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
     @OnClick(R.id.btnFidele)
     public void onClickBtnFidele(View view) {
         startActivity(new Intent(ProfileActivity.this, SoldeFidelisationAcitivity.class));
+        //startActivity(new Intent(ProfileActivity.this, MapsActivity.class));
     }
 
-    private boolean rendreVerifPlain() {
-        if (ProjetLabo.user.getVoiture().getFuelQuantity() < 25) {
-            new AlertDialog.Builder(ProfileActivity.this)
-                    .setTitle("Faites le plein !")
-                    .setMessage("Vous devez rendre un véhicule contenant au minimum 25 litres de carburant.")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-            return false;
-        }
-        return true;
-    }
 
     @OnClick(R.id.btnRendre)
     public void onClickBtnRendre(View view) {
@@ -160,13 +145,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                     .setMessage("Êtes-vous sûr de vouloir annuler cette location avant la date prévue ?")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            if (ProfileActivity.this.rendreVerifPlain()) {
-                                ProjetLabo.user.getVoiture().setRendu(true);
-                                ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
-                                ProjetLabo.user.setVoiture(null);
-                                ProjetLabo.user.setToApi(ProfileActivity.this);
-                                ProfileActivity.this.recreate();
-                            }
+                            startActivity(new Intent(ProfileActivity.this, MapsActivity.class));
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -185,13 +164,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                         .setMessage("Êtes-vous sûr de vouloir rendre ce véhicule avant la date prévue ?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                if (ProfileActivity.this.rendreVerifPlain()) {
-                                    ProjetLabo.user.getVoiture().setRendu(true);
-                                    ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
-                                    ProjetLabo.user.setVoiture(null);
-                                    ProjetLabo.user.setToApi(ProfileActivity.this);
-                                    ProfileActivity.this.recreate();
-                                }
+                                startActivity(new Intent(ProfileActivity.this, MapsActivity.class));
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -213,25 +186,13 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                                     "Veuillez payer la somme de " + prixRetard + " € pour le retard")
                             .setPositiveButton("Payer", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    if (ProfileActivity.this.rendreVerifPlain()) {
-                                        ProjetLabo.user.getVoiture().setRendu(true);
-                                        ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
-                                        ProjetLabo.user.setVoiture(null);
-                                        ProjetLabo.user.setToApi(ProfileActivity.this);
-                                        ProfileActivity.this.recreate();
-                                    }
+                                    startActivity(new Intent(ProfileActivity.this, MapsActivity.class));
                                 }
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
                 } else {
-                    if (ProfileActivity.this.rendreVerifPlain()) {
-                        ProjetLabo.user.getVoiture().setRendu(true);
-                        ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
-                        ProjetLabo.user.setVoiture(null);
-                        ProjetLabo.user.setToApi(ProfileActivity.this);
-                        ProfileActivity.this.recreate();
-                    }
+                    startActivity(new Intent(ProfileActivity.this, MapsActivity.class));
                 }
             }
         }

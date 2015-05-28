@@ -33,6 +33,7 @@ public class Voiture implements Serializable {
     protected boolean openEtui;
     protected boolean keyInEtui;
     protected float fuelQuantity;
+    protected String parking;
 
     public Voiture(){
 
@@ -147,6 +148,14 @@ public class Voiture implements Serializable {
 
     public void setFuelQuantity(float fuelQuantity) {
         this.fuelQuantity = fuelQuantity;
+    }
+
+    public String getParking() {
+        return parking;
+    }
+
+    public void setParking(String parking) {
+        this.parking = parking;
     }
 
     public boolean setToApi(final Context context){
