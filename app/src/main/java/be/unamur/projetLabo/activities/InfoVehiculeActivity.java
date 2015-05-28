@@ -185,7 +185,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             ib_bluetooth_activated.setBackground(getResources().getDrawable(R.drawable.blueetooth_green));
             //setting to available or not
             if (ProjetLabo.user.getVoiture().isOpenDoor()) {
-                ib_car_doors.getBackground().setAlpha(0);
+                ib_car_doors.getBackground().setAlpha(255);
                 ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_red));
                 // setting img button to "GONE" (unclickable)
                 ib_car_case.getBackground().setAlpha(128);
@@ -194,14 +194,14 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             else {
                 ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_green));
                 //setting car_doors and etui to clickable
-                ib_car_doors.getBackground().setAlpha(0);
-                ib_car_case.getBackground().setAlpha(0);
+                ib_car_doors.getBackground().setAlpha(255);
+                ib_car_case.getBackground().setAlpha(255);
                 // check if car_case is opened. If well, access to key in case unlocked
                 if (ProjetLabo.user.getVoiture().isOpenEtui()){
                     ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_red));
                     // making car_doors unclickable
                     ib_car_doors.getBackground().setAlpha(128);
-                    ib_car_key.getBackground().setAlpha(0);
+                    ib_car_key.getBackground().setAlpha(255);
                     // check if key is inside the case
                     if (ProjetLabo.user.getVoiture().isKeyInEtui())
                         ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_green));
@@ -212,7 +212,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                     ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
                     // setting img button to "GONE" (unclickable)
                     ib_car_key.getBackground().setAlpha(128);
-                    ib_car_doors.getBackground().setAlpha(0);
+                    ib_car_doors.getBackground().setAlpha(255);
                 }
 
             }
@@ -227,7 +227,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             ProjetLabo.user.getVoiture().setOpenDoor(true);
             ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_red));
             //setting car_doors to clickable
-            ib_car_doors.getBackground().setAlpha(0);
+            ib_car_doors.getBackground().setAlpha(255);
             // setting img button to "GONE" (unclickable)
             ib_car_case.getBackground().setAlpha(128);
             ib_car_key.getBackground().setAlpha(128);
@@ -239,7 +239,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
 
             // setting car_case and car_key
             ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
-            ib_car_case.getBackground().setAlpha(0);
+            ib_car_case.getBackground().setAlpha(255);
             // setting img button to "GONE" (unclickable)
             ib_car_key.getBackground().setAlpha(128);
         }
@@ -253,7 +253,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             ProjetLabo.user.getVoiture().setOpenEtui(false);
             ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
             //setting car_doors to clickable
-            ib_car_doors.getBackground().setAlpha(0);
+            ib_car_doors.getBackground().setAlpha(255);
             // setting img button to "GONE" (unclickable)
             ib_car_key.getBackground().setAlpha(128);
         }
