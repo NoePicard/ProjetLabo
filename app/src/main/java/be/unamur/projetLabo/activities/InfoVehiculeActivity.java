@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cardiomood.android.controls.gauge.SpeedometerGauge;
+//import com.cardiomood.android.controls.gauge.SpeedometerGauge;
 
 import org.w3c.dom.Text;
 

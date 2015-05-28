@@ -12,7 +12,9 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:visibility="visible"
+        android:id="@+id/layoutGetInfo_inscription">
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,31 +23,24 @@
             android:layout_gravity="center_horizontal"
             android:enabled="false"
             android:textAlignment="center"
-            android:textColor="#ffff000a" />
+            android:textColor="#ffff000a"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:id="@+id/lbl_login" />
+            android:text="@string/inscription_mainText"
+            android:id="@+id/lbl_nameFirstName" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txt_login" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/password"
-            android:id="@+id/lbl_password" />
+            android:id="@+id/txt_firstName" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/txt_password" />
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:id="@+id/txt_name" />
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -66,6 +61,59 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:weightSum="1"
+        android:visibility="gone"
+        android:id="@+id/layoutDisplayLoginPassword_inscription">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:id="@+id/lbl_login"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:id="@+id/txt_login"
+            android:focusable="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:id="@+id/lbl_password"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:id="@+id/txt_password"
+            android:focusable="false" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SUIVANT"
+            android:id="@+id/btn_nextInscription"
+            android:singleLine="true"
+            android:background="@drawable/button_background"
+            android:textColor="@android:color/white"
+            android:layout_weight="0.03"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
 
     </LinearLayout>
 
