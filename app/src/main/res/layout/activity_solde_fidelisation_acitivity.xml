@@ -186,36 +186,30 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/linearLayout4"
-        android:layout_alignStart="@+id/linearLayout4"
-        android:layout_marginBottom="35dp"
-        android:layout_alignRight="@+id/linearLayout4"
-        android:layout_alignEnd="@+id/linearLayout4"
-        android:layout_below="@+id/linearLayout4"
-        android:layout_marginTop="100dp"
-        android:onClick="@string/title_activity_main"
-        android:clickable="true"
-        android:gravity="bottom">
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@color/primary_dark"
+        android:clickable="false"
+        android:layout_marginLeft="10dp"
+        android:layout_margin="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primary_dark">
+            android:layout_height="match_parent">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:gravity="center"
                 android:text="Retour"
                 android:id="@+id/btn_retour"
                 android:clickable="false"
                 android:textColor="@android:color/white"
                 android:textSize="25sp"
                 android:paddingTop="10dp"
-                android:paddingLeft="130dp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
     </LinearLayout>
-
 
 </RelativeLayout>
