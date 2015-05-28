@@ -45,7 +45,6 @@
                 android:paddingRight="10dp"
                 android:paddingTop="15dp"
                 android:textColor="@android:color/white"
-                android:paddingLeft="30dp"
                 android:gravity="right" />
         </RelativeLayout>
     </LinearLayout>
