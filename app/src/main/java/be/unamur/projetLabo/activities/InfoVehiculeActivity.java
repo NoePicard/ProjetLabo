@@ -183,9 +183,8 @@ public class InfoVehiculeActivity extends ActionBarActivity {
         // check if the user accepted to enable bluetooth (if well, enter the if)
         if (resultCode == RESULT_OK) {
             ib_bluetooth_activated.setBackground(getResources().getDrawable(R.drawable.blueetooth_green));
-            // setting all img buttons : if available, if gone...
+            //setting to available or not
             if (ProjetLabo.user.getVoiture().isOpenDoor()) {
-                //making car_doors clickable
                 ib_car_doors.getBackground().setAlpha(0);
                 ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_red));
                 // setting img button to "GONE" (unclickable)
@@ -194,11 +193,15 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             }
             else {
                 ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_green));
+                //setting car_doors and etui to clickable
+                ib_car_doors.getBackground().setAlpha(0);
+                ib_car_case.getBackground().setAlpha(0);
                 // check if car_case is opened. If well, access to key in case unlocked
                 if (ProjetLabo.user.getVoiture().isOpenEtui()){
                     ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_red));
                     // making car_doors unclickable
                     ib_car_doors.getBackground().setAlpha(128);
+                    ib_car_key.getBackground().setAlpha(0);
                     // check if key is inside the case
                     if (ProjetLabo.user.getVoiture().isKeyInEtui())
                         ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_green));
@@ -209,6 +212,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                     ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
                     // setting img button to "GONE" (unclickable)
                     ib_car_key.getBackground().setAlpha(128);
+                    ib_car_doors.getBackground().setAlpha(0);
                 }
 
             }
