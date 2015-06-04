@@ -88,11 +88,11 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                 ib_bluetooth_activated.setBackground(getResources().getDrawable(R.drawable.blueetooth_red));
                 // setting every img button to "gone" (unclickable)
                 ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door));
-                        ib_car_doors.getBackground().setAlpha(128);
+                ib_car_doors.getBackground().setAlpha(128);
                 ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case));
-                        ib_car_case.getBackground().setAlpha(128);
+                ib_car_case.getBackground().setAlpha(128);
                 ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
-                        ib_car_key.getBackground().setAlpha(128);
+                ib_car_key.getBackground().setAlpha(128);
                 /*
                     SETTING GAUGE TO GONE
                  */
