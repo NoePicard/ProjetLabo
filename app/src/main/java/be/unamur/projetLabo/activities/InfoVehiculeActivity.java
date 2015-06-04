@@ -39,8 +39,12 @@ public class InfoVehiculeActivity extends ActionBarActivity {
     public ImageButton ib_bluetooth_activated;
     public ImageButton ib_car_case;
     BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter(); //SETTING BT ADAPTER
+    public SpeedometerGauge sv_fuel_gauge;
+
+    //other var
     private final static int REQUEST_CODE_ENABLE_BLUETOOTH = 0;
-    private SpeedometerGauge sv_speedometer;
+    private float fuelQTT;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
         ib_car_case = (ImageButton) findViewById(R.id.car_case);
         ib_car_doors = (ImageButton) findViewById(R.id.car_doors);
         ib_car_key = (ImageButton) findViewById(R.id.car_key);
-        //sv_speedometer = (SpeedometerGauge) findViewById(R.id.speedometer);
+        sv_fuel_gauge = (SpeedometerGauge) findViewById(R.id.fuel_gauge);
 
         /*
             SETTING END OF RENT DATE
@@ -70,11 +74,32 @@ public class InfoVehiculeActivity extends ActionBarActivity {
         */
         String car_model = ProjetLabo.user.getVoiture().getName();
         lbl_car_model.setText(car_model);
-
-
         /*
-            SETTING IMAGEVIEWS
-         */
+                    SET fuel_gauge TO VISIBLE.
+
+                */
+        // Add label converter
+        sv_fuel_gauge.setLabelConverter(new com.cardiomood.android.controls.gauge.SpeedometerGauge.LabelConverter() {
+            @Override
+            public String getLabelFor(double progress, double maxProgress) {
+                return String.valueOf((int) Math.round(progress));
+            }
+        });
+
+        // configure value range and ticks
+        sv_fuel_gauge.setMaxSpeed(60);
+        sv_fuel_gauge.setMajorTickStep(5);
+        sv_fuel_gauge.setMinorTicks(4);
+
+        // Configure value range colors
+        sv_fuel_gauge.addColoredRange(0, 10, Color.RED);
+        sv_fuel_gauge.addColoredRange(10, 25, Color.YELLOW);
+        sv_fuel_gauge.addColoredRange(25, 60, Color.GREEN);
+        fuelQTT = ProjetLabo.user.getVoiture().getFuelQuantity();
+        //FuelGauge needle is gonna be set here after
+       /*
+            SETTING BUTTON VIEWS DEFAULT
+        */
 
         //verifying is Bluetooth is supported
         if (bluetoothAdapter == null) {
@@ -93,12 +118,12 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                         ib_car_case.getBackground().setAlpha(128);
                 ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
                         ib_car_key.getBackground().setAlpha(128);
-                /*
-                    SETTING GAUGE TO GONE
-                 */
+                sv_fuel_gauge.setSpeed(0,false);
             }
             else {
                 ib_bluetooth_activated.setBackground(getResources().getDrawable(R.drawable.blueetooth_green));
+                // Configure FuelGauge needle
+                sv_fuel_gauge.setSpeed((int)fuelQTT, false);
                 if (ProjetLabo.user.getVoiture().isOpenDoor()) {
                     ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_red));
                     // setting img button to "gone" (unclickable)
@@ -130,33 +155,6 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                     }
 
                 }
-
-                /*
-                    SET fuel_gauge TO VISIBLE.
-
-
-                // Add label converter
-                sv_speedometer.setLabelConverter(new com.cardiomood.android.controls.gauge.SpeedometerGauge.LabelConverter() {
-                    @Override
-                    public String getLabelFor(double progress, double maxProgress) {
-                        return String.valueOf((int) Math.round(progress));
-                    }
-                });
-
-                // configure value range and ticks
-                sv_speedometer.setMaxSpeed(60);
-                sv_speedometer.setMajorTickStep(5);
-                sv_speedometer.setMinorTicks(4);
-
-                // Configure value range colors
-                sv_speedometer.addColoredRange(0, 10, Color.RED);
-                sv_speedometer.addColoredRange(15, 25, Color.YELLOW);
-                sv_speedometer.addColoredRange(25, 60, Color.GREEN);
-
-                // Configure needle
-                sv_speedometer.setSpeed(ProjetLabo.user.getVoiture().getFuelQuantity(), false);
-                */
-
             }
         }
 
@@ -181,7 +179,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             ib_car_case.getBackground().setAlpha(128);
             ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
             ib_car_key.getBackground().setAlpha(128);
-            //sv_speedometer.getBackground().setAlpha(128);
+            sv_fuel_gauge.setSpeed(0, false);
         }
     }
 
@@ -193,6 +191,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
         // check if the user accepted to enable bluetooth (if well, enter the if)
         if (resultCode == RESULT_OK) {
             ib_bluetooth_activated.setBackground(getResources().getDrawable(R.drawable.blueetooth_green));
+            sv_fuel_gauge.setSpeed((int)fuelQTT, false);
             //setting to available or not
             if (ProjetLabo.user.getVoiture().isOpenDoor()) {
                 ib_car_doors.getBackground().setAlpha(255);

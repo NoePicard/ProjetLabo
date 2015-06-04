@@ -30,7 +30,8 @@
             android:textSize="35sp"
             android:textColor="@android:color/white"
             android:padding="@dimen/padding_m"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:gravity="center" />
     </LinearLayout>
 
     <LinearLayout
@@ -92,7 +93,10 @@
             android:id="@+id/car_model"
             android:paddingRight="10dp"
             android:textSize="30sp"
-            android:paddingTop="8dp" />
+            android:paddingTop="8dp"
+            android:textColor="@android:color/white"
+            android:gravity="right"
+            android:layout_gravity="right" />
 
     </LinearLayout>
 
@@ -128,7 +132,7 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/bluetooth_activated"
             android:layout_toEndOf="@+id/bluetooth_activated"
-            android:layout_marginLeft="9dp"
+            android:layout_marginLeft="7dp"
             android:clickable="true"
             android:visibility="visible" />
 
@@ -158,6 +162,21 @@
             android:background="@drawable/car_case"
             android:clickable="true"
             android:layout_marginLeft="12dp" />
+
+        <view
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            class="com.cardiomood.android.controls.gauge.SpeedometerGauge"
+            android:id="@+id/fuel_gauge"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp"
+            android:visibility="visible"
+            android:layout_below="@+id/car_doors"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp" />
 
 
     </RelativeLayout>
