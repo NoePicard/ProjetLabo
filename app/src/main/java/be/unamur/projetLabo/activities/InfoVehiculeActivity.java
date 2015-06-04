@@ -4,8 +4,10 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +31,7 @@ import be.unamur.projetLabo.R;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class InfoVehiculeActivity extends ActionBarActivity {
+public class InfoVehiculeActivity extends BaseActivity {
 
     //public var for layout.
     public TextView lbl_car_model;
@@ -51,6 +53,16 @@ public class InfoVehiculeActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_vehicule);
         ButterKnife.inject(this);
+
+        ActionBar actionBar = InfoVehiculeActivity.this.getSupportActionBar();
+        try{
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }catch (Exception e){
+            Log.v("bwb", e.toString());
+        }
+
 
         /*
             LINKING VAR TO LAYOUT

@@ -3,8 +3,10 @@ package be.unamur.projetLabo.activities;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.annotation.DrawableRes;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +32,7 @@ import be.unamur.projetLabo.request.PostRequest;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SoldeFidelisationAcitivity extends ActionBarActivity {
+public class SoldeFidelisationAcitivity extends BaseActivity {
 
     private TextView lbl_solde_capital;
     private ImageView iv_correct_gps;
@@ -42,6 +44,16 @@ public class SoldeFidelisationAcitivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solde_fidelisation_acitivity);
         ButterKnife.inject(this);
+
+        ActionBar actionBar = SoldeFidelisationAcitivity.this.getSupportActionBar();
+        try{
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }catch (Exception e){
+            Log.v("bwb", e.toString());
+        }
+
 
         //Récupération de la vue
         lbl_solde_capital = (TextView) findViewById(R.id.points_fidelisation);
@@ -71,8 +83,4 @@ public class SoldeFidelisationAcitivity extends ActionBarActivity {
         }
     }
 
-    @OnClick(R.id.btn_retour)
-    public void OnReturnButton (View view){
-        SoldeFidelisationAcitivity.this.finish();
-    }
 }

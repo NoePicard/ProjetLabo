@@ -198,8 +198,8 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
         }
     }
 
-    @OnClick(R.id.btnPlain)
-    public void onClickBtnPlain(final View view) {
+    @OnClick(R.id.btnPlein)
+    public void onClickBtnPlein(final View view) {
         final SeekBar input = new SeekBar(this);
         input.setMax(50);
         input.setProgress((int) Math.floor(ProjetLabo.user.getVoiture().getFuelQuantity()));
@@ -236,7 +236,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                                     .setMessage("Vous ne pouvez pas vendre de l'essence, uniquement en acheter.")
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            ProfileActivity.this.onClickBtnPlain(view);
+                                            ProfileActivity.this.onClickBtnPlein(view);
                                         }
                                     })
                                     .setIcon(android.R.drawable.ic_dialog_alert)
