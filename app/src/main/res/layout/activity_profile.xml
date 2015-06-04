@@ -17,13 +17,13 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_m"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin">
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="8dp">
 
             <ImageView
-                android:layout_width="49dp"
-                android:layout_height="49dp"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
                 android:id="@+id/imageView2"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
@@ -39,8 +39,16 @@
                 android:layout_toRightOf="@+id/imageView2"
                 android:layout_toEndOf="@+id/imageView2"
                 android:textSize="@dimen/title_4"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="23dp" />
         </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -60,9 +68,10 @@
                     android:text="Ma voiture"
                     android:id="@+id/textView10"
                     android:layout_gravity="bottom"
-                    android:textSize="@dimen/title_1"
+                    android:textSize="@dimen/title_3"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin" />
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="10dp" />
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -73,7 +82,9 @@
                     android:elevation="4dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     card_view:cardCornerRadius="4dp"
-                    android:layout_margin="@dimen/activity_horizontal_margin">
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -197,17 +208,6 @@
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:textColor="@android:color/white"
                     android:visibility="gone" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mon compte fidélité"
-                    android:id="@+id/textView11"
-                    android:layout_gravity="bottom"
-                    android:textSize="@dimen/title_2"
-                    android:layout_marginTop="@dimen/padding_m"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin" />
 
                 <Button
                     android:layout_width="match_parent"
