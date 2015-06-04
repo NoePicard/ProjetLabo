@@ -86,7 +86,6 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             }
         });
 
-
         // configure value range and ticks
         sv_fuel_gauge.setMaxSpeed(50);
         sv_fuel_gauge.setMajorTickStep(5);
