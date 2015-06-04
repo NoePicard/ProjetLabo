@@ -20,6 +20,7 @@ import android.widget.Toast;
 //import com.cardiomood.android.controls.gauge.SpeedometerGauge;
 
 import com.cardiomood.android.controls.gauge.SpeedometerGauge;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -34,8 +35,8 @@ import butterknife.OnClick;
 public class InfoVehiculeActivity extends BaseActivity {
 
     //public var for layout.
+    public ImageView voiturePhoto;
     public TextView lbl_car_model;
-    public TextView lbl_renting_end_date;
     public ImageButton ib_car_doors;
     public ImageButton ib_car_key;
     public ImageButton ib_bluetooth_activated;
@@ -67,22 +68,18 @@ public class InfoVehiculeActivity extends BaseActivity {
         /*
             LINKING VAR TO LAYOUT
          */
+        voiturePhoto = (ImageView) findViewById(R.id.iv_voiture_photo);
         lbl_car_model = (TextView) findViewById(R.id.car_model);
-        lbl_renting_end_date = (TextView) findViewById(R.id.renting_end_date);
         ib_bluetooth_activated = (ImageButton) findViewById(R.id.bluetooth_activated);
         ib_car_case = (ImageButton) findViewById(R.id.car_case);
         ib_car_doors = (ImageButton) findViewById(R.id.car_doors);
         ib_car_key = (ImageButton) findViewById(R.id.car_key);
         sv_fuel_gauge = (SpeedometerGauge) findViewById(R.id.fuel_gauge);
 
+        String url = ProjetLabo.BASE_URL + ProjetLabo.user.getVoiture().getPath();
+        Picasso.with(this).load(url).into(voiturePhoto);
 
         /*
-            SETTING END OF RENT DATE
-        */
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
-        lbl_renting_end_date.setText(dateFormat.format(ProjetLabo.user.getVoiture().getEnd().getTime()));
-
-       /*
             SETTING CAR MODEL
         */
         String car_model = ProjetLabo.user.getVoiture().getName();
