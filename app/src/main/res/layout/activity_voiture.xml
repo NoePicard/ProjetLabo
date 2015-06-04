@@ -32,7 +32,9 @@
                 android:text="Caractéristique du véhicule :"
                 android:id="@+id/lbl_Titre_1"
                 android:textIsSelectable="false"
-                android:textSize="@dimen/title_1" />
+                android:textSize="@dimen/title_4"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin" />
 
             <TextView
                 android:layout_width="fill_parent"

@@ -62,32 +62,36 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="10dp">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nombre de porte"
-                        android:id="@+id/textView9" />
+                        android:id="@+id/imageSeat"
+                        android:background="@drawable/doors_grey" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/voiture_nbDoor"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginRight="@dimen/padding_xl" />
+                        android:layout_marginRight="@dimen/padding_xl"
+                        android:layout_weight="1" />
 
-                    <TextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nombre de place"
-                        android:id="@+id/textView12" />
+                        android:id="@+id/imageDoor"
+                        android:background="@drawable/seats_grey" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/voiture_nbSeat"
                         android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" />
+                        android:layout_alignParentEnd="true"
+                        android:layout_weight="1" />
                 </LinearLayout>
 
                 <RelativeLayout

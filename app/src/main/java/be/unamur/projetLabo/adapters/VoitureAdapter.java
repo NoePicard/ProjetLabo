@@ -85,8 +85,8 @@ public class VoitureAdapter extends RecyclerView.Adapter<VoitureAdapter.PersonVi
     public void onBindViewHolder(final PersonViewHolder personViewHolder, int i) {
         final Voiture itemVoiture = voituresList.get(i);
         personViewHolder.voitureName.setText(itemVoiture.getName());
-        personViewHolder.voitureNbSeat.setText(Integer.toString(itemVoiture.getNbSeat()));
-        personViewHolder.voitureNbDoor.setText(Integer.toString(itemVoiture.getNbDoor()));
+        personViewHolder.voitureNbSeat.setText("  " + Integer.toString(itemVoiture.getNbSeat()));
+        personViewHolder.voitureNbDoor.setText("  " + Integer.toString(itemVoiture.getNbDoor()));
         personViewHolder.voiturePrix.setText(itemVoiture.getPrice() + "€");
         personViewHolder.voiturePlusDetails.setText("Plus de détails...");
 
