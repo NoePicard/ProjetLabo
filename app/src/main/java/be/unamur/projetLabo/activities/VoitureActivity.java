@@ -64,7 +64,6 @@ public class VoitureActivity extends BaseActivity {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }catch (Exception e){
-            Log.v("bwb", e.toString());
         }
 
         lblDescriptionVoiture = (TextView) findViewById(R.id.lbl_Description_Vehicule);

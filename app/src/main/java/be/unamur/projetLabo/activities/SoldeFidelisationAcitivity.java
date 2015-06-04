@@ -51,7 +51,6 @@ public class SoldeFidelisationAcitivity extends BaseActivity {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }catch (Exception e){
-            Log.v("bwb", e.toString());
         }
 
 

@@ -39,7 +39,6 @@ public class ListeVoituresActivity extends BaseActivity {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }catch (Exception e){
-            Log.v("bwb", e.toString());
         }
 
         Intent intent = getIntent();
