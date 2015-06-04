@@ -22,8 +22,8 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin">
 
             <ImageView
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="49dp"
+                android:layout_height="49dp"
                 android:id="@+id/imageView2"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
@@ -38,9 +38,8 @@
                 android:layout_alignTop="@+id/imageView2"
                 android:layout_toRightOf="@+id/imageView2"
                 android:layout_toEndOf="@+id/imageView2"
-                android:paddingTop="@dimen/padding_xl"
-                android:paddingLeft="@dimen/padding_m"
-                android:textSize="@dimen/title_4" />
+                android:textSize="@dimen/title_4"
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
 
         <ScrollView
