@@ -42,6 +42,7 @@ public class InfoVehiculeActivity extends BaseActivity {
     public ImageButton ib_car_case;
     BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter(); //SETTING BT ADAPTER
     public SpeedometerGauge sv_fuel_gauge;
+    private SpeedometerGauge speedometer;
 
     //other var
     private final static int REQUEST_CODE_ENABLE_BLUETOOTH = 0;
@@ -74,6 +75,7 @@ public class InfoVehiculeActivity extends BaseActivity {
         ib_car_key = (ImageButton) findViewById(R.id.car_key);
         sv_fuel_gauge = (SpeedometerGauge) findViewById(R.id.fuel_gauge);
 
+
         /*
             SETTING END OF RENT DATE
         */
@@ -97,6 +99,7 @@ public class InfoVehiculeActivity extends BaseActivity {
             }
         });
 
+
         // configure value range and ticks
         sv_fuel_gauge.setMaxSpeed(50);
         sv_fuel_gauge.setMajorTickStep(5);
@@ -106,17 +109,17 @@ public class InfoVehiculeActivity extends BaseActivity {
         // Configure value range colors
         sv_fuel_gauge.addColoredRange(0, 10, Color.RED);
         sv_fuel_gauge.addColoredRange(10, 25, Color.YELLOW);
-        sv_fuel_gauge.addColoredRange(25, 60, Color.GREEN);
+        sv_fuel_gauge.addColoredRange(25, 50, Color.GREEN);
         fuelQTT = ProjetLabo.user.getVoiture().getFuelQuantity();
         //FuelGauge needle is gonna be set here after
+
        /*
             SETTING BUTTON VIEWS DEFAULT
         */
 
         //verifying is Bluetooth is supported
         if (bluetoothAdapter == null) {
-            Toast.makeText(InfoVehiculeActivity.this, "La fonction Bluetooth n'est pas supportée",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(InfoVehiculeActivity.this, "La fonction Bluetooth n'est pas supportée", Toast.LENGTH_SHORT).show();
             InfoVehiculeActivity.this.finish();
         }
         else {

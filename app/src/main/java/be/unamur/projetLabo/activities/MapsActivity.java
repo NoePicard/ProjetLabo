@@ -67,7 +67,7 @@ public class MapsActivity extends BaseActivity {
         markerOptions.describeContents();
         //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.car_on_map));
         markerOptions.title("Parking");
-        markerOptions.snippet("Parkez vous à l'emplacement A33");
+        markerOptions.snippet("Parkez-vous à l'emplacement 'A33' ");
         markerOptions.visible(true);
         mMap.addMarker(markerOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.4665398, 4.7914438), 10));
@@ -95,7 +95,7 @@ public class MapsActivity extends BaseActivity {
     public void onClickBtnCarDropped(View v){
         new AlertDialog.Builder(this)
                 .setTitle("Confirmez")
-                .setMessage("La voiture " + ProjetLabo.user.getVoiture().getName() +" a bien été stationné à l'emplacement demandé ?")
+                .setMessage("La voiture " + ProjetLabo.user.getVoiture().getName() +" a-t-elle bien été stationnée à l'emplacement demandé ?")
                 .setPositiveButton("Je confirme", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         if (MapsActivity.this.rendreVerifPlain()) {
