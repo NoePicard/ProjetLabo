@@ -44,6 +44,7 @@ import butterknife.OnClick;
 
 public class ProfileActivity extends BaseActivity implements DatePickerFragment.OnDatePickerSetListener {
     private CardView cvVoitureLoue;
+    private TextView txtVoiture;
     private Button btnLouer;
     private ImageView voiturePhoto;
     private TextView voitureName;
@@ -61,6 +62,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
 
 
         cvVoitureLoue = (CardView) findViewById(R.id.cvVoitureLoue);
+        txtVoiture = (TextView) findViewById(R.id.txt_voiture);
         btnLouer = (Button) findViewById(R.id.btnLouer);
         btnFidele = (Button) findViewById(R.id.btnFidele);
         btnRendre = (Button) findViewById(R.id.btnRendre);
@@ -99,6 +101,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
         } else {
             //On cache la carte et on affiche le btn "Louer"
             cvVoitureLoue.setVisibility(View.GONE);
+            txtVoiture.setVisibility(View.GONE);
             btnLouer.setVisibility(View.VISIBLE);
         }
 
