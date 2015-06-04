@@ -128,8 +128,9 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/bluetooth_activated"
             android:layout_toEndOf="@+id/bluetooth_activated"
-            android:layout_marginLeft="15dp"
-            android:clickable="true" />
+            android:layout_marginLeft="9dp"
+            android:clickable="true"
+            android:visibility="visible" />
 
 
         <ImageButton
@@ -142,8 +143,9 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/car_doors"
             android:layout_toEndOf="@+id/car_doors"
-            android:layout_marginLeft="15dp"
-            android:clickable="true" />
+            android:layout_marginLeft="12dp"
+            android:clickable="true"
+            android:visibility="visible" />
 
         <ImageButton
             android:layout_width="75dp"
@@ -154,7 +156,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:background="@drawable/car_case"
-            android:clickable="true" />
+            android:clickable="true"
+            android:layout_marginLeft="12dp" />
 
 
     </RelativeLayout>

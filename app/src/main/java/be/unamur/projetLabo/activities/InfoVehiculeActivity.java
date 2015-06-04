@@ -87,31 +87,37 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             if (!bluetoothAdapter.isEnabled()){
                 ib_bluetooth_activated.setBackground(getResources().getDrawable(R.drawable.blueetooth_red));
                 // setting every img button to "gone" (unclickable)
-                ib_car_doors.getBackground().setAlpha(128);
-                ib_car_case.getBackground().setAlpha(128);
-                ib_car_key.getBackground().setAlpha(128);
+                ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door));
+                        ib_car_doors.getBackground().setAlpha(128);
+                ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case));
+                        ib_car_case.getBackground().setAlpha(128);
+                ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
+                        ib_car_key.getBackground().setAlpha(128);
                 /*
                     SETTING GAUGE TO GONE
                  */
             }
             else {
                 ib_bluetooth_activated.setBackground(getResources().getDrawable(R.drawable.blueetooth_green));
-                if (ProjetLabo.user.getVoiture().isOpenDoor()) {
+                if (ProjetLabo.user.getVoiture().isOpenDoor() == true) {
                     ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_red));
                     // setting img button to "gone" (unclickable)
+                    ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case));
                     ib_car_case.getBackground().setAlpha(128);
+                    ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
                     ib_car_key.getBackground().setAlpha(128);
 
                 }
                 else {
                     ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_green));
                     // check if car_case is opened. If well, access to key in case unlocked
-                    if (ProjetLabo.user.getVoiture().isOpenEtui()){
+                    if (ProjetLabo.user.getVoiture().isOpenEtui() == true){
                         ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_red));
                         //set car_doors to unclickable
+                        ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door));
                         ib_car_doors.getBackground().setAlpha(128);
                         // check if key is inside the case
-                        if (ProjetLabo.user.getVoiture().isKeyInEtui())
+                        if (ProjetLabo.user.getVoiture().isKeyInEtui() == true)
                             ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_green));
                         else
                             ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_red));
@@ -119,6 +125,7 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                     else {
                         ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
                         // setting img button to unclickable
+                        ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
                         ib_car_key.getBackground().setAlpha(128);
                     }
 
@@ -168,8 +175,11 @@ public class InfoVehiculeActivity extends ActionBarActivity {
             bluetoothAdapter.disable();
             ib_bluetooth_activated.setBackground(getResources().getDrawable(R.drawable.blueetooth_red));
             // setting every img button to "gone" (unclickable)
+            ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door));
             ib_car_doors.getBackground().setAlpha(128);
+            ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case));
             ib_car_case.getBackground().setAlpha(128);
+            ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
             ib_car_key.getBackground().setAlpha(128);
             //sv_speedometer.getBackground().setAlpha(128);
         }
@@ -184,11 +194,13 @@ public class InfoVehiculeActivity extends ActionBarActivity {
         if (resultCode == RESULT_OK) {
             ib_bluetooth_activated.setBackground(getResources().getDrawable(R.drawable.blueetooth_green));
             //setting to available or not
-            if (ProjetLabo.user.getVoiture().isOpenDoor()) {
+            if (ProjetLabo.user.getVoiture().isOpenDoor() == true) {
                 ib_car_doors.getBackground().setAlpha(255);
                 ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_red));
                 // setting img button to "GONE" (unclickable)
+                ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case));
                 ib_car_case.getBackground().setAlpha(128);
+                ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
                 ib_car_key.getBackground().setAlpha(128);
             }
             else {
@@ -197,13 +209,13 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                 ib_car_doors.getBackground().setAlpha(255);
                 ib_car_case.getBackground().setAlpha(255);
                 // check if car_case is opened. If well, access to key in case unlocked
-                if (ProjetLabo.user.getVoiture().isOpenEtui()){
+                if (ProjetLabo.user.getVoiture().isOpenEtui() == true){
                     ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_red));
                     // making car_doors unclickable
+                    ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door));
                     ib_car_doors.getBackground().setAlpha(128);
-                    ib_car_key.getBackground().setAlpha(255);
                     // check if key is inside the case
-                    if (ProjetLabo.user.getVoiture().isKeyInEtui())
+                    if (ProjetLabo.user.getVoiture().isKeyInEtui() == true)
                         ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_green));
                     else
                         ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_red));
@@ -211,7 +223,9 @@ public class InfoVehiculeActivity extends ActionBarActivity {
                 else {
                     ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
                     // setting img button to "GONE" (unclickable)
+                    ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
                     ib_car_key.getBackground().setAlpha(128);
+                    ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_green));
                     ib_car_doors.getBackground().setAlpha(255);
                 }
 
@@ -222,67 +236,105 @@ public class InfoVehiculeActivity extends ActionBarActivity {
 
     @OnClick(R.id.car_doors)
     public void OnCarDoorsButton (){
-        if ((!ProjetLabo.user.getVoiture().isOpenDoor()) && (!ProjetLabo.user.getVoiture().isOpenEtui())){
-            //setting drawable and OpenDoor to true
-            ProjetLabo.user.getVoiture().setOpenDoor(true);
-            ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_red));
-            //setting car_doors to clickable
-            ib_car_doors.getBackground().setAlpha(255);
-            // setting img button to "GONE" (unclickable)
-            ib_car_case.getBackground().setAlpha(128);
-            ib_car_key.getBackground().setAlpha(128);
-        }
-        if ((ProjetLabo.user.getVoiture().isOpenDoor()) && (!ProjetLabo.user.getVoiture().isOpenEtui())){
-            // setting drawable and OpenDoor to false
-            ProjetLabo.user.getVoiture().setOpenDoor(false);
-            ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_green));
+        if (bluetoothAdapter.isEnabled()){
+            if ((ProjetLabo.user.getVoiture().isOpenEtui() == false) && (ProjetLabo.user.getVoiture().isOpenDoor() == false)){
+                //setting drawable and OpenDoor to true
+                ProjetLabo.user.getVoiture().setOpenDoor(true);
+                ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_red));
+                ib_car_doors.getBackground().setAlpha(255);
+                // setting img button to "GONE" (unclickable)
+                ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case));
+                ib_car_case.getBackground().setAlpha(128);
+                ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
+                ib_car_key.getBackground().setAlpha(128);
+            }
+            else if ((ProjetLabo.user.getVoiture().isOpenEtui()==false) && (ProjetLabo.user.getVoiture().isOpenDoor() == true)){
+                // setting drawable and OpenDoor to false
+                ProjetLabo.user.getVoiture().setOpenDoor(false);
+                ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_green));
 
-            // setting car_case and car_key
-            ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
-            ib_car_case.getBackground().setAlpha(255);
-            // setting img button to "GONE" (unclickable)
-            ib_car_key.getBackground().setAlpha(128);
+                // setting car_case and car_key
+                ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
+                ib_car_case.getBackground().setAlpha(255);
+                // setting img button to "GONE" (unclickable)
+                ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
+                ib_car_key.getBackground().setAlpha(128);
+            }
+            else {
+                Toast.makeText(InfoVehiculeActivity.this, "Fermer d'abord l'étui", Toast.LENGTH_LONG).show();
+            }
+        }
+        else {
+            Toast.makeText(InfoVehiculeActivity.this, "Activer d'abord Bluetooth", Toast.LENGTH_LONG).show();
         }
     }
 
 
     @OnClick (R.id.car_case)
     public void OnCarCaseButton (){
-        if ((!ProjetLabo.user.getVoiture().isOpenDoor()) && (ProjetLabo.user.getVoiture().isOpenEtui())){
-            // setting drawable and OpenEtui to false
-            ProjetLabo.user.getVoiture().setOpenEtui(false);
-            ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
-            //setting car_doors to clickable
-            ib_car_doors.getBackground().setAlpha(255);
-            // setting img button to "GONE" (unclickable)
-            ib_car_key.getBackground().setAlpha(128);
+        if (bluetoothAdapter.isEnabled()){
+            if ((ProjetLabo.user.getVoiture().isOpenDoor() == false) && (ProjetLabo.user.getVoiture().isOpenEtui() == true)){
+                // setting drawable and OpenEtui to false
+                ProjetLabo.user.getVoiture().setOpenEtui(false);
+                ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_green));
+                //setting car_doors to clickable
+                ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_green));
+                ib_car_doors.getBackground().setAlpha(255);
+                // setting img button to "GONE" (unclickable)
+                ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
+                ib_car_key.getBackground().setAlpha(128);
+            }
+            else if ((ProjetLabo.user.getVoiture().isOpenDoor() == false)&& (ProjetLabo.user.getVoiture().isOpenEtui() == false)){
+                // setting drawable and OpenEtui to true
+                ProjetLabo.user.getVoiture().setOpenEtui(true);
+                ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_red));
+                // setting car_doors to unclickable
+                ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door));
+                ib_car_doors.getBackground().setAlpha(128);
+                if (ProjetLabo.user.getVoiture().isKeyInEtui() == true)
+                    ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_green));
+                else
+                    ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_red));
+            }
+            else {
+                Toast.makeText(InfoVehiculeActivity.this, "Fermer d'abord les portières", Toast.LENGTH_LONG).show();
+            }
         }
-        if ((!ProjetLabo.user.getVoiture().isOpenDoor())&& (!ProjetLabo.user.getVoiture().isOpenEtui())){
-            // setting drawable and OpenEtui to true
-            ProjetLabo.user.getVoiture().setOpenEtui(true);
-            ib_car_case.setBackground(getResources().getDrawable(R.drawable.car_case_red));
-            // setting car_doors to unclickable
-            ib_car_doors.getBackground().setAlpha(128);
-            if (ProjetLabo.user.getVoiture().isKeyInEtui())
-                ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_green));
-            else
-                ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_red));
+        else{
+            Toast.makeText(InfoVehiculeActivity.this, "Activer d'abord Bluetooth", Toast.LENGTH_LONG).show();
         }
+
     }
 
 
     @OnClick(R.id.car_key)
     public void OnCarKeyButton (){
-        if ((ProjetLabo.user.getVoiture().isOpenEtui()) && (ProjetLabo.user.getVoiture().isKeyInEtui())){
-            // setting drawable and KeyInEtui to false
-            ProjetLabo.user.getVoiture().setKeyInEtui(false);
-            ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_red));
+        if (bluetoothAdapter.isEnabled()){
+            if ((ProjetLabo.user.getVoiture().isOpenEtui()) && (ProjetLabo.user.getVoiture().isKeyInEtui())){
+                // setting drawable and KeyInEtui to false
+                ProjetLabo.user.getVoiture().setKeyInEtui(false);
+                ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_red));
+            }
+            else if ((ProjetLabo.user.getVoiture().isOpenEtui()) && (!ProjetLabo.user.getVoiture().isKeyInEtui())){
+                // setting drawable and KeyInEtui to true
+                ProjetLabo.user.getVoiture().setKeyInEtui(true);
+                ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_green));
+            }
+            else {
+                if (ProjetLabo.user.getVoiture().isOpenDoor()){
+                    Toast.makeText(InfoVehiculeActivity.this, "Fermer d'abord les portières", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(InfoVehiculeActivity.this, "Ouvrir d'abord l'étui", Toast.LENGTH_LONG).show();
+                }
+
+
+            }
         }
-        if ((ProjetLabo.user.getVoiture().isOpenEtui()) && (!ProjetLabo.user.getVoiture().isKeyInEtui())){
-            // setting drawable and KeyInEtui to true
-            ProjetLabo.user.getVoiture().setKeyInEtui(true);
-            ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key_green));
+        else{
+            Toast.makeText(InfoVehiculeActivity.this, "Activer d'abord Bluetooth", Toast.LENGTH_LONG).show();
         }
+
     }
 
 }
