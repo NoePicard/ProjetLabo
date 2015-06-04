@@ -102,6 +102,7 @@ public class InfoVehiculeActivity extends BaseActivity {
         sv_fuel_gauge.setMajorTickStep(5);
         sv_fuel_gauge.setMinorTicks(4);
 
+
         // Configure value range colors
         sv_fuel_gauge.addColoredRange(0, 10, Color.RED);
         sv_fuel_gauge.addColoredRange(10, 25, Color.YELLOW);
