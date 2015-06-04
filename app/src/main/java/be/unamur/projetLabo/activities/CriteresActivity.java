@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -122,14 +123,15 @@ public class CriteresActivity extends BaseActivity implements DatePickerFragment
     public void onDatePickerSet(int year, int monthOfYear, int dayOfMonth) {
         Calendar date = new GregorianCalendar();
         date.set(year, monthOfYear, dayOfMonth);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
         switch (StartOrEnd) {
             case "start":
                 start = date.getTime().getTime();
-                btnStart.setText(date.get(Calendar.DAY_OF_MONTH) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR));
+                btnStart.setText(dateFormat.format(start));
                 break;
             case "end":
                 end = date.getTime().getTime();
-                btnEnd.setText(date.get(Calendar.DAY_OF_MONTH) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR));
+                btnEnd.setText(dateFormat.format(end));
                 break;
             default:
                 start = 0;

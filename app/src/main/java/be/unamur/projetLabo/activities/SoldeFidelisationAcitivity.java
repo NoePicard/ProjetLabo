@@ -51,39 +51,8 @@ public class SoldeFidelisationAcitivity extends ActionBarActivity {
 
         //SETTING USER FIDELE -> TRUE
         if (!ProjetLabo.user.isFidele()){
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("fidele", Boolean.toString(true));
-
-            int usrID = ProjetLabo.user.getId();
-            String URL = ProjetLabo.API_BASE_URL + "/fideles/"+ usrID+".json";
-            PostRequest requestAddUser = new PostRequest(URL, params, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String s) {
-                    try {
-                        JSONObject userJSON = new JSONObject(s);
-                        if (userJSON.has("response")) {
-                            if(userJSON.getBoolean("response")) {
-                                ProjetLabo.user.setFidele(true);
-                            }
-                            else{
-                                SoldeFidelisationAcitivity.this.finish();
-                            }
-                        } else {
-                           SoldeFidelisationAcitivity.this.finish();
-                        }
-                    } catch (JSONException e) {
-                        SoldeFidelisationAcitivity.this.finish();
-                    }
-                }
-            },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            Toast.makeText(SoldeFidelisationAcitivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
-                        }
-                    });
-            RequestQueue queue = Volley.newRequestQueue(SoldeFidelisationAcitivity.this, new OkHttpStack());
-            queue.add(requestAddUser);
+            ProjetLabo.user.setFidele(true);
+            ProjetLabo.user.setToApi(SoldeFidelisationAcitivity.this);
         }
         int solde_capital = ProjetLabo.user.getCapital();
         lbl_solde_capital.setText(Integer.toString(solde_capital));

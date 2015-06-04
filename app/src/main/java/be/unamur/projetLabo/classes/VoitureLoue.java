@@ -57,6 +57,7 @@ public class VoitureLoue extends Voiture {
             this.end.setTime(formatter.parse(voitObj.getString("End")));
             this.idLocation = voitObj.getInt("IdLocation");
             this.rendu = voitObj.getBoolean("Rendu");
+            this.fuelQuantity = (float) voitObj.getDouble("FuelQuantity");
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (ParseException e) {

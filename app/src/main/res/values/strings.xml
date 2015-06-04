@@ -17,7 +17,7 @@
     <string name="title_activity_liste_voitures">Liste des véhicule</string>
     <string name="btn_envoyer_criteres_activity">Suivant</string>
     <string name="title_activity_solde_fidelisation_acitivity">Ma Fidélisation</string>
-    <string name="title_activity_info_vehicule">InfoVehiculeActivity</string>
+    <string name="title_activity_info_vehicule">Info sur votre voitures</string>
     <string name="MyProfile">Mon profil</string>
     <string name="title_activity_profile">Mon profil</string>
     <string name="Logout">Se déconnecter</string>

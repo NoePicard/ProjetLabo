@@ -44,7 +44,6 @@ public class MapsActivity extends BaseActivity {
         }catch (Exception e){
             Log.v("bwb", e.toString());
         }
-
     }
 
     @Override

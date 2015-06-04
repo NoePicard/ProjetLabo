@@ -107,6 +107,7 @@ public class Utilisateur {
         params.put("password", this.password);
         params.put("contracted", Boolean.toString(this.contrated));
         params.put("capital", Float.toString(this.capital));
+        params.put("fidele", Boolean.toString(this.fidele));
 
         String URL = ProjetLabo.API_BASE_URL + "/objects/users.json";
 
