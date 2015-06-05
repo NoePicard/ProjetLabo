@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -49,6 +50,7 @@ public class VoitureActivity extends BaseActivity {
 
     private Voiture voiture;
     private TextView lblDescriptionVoiture;
+    private CheckBox chbGPS;
     private long start;
     private long end;
 
@@ -67,6 +69,7 @@ public class VoitureActivity extends BaseActivity {
         }
 
         lblDescriptionVoiture = (TextView) findViewById(R.id.lbl_Description_Vehicule);
+        chbGPS = (CheckBox) findViewById(R.id.chb_GPS);
 
         Intent intent = getIntent();
         voiture = (Voiture) intent.getSerializableExtra("voiture");
@@ -80,6 +83,7 @@ public class VoitureActivity extends BaseActivity {
 
         VoitureActivity.this.setTitle("Votre selection : " + voiture.getName());
         lblDescriptionVoiture.setText("Ce véhicule comporte " + voiture.getNbSeat() + " sièges, muni de " + voiture.getNbDoor() + "  portes il vous conduira où vous le souhaitez.");
+
     }
 
     @OnClick(R.id.btn_louer)
@@ -119,6 +123,7 @@ public class VoitureActivity extends BaseActivity {
                                             //1 point pas semaine de location
                                             ProjetLabo.user.addCapital(((float) 1 / 7) * nbDays);
                                             VoitureLoue voit = new VoitureLoue(voiture, louerJSON.getInt("idLocation"), calStart, calEnd);
+                                            voit.setGps(chbGPS.isChecked());
                                             if(ProjetLabo.user.isFidele()){
                                                 voit.setFuelQuantity(50);
                                             }else{

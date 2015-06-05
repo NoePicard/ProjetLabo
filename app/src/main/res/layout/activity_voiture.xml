@@ -46,7 +46,16 @@
 
 
     </ScrollView>
-
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Louer un GPS"
+        android:id="@+id/chb_GPS"
+        android:checked="false"
+        android:layout_above="@+id/btn_louer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="@dimen/padding_m" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -148,7 +148,12 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                     .setMessage("Êtes-vous sûr de vouloir annuler cette location avant la date prévue ?")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(ProfileActivity.this, MapsActivity.class));
+                            ProjetLabo.user.getVoiture().setRendu(true);
+                            ProjetLabo.user.getVoiture().setToApi(ProfileActivity.this);
+                            ProjetLabo.user.setVoiture(null);
+                            ProjetLabo.user.setToApi(ProfileActivity.this);
+                            ProfileActivity.this.recreate();
+
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
