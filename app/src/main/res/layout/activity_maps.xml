@@ -18,7 +18,7 @@ android:layout_height="match_parent"
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Voiture déposé !"
+        android:text="Voiture déposée !"
         android:id="@+id/btnCarDropped"
         android:layout_alignBottom="@+id/map"
         android:layout_alignParentLeft="true"
