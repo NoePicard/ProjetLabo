@@ -58,7 +58,9 @@
         </activity>
         <activity
             android:name=".activities.InfoVehiculeActivity"
-            android:label="@string/title_activity_info_vehicule" >
+            android:label="@string/title_activity_info_vehicule"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
         <activity
             android:name=".activities.ProfileActivity"
