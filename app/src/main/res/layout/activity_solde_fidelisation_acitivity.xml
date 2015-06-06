@@ -8,176 +8,201 @@
     android:id="@+id/MainRelativeLayout">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:minHeight="60dp"
-        android:id="@+id/linearLayout">
+        android:layout_height="40dp"
+        android:id="@+id/linearLayout"
+        android:background="@drawable/button_background">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primary_dark">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Solde du compte "
+            android:id="@+id/textView"
+            android:textSize="25sp"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Solde du compte "
-                android:id="@+id/textView"
-                android:textSize="30sp"
-                android:paddingTop="15dp"
-                android:paddingLeft="10dp"
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:text=""
-                android:id="@+id/points_fidelisation"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_toRightOf="@+id/textView"
-                android:layout_toEndOf="@+id/textView"
-                android:textSize="30sp"
-                android:paddingRight="10dp"
-                android:paddingTop="15dp"
-                android:textColor="@android:color/white"
-                android:gravity="right" />
-        </RelativeLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/points_fidelisation"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/textView"
+            android:layout_toEndOf="@+id/textView"
+            android:textSize="30sp"
+            android:textColor="@android:color/white"
+            android:layout_weight="0.35"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical" />
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
-        android:layout_alignLeft="@+id/linearLayout"
-        android:layout_alignStart="@+id/linearLayout"
-        android:layout_alignRight="@+id/linearLayout"
-        android:layout_alignEnd="@+id/linearLayout"
-        android:layout_marginTop="20dp"
-        android:id="@+id/linearLayout2"
-        android:background="@color/primary">
+        android:id="@+id/scrollView3"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primary">
+            android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="250dp"
-                android:layout_height="fill_parent"
-                android:text="Accès GPS"
-                android:id="@+id/textView2"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:paddingTop="13dp"
-                android:paddingLeft="10dp"
-                android:textColor="@android:color/white"
-                android:textSize="25sp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vos avantages :"
+                android:layout_below="@+id/scrollView"
+                android:id="@+id/textView6"
+                android:textSize="20dp"
+                android:layout_marginTop="50dp"
+                android:textStyle="bold" />
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="fill_parent"
-                android:id="@+id/points_gps_fidelisation"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/correct_v"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="right"
-                android:layout_marginLeft="17dp" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/separator1"
+                android:layout_below="@+id/textView6"
+                android:layout_marginTop="@dimen/activity_vertical_margin" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/separator1"
+                android:layout_alignLeft="@+id/linearLayout"
+                android:layout_alignRight="@+id/linearLayout"
+                android:id="@+id/linearLayout2"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="Accès GPS"
+                    android:id="@+id/textView2"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="18sp"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp" />
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/points_gps_fidelisation"
+                    android:background="@drawable/correct_v"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="5dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/separator2"
+                android:layout_below="@+id/linearLayout2"
+                android:layout_marginTop="5dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_alignStart="@+id/linearLayout2"
+                android:layout_below="@+id/separator2"
+                android:layout_alignRight="@+id/linearLayout2"
+                android:layout_alignEnd="@+id/linearLayout2"
+                android:id="@+id/linearLayout3"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="Accès Conseils "
+                    android:id="@+id/textView3"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="18dp"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp" />
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/points_conseils_fidelisation"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/correct_v"
+                    android:layout_marginRight="5dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/separator3"
+                android:layout_below="@+id/linearLayout3"
+                android:layout_marginTop="5dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/linearLayout3"
+                android:layout_alignStart="@+id/linearLayout3"
+                android:layout_below="@+id/separator3"
+                android:layout_alignRight="@+id/linearLayout3"
+                android:layout_alignEnd="@+id/linearLayout3"
+                android:id="@+id/linearLayout4"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="fill_parent"
+                    android:text="Faire le plein "
+                    android:id="@+id/textView4"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="18dp"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp" />
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/points_plein_fidelisation"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/correct_v"
+                    android:layout_marginRight="5dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/separator4"
+                android:layout_below="@+id/linearLayout4"
+                android:layout_marginTop="5dp" />
         </RelativeLayout>
-    </LinearLayout>
+    </ScrollView>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignLeft="@+id/linearLayout2"
-        android:layout_alignStart="@+id/linearLayout2"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_alignRight="@+id/linearLayout2"
-        android:layout_alignEnd="@+id/linearLayout2"
-        android:layout_marginTop="30dp"
-        android:id="@+id/linearLayout3">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primary">
-
-            <TextView
-                android:layout_width="250dp"
-                android:layout_height="fill_parent"
-                android:text="Accès Conseils "
-                android:id="@+id/textView3"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:paddingLeft="10dp"
-                android:textSize="25dp"
-                android:paddingTop="13dp"
-                android:textColor="@android:color/white" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="fill_parent"
-                android:id="@+id/points_conseils_fidelisation"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/correct_v"
-                android:layout_marginRight="5dp" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignLeft="@+id/linearLayout3"
-        android:layout_alignStart="@+id/linearLayout3"
-        android:layout_below="@+id/linearLayout3"
-        android:layout_alignRight="@+id/linearLayout3"
-        android:layout_alignEnd="@+id/linearLayout3"
-        android:layout_marginTop="30dp"
-        android:id="@+id/linearLayout4">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primary">
-
-            <TextView
-                android:layout_width="250dp"
-                android:layout_height="fill_parent"
-                android:text="Faire le plein "
-                android:id="@+id/textView4"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:paddingLeft="10dp"
-                android:textSize="25dp"
-                android:paddingTop="13dp"
-                android:textColor="@android:color/white" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="fill_parent"
-                android:id="@+id/points_plein_fidelisation"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/correct_v"
-                android:layout_marginRight="5dp" />
-
-        </RelativeLayout>
-    </LinearLayout>
 </RelativeLayout>
