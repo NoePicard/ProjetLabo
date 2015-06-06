@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.media.Image;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class InfoVehiculeActivity extends BaseActivity {
 
     //public var for layout.
     public ImageView voiturePhoto;
+    public ImageView iv_GPS;
     public TextView lbl_car_model;
     public ImageButton ib_car_doors;
     public ImageButton ib_car_key;
@@ -75,6 +77,7 @@ public class InfoVehiculeActivity extends BaseActivity {
         ib_car_doors = (ImageButton) findViewById(R.id.car_doors);
         ib_car_key = (ImageButton) findViewById(R.id.car_key);
         sv_fuel_gauge = (SpeedometerGauge) findViewById(R.id.fuel_gauge);
+        iv_GPS = (ImageView) findViewById(R.id.ivCarGPS);
 
         String url = ProjetLabo.BASE_URL + ProjetLabo.user.getVoiture().getPath();
         Picasso.with(this).load(url).into(voiturePhoto);
@@ -170,6 +173,14 @@ public class InfoVehiculeActivity extends BaseActivity {
             }
         }
 
+
+
+        //GPS
+        if(ProjetLabo.user.getVoiture().isGps()){
+            iv_GPS.setVisibility(View.VISIBLE);
+        }else{
+            iv_GPS.setVisibility(View.GONE);
+        }
     }
 
 

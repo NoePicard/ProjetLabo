@@ -41,16 +41,26 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_below="@+id/linearLayout5"
-        android:layout_marginBottom="@dimen/padding_xl">
+        android:layout_marginBottom="@dimen/padding_xl"
+        android:weightSum="1">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:id="@+id/car_model"
             android:textSize="20sp"
             android:textColor="@android:color/white"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_vertical|center|center_horizontal" />
+            android:gravity="center_vertical|center|center_horizontal"
+            android:layout_weight="0.99" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:id="@+id/ivCarGPS"
+            android:background="@drawable/car_gps"
+            android:adjustViewBounds="true"
+            android:layout_margin="@dimen/padding_xs" />
 
     </LinearLayout>
 
@@ -62,7 +72,7 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:id="@+id/linearLayout3"
         android:layout_below="@+id/linearLayout8"
-        android:layout_marginTop="@dimen/padding_xl"
+        android:layout_marginTop="@dimen/padding_m"
         android:layout_marginBottom="10dp">
 
         <ImageButton
@@ -127,6 +137,7 @@
             android:layout_alignWithParentIfMissing="false"
             android:layout_weight="1"
             android:layout_marginLeft="5dp" />
+
     </LinearLayout>
 
     <RelativeLayout
