@@ -239,6 +239,9 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                                         })
                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                         .show();
+                            } else {
+                                ProjetLabo.user.getVoiture().setFuelQuantity((int) Math.floor(input.getProgress()));
+                                ProjetLabo.user.setToApi(ProfileActivity.this);
                             }
                         } else {
                             new AlertDialog.Builder(ProfileActivity.this)
