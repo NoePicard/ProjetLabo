@@ -133,11 +133,12 @@ public class InfoVehiculeActivity extends BaseActivity {
                         ib_car_case.getBackground().setAlpha(128);
                 ib_car_key.setBackground(getResources().getDrawable(R.drawable.car_key));
                         ib_car_key.getBackground().setAlpha(128);
-                sv_fuel_gauge.setSpeed(0,false);
+                sv_fuel_gauge.setSpeed(0, false);
+
             }
             else {
                 ib_bluetooth_activated.setBackground(getResources().getDrawable(R.drawable.blueetooth_green));
-                // Configure FuelGauge needle
+                //configure FUEL GAUGE needle
                 sv_fuel_gauge.setSpeed((int)fuelQTT, false);
                 if (ProjetLabo.user.getVoiture().isOpenDoor()) {
                     ib_car_doors.setBackground(getResources().getDrawable(R.drawable.car_door_red));
