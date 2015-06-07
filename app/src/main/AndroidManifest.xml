@@ -40,23 +40,28 @@
         </activity>
         <activity
             android:name=".activities.ContratActivity"
-            android:label="@string/title_activity_contrat" >
+            android:label="@string/title_activity_contrat"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activities.CriteresActivity"
-            android:label="@string/title_activity_criteres" >
+            android:label="@string/title_activity_criteres"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activities.VoitureActivity"
-            android:label="@string/title_activity_voiture" >
+            android:label="@string/title_activity_voiture"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activities.SoldeFidelisationAcitivity"
-            android:label="@string/title_activity_solde_fidelisation_acitivity" >
+            android:label="@string/title_activity_solde_fidelisation_acitivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activities.ListeVoituresActivity"
-            android:label="@string/title_activity_liste_voitures" >
+            android:label="@string/title_activity_liste_voitures"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activities.InfoVehiculeActivity"
@@ -66,7 +71,8 @@
         </activity>
         <activity
             android:name=".activities.ProfileActivity"
-            android:label="@string/title_activity_profile" >
+            android:label="@string/title_activity_profile"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activities.BaseActivity"
@@ -78,7 +84,8 @@
             android:value="AIzaSyB5DlWQgNe7u_JE8673zfP2UHS4BI0fdJM" />
         <activity
             android:name=".activities.MapsActivity"
-            android:label="@string/title_activity_maps" >
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait">
         </activity>
         <uses-library android:name="com.google.android.maps" />
     </application>
