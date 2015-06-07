@@ -63,14 +63,14 @@ public class MapsActivity extends BaseActivity {
 
     private void setUpMap() {
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(new LatLng(50.4665398, 4.7914438));
+        markerOptions.position(new LatLng(50.4658513, 4.8578139));
         markerOptions.describeContents();
         //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.car_on_map));
         markerOptions.title("Parking");
         markerOptions.snippet("Parkez-vous à l'emplacement 'A33' ");
         markerOptions.visible(true);
         mMap.addMarker(markerOptions);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.4665398, 4.7914438), 10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.4665398, 4.8578139), 10));
     }
 
     private boolean rendreVerifPlain() {
