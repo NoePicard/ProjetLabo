@@ -135,16 +135,17 @@ public class VoitureActivity extends BaseActivity {
                                             new AlertDialog.Builder(VoitureActivity.this)
                                                     .setTitle("Adresse de réception")
                                                     .setMessage("Votre véhicule sera disponible le " + dateFormat.format(start) + " à l'adresse : Rue Grandgagnage 21, B-5000 Namur")
-                                                    .setPositiveButton("Payer", new DialogInterface.OnClickListener() {
+                                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                                         public void onClick(DialogInterface dialog, int which) {
+                                                            Intent intent = new Intent(VoitureActivity.this, ProfileActivity.class);
+                                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                            startActivity(intent);
+                                                            VoitureActivity.this.finish();
                                                         }
                                                     })
+                                                    .setCancelable(false)
                                                     .setIcon(android.R.drawable.ic_dialog_alert)
                                                     .show();
-                                            Intent intent = new Intent(VoitureActivity.this, ProfileActivity.class);
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            startActivity(intent);
-                                            VoitureActivity.this.finish();
                                         } else {
                                             hideProgressBar();
                                             Toast.makeText(VoitureActivity.this, "Une erreur est survenue veuillez réessayer", Toast.LENGTH_LONG).show();
