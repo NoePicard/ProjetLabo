@@ -61,11 +61,11 @@ public class VoitureActivity extends BaseActivity {
         ButterKnife.inject(this);
 
         ActionBar actionBar = VoitureActivity.this.getSupportActionBar();
-        try{
+        try {
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
-        }catch (Exception e){
+        } catch (Exception e) {
         }
 
         lblDescriptionVoiture = (TextView) findViewById(R.id.lbl_Description_Vehicule);
@@ -73,8 +73,8 @@ public class VoitureActivity extends BaseActivity {
 
         Intent intent = getIntent();
         voiture = (Voiture) intent.getSerializableExtra("voiture");
-        start = intent.getLongExtra("Debut",0);
-        end = intent.getLongExtra("Fin",0);
+        start = intent.getLongExtra("Debut", 0);
+        end = intent.getLongExtra("Fin", 0);
 
         ImageView voiturePhoto = (ImageView) findViewById(R.id.iv_voiture_photo);
 
@@ -87,9 +87,9 @@ public class VoitureActivity extends BaseActivity {
     }
 
     @OnClick(R.id.btn_louer)
-    public void onClickBtnLouer(View v){
+    public void onClickBtnLouer(View v) {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         final int nbDays = Math.round((end - start) / (1000 * 60 * 60 * 24));
         float prix = voiture.getPrice() * nbDays;
         new AlertDialog.Builder(this)
@@ -124,15 +124,23 @@ public class VoitureActivity extends BaseActivity {
                                             ProjetLabo.user.addCapital(((float) 1 / 7) * nbDays);
                                             VoitureLoue voit = new VoitureLoue(voiture, louerJSON.getInt("idLocation"), calStart, calEnd);
                                             voit.setGps(chbGPS.isChecked());
-                                            if(ProjetLabo.user.isFidele()){
+                                            if (ProjetLabo.user.isFidele()) {
                                                 voit.setFuelQuantity(50);
-                                            }else{
+                                            } else {
                                                 voit.setFuelQuantity(25);
                                             }
                                             ProjetLabo.user.setVoiture(voit);
                                             ProjetLabo.user.setToApi(VoitureActivity.this);
-                                            //Lancer l'actitité profile et fermet toutes les autres activité.
-                                            // Cela évite de revenir avec le btn retour dans la liste des véhicules à loué
+
+                                            new AlertDialog.Builder(VoitureActivity.this)
+                                                    .setTitle("Adresse de réception")
+                                                    .setMessage("Votre véhicule sera disponible le " + dateFormat.format(start) + " à l'adresse : Rue Grandgagnage 21, B-5000 Namur")
+                                                    .setPositiveButton("Payer", new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                        }
+                                                    })
+                                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                                    .show();
                                             Intent intent = new Intent(VoitureActivity.this, ProfileActivity.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             startActivity(intent);
@@ -196,10 +204,11 @@ public class VoitureActivity extends BaseActivity {
         inflater.inflate(R.menu.menu_default, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         action_bar_progress = menu.findItem(R.id.action_bar_progress);
-        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(action_bar_progress);
+        ProgressBar v = (ProgressBar) MenuItemCompat.getActionView(action_bar_progress);
         return super.onPrepareOptionsMenu(menu);
     }
 

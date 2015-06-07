@@ -294,47 +294,69 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
     public void onDatePickerSet(int year, int monthOfYear, int dayOfMonth) {
         final Calendar calProlongation = new GregorianCalendar();
         calProlongation.set(year, monthOfYear, dayOfMonth);
-        long prolongation = calProlongation.getTime().getTime();
+        final long prolongation = calProlongation.getTime().getTime();
         if (prolongation > ProjetLabo.user.getVoiture().getEnd().getTime().getTime()) {
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("idLocation", Integer.toString(ProjetLabo.user.getVoiture().getIdLocation()));
-            params.put("end", Long.toString(prolongation));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            final int nbDays = Math.round((prolongation - ProjetLabo.user.getVoiture().getEnd().getTime().getTime()) / (1000 * 60 * 60 * 24));
+            float prix = ProjetLabo.user.getVoiture().getPrice() * nbDays;
+            new AlertDialog.Builder(this)
+                    .setTitle("Louer cette voiture !")
+                    .setMessage("Pour prolonger cette voiture jusqu'au " + dateFormat.format(prolongation) +
+                            " veuillez payer la somme de " + prix + " €.")
+                    .setPositiveButton("Payer", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
-            String URL = ProjetLabo.API_BASE_URL + "/prolongers.json";
+                            Map<String, String> params = new HashMap<String, String>();
+                        params.put("idLocation", Integer.toString(ProjetLabo.user.getVoiture().getIdLocation()));
+                        params.put("end", Long.toString(prolongation));
 
-            PostRequest requestAddUser = new PostRequest(URL, params, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String s) {
-                    try {
-                        JSONObject userJSON = new JSONObject(s);
-                        if (userJSON.has("response")) {
-                            if (userJSON.getBoolean("response")) {
-                                int nbDays = Math.round((calProlongation.getTimeInMillis() - ProjetLabo.user.getVoiture().getEnd().getTimeInMillis()) / (1000 * 60 * 60 * 24));
-                                //1 point pas semaine de location
-                                ProjetLabo.user.addCapital(((float) 1 / 7) * (float) nbDays);
-                                ProjetLabo.user.getVoiture().setEnd(calProlongation);
-                                ProjetLabo.user.setToApi(ProfileActivity.this);
-                                ProfileActivity.this.recreate();
-                            } else {
-                                Toast.makeText(ProfileActivity.this, "Ce véhicule ne peut pas être prolongé jusqu'à la date voulue !", Toast.LENGTH_LONG).show();
+                        String URL = ProjetLabo.API_BASE_URL + "/prolongers.json";
+
+                        PostRequest requestAddUser = new PostRequest(URL, params, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String s) {
+                                try {
+                                    JSONObject userJSON = new JSONObject(s);
+                                    if (userJSON.has("response")) {
+                                        if (userJSON.getBoolean("response")) {
+                                            int nbDays = Math.round((calProlongation.getTimeInMillis() - ProjetLabo.user.getVoiture().getEnd().getTimeInMillis()) / (1000 * 60 * 60 * 24));
+                                            //1 point pas semaine de location
+                                            ProjetLabo.user.addCapital(((float) 1 / 7) * (float) nbDays);
+                                            ProjetLabo.user.getVoiture().setEnd(calProlongation);
+                                            ProjetLabo.user.setToApi(ProfileActivity.this);
+                                            ProfileActivity.this.recreate();
+                                        } else {
+                                            Toast.makeText(ProfileActivity.this, "Ce véhicule ne peut pas être prolongé jusqu'à la date voulue !", Toast.LENGTH_LONG).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(ProfileActivity.this, "Il est actuellement impossible de prolonger votre véhicule", Toast.LENGTH_LONG).show();
+                                    }
+                                } catch (JSONException e) {
+                                    Toast.makeText(ProfileActivity.this, "Il est actuellement impossible de prolonger votre véhicule", Toast.LENGTH_LONG).show();
+                                }
                             }
-                        } else {
-                            Toast.makeText(ProfileActivity.this, "Il est actuellement impossible de prolonger votre véhicule", Toast.LENGTH_LONG).show();
+                        },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError volleyError) {
+                                        Toast.makeText(ProfileActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                        RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this, new OkHttpStack());
+                        queue.add(requestAddUser);
                         }
-                    } catch (JSONException e) {
-                        Toast.makeText(ProfileActivity.this, "Il est actuellement impossible de prolonger votre véhicule", Toast.LENGTH_LONG).show();
-                    }
-                }
-            },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            Toast.makeText(ProfileActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
                         }
-                    });
-            RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this, new OkHttpStack());
-            queue.add(requestAddUser);
-        } else {
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+
+        else
+        {
             Toast.makeText(ProfileActivity.this, "Votre nouvelle date de fin de location doit être supérieure a l'ancienne.", Toast.LENGTH_LONG).show();
         }
     }
