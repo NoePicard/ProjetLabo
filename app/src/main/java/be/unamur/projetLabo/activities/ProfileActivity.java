@@ -219,7 +219,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                     public void onClick(DialogInterface dialog, int whichButton) {
                         if (input.getProgress() > ProjetLabo.user.getVoiture().getFuelQuantity()) {
                             final float prixFidele = (input.getProgress() - ProjetLabo.user.getVoiture().getFuelQuantity()) * 1 / 10;
-                            if (prixFidele < ProjetLabo.user.getCapital()) {
+                            if (prixFidele < ProjetLabo.user.getCapital() && ProjetLabo.user.isFidele()) {
                                 new AlertDialog.Builder(ProfileActivity.this)
                                         .setTitle("Payer avec votre compte fidélité")
                                         .setMessage("Vous possédez " + ProjetLabo.user.getCapital() + " points sur votre compte fidélité. Souhaitez-vous payer votre plein (" + prixFidele + " points) avec ces points ?")
