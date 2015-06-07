@@ -145,6 +145,14 @@ public class CriteresActivity extends BaseActivity implements DatePickerFragment
                 btnEnd.setText("");
             }
         }
+        if(start != 0){
+            date = new GregorianCalendar();
+            if ((date.getTimeInMillis() - (1000 * 60 * 60 * 24)) > start) {
+                Toast.makeText(CriteresActivity.this, "Veuillez choisir une date de début correcte.", Toast.LENGTH_LONG).show();
+                start = 0;
+                btnStart.setText("");
+            }
+        }
     }
 
     @OnClick(R.id.btn_next)
