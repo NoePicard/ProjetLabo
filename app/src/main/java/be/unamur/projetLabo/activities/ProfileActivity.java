@@ -226,17 +226,19 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
                                         .setPositiveButton("Compte fidélité", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 ProjetLabo.user.subCapital(prixFidele);
+                                                ProjetLabo.user.getVoiture().setFuelQuantity((int) Math.floor(input.getProgress()));
+                                                ProjetLabo.user.setToApi(ProfileActivity.this);
                                             }
                                         })
                                         .setNegativeButton("Cash", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 // do nothing
+                                                ProjetLabo.user.getVoiture().setFuelQuantity((int) Math.floor(input.getProgress()));
+                                                ProjetLabo.user.setToApi(ProfileActivity.this);
                                             }
                                         })
                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                         .show();
-                                ProjetLabo.user.getVoiture().setFuelQuantity((int) Math.floor(ProjetLabo.user.getVoiture().getFuelQuantity() + input.getProgress()));
-                                ProjetLabo.user.setToApi(ProfileActivity.this);
                             }
                         } else {
                             new AlertDialog.Builder(ProfileActivity.this)
