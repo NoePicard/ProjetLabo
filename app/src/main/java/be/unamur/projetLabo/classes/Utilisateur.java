@@ -81,13 +81,19 @@ public class Utilisateur {
         this.contrated = contrated;
     }
     public void setCapital (float capital){
-        this.capital = capital;
+        if(this.fidele){
+            this.capital = capital;
+        }
     }
     public void addCapital(float capital){
-        this.capital += capital;
+        if(this.fidele) {
+            this.capital += capital;
+        }
     }
     public void subCapital(float capital){
-        this.capital -= capital;
+        if(this.fidele) {
+            this.capital -= capital;
+        }
     }
     public int getCapital(){
         return (int) Math.floor(this.capital);
