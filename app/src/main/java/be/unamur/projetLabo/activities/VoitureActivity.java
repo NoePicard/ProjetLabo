@@ -82,7 +82,7 @@ public class VoitureActivity extends BaseActivity {
         Picasso.with(this).load(url).into(voiturePhoto);
 
         VoitureActivity.this.setTitle("Votre selection : " + voiture.getName());
-        lblDescriptionVoiture.setText("Ce véhicule comporte " + voiture.getNbSeat() + " sièges, muni de " + voiture.getNbDoor() + "  portes il vous conduira où vous le souhaitez.");
+        lblDescriptionVoiture.setText("Ce véhicule comporte " + voiture.getNbSeat() + " sièges, muni de " + voiture.getNbDoor() + " portes il vous conduira où vous le souhaitez.");
 
     }
 

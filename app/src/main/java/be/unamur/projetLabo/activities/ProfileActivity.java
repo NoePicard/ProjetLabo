@@ -300,7 +300,7 @@ public class ProfileActivity extends BaseActivity implements DatePickerFragment.
             final int nbDays = Math.round((prolongation - ProjetLabo.user.getVoiture().getEnd().getTime().getTime()) / (1000 * 60 * 60 * 24));
             float prix = ProjetLabo.user.getVoiture().getPrice() * nbDays;
             new AlertDialog.Builder(this)
-                    .setTitle("Louer cette voiture !")
+                    .setTitle("Prolonger cette voiture !")
                     .setMessage("Pour prolonger cette voiture jusqu'au " + dateFormat.format(prolongation) +
                             " veuillez payer la somme de " + prix + " €.")
                     .setPositiveButton("Payer", new DialogInterface.OnClickListener() {
