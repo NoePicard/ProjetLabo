@@ -1,13 +1,20 @@
 package be.unamur.projetLabo.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -18,10 +25,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Map;
 
 import be.unamur.projetLabo.ProjetLabo;
 import be.unamur.projetLabo.R;
+import be.unamur.projetLabo.classes.Utilisateur;
+import be.unamur.projetLabo.exception.UserConnectionException;
+import be.unamur.projetLabo.request.OkHttpStack;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -62,15 +75,43 @@ public class MapsActivity extends BaseActivity {
     }
 
     private void setUpMap() {
-        MarkerOptions markerOptions = new MarkerOptions();
+        final MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(new LatLng(50.4658513, 4.8578139));
         markerOptions.describeContents();
         //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.car_on_map));
         markerOptions.title("Parking");
-        markerOptions.snippet("Parkez-vous à l'emplacement 'A33' ");
-        markerOptions.visible(true);
-        mMap.addMarker(markerOptions);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.4665398, 4.8578139), 10));
+
+        String URL = ProjetLabo.API_BASE_URL + "/place/free.json";
+        StringRequest request = new StringRequest(URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                try{
+                    JSONObject userJSON = new JSONObject(s);
+                    if (userJSON.has("place")) {
+                        markerOptions.snippet("Parkez-vous à l'emplacement '"+ userJSON.getString("place") +"' ");
+                        markerOptions.visible(true);
+                        mMap.addMarker(markerOptions);
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.4665398, 4.8578139), 10));
+                        ProjetLabo.user.getVoiture().setParking(userJSON.getString("place"));
+                    } else {
+                        Toast.makeText(MapsActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(MapsActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        hideProgressBar();
+                        Toast.makeText(MapsActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue queue = Volley.newRequestQueue(MapsActivity.this, new OkHttpStack());
+        queue.add(request);
+
     }
 
     private boolean rendreVerifPlain() {

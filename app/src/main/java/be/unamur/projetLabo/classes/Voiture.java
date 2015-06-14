@@ -48,6 +48,9 @@ public class Voiture implements Serializable {
             this.manualTransmission = voitObj.getBoolean("ManualTransmission");
             this.path = voitObj.getString("Path");
             this.price = voitObj.getLong("Price");
+            this.openDoor = voitObj.getBoolean("openDoor");
+            this.openEtui = voitObj.getBoolean("openEtui");
+            this.keyInEtui = voitObj.getBoolean("keyInEtui");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -171,6 +174,11 @@ public class Voiture implements Serializable {
         params.put("openEtui", Boolean.toString(this.openEtui));
         params.put("keyInEtui", Boolean.toString(this.keyInEtui));
         params.put("fuelQuantity", Float.toString(this.fuelQuantity));
+        if(this.parking == null){
+            params.put("place", "");
+        }else{
+            params.put("place", this.parking);
+        }
 
         String URL = ProjetLabo.API_BASE_URL + "/objects/voitures.json";
 

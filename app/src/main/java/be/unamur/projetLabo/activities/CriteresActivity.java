@@ -165,6 +165,8 @@ public class CriteresActivity extends BaseActivity implements DatePickerFragment
         }
     }
 
+
+
     @OnClick(R.id.btn_next)
     public void onClickBtnNext(View view) {
         if (start != 0 && end != 0) {
