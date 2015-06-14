@@ -360,4 +360,10 @@ public class InfoVehiculeActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ProjetLabo.user.setToApi(InfoVehiculeActivity.this);
+        ProjetLabo.user.getVoiture().setToApi(InfoVehiculeActivity.this);
+    }
 }

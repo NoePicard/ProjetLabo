@@ -3,6 +3,7 @@ package be.unamur.projetLabo.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
@@ -56,6 +57,15 @@ public class CriteresActivity extends BaseActivity implements DatePickerFragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_criteres);
         ButterKnife.inject(this);
+
+        ActionBar actionBar = CriteresActivity.this.getSupportActionBar();
+        try{
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }catch (Exception e){
+        }
+
 
         listViewCriteres = (ListView) findViewById(R.id.listView_criteres);
         btnStart = (EditText) findViewById(R.id.txt_startDate);

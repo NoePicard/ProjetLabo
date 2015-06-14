@@ -90,6 +90,22 @@ public class MapsActivity extends BaseActivity {
         return true;
     }
 
+    private boolean verifEtatVoiture(){
+        if (!ProjetLabo.user.getVoiture().isKeyInEtui() || ProjetLabo.user.getVoiture().isOpenEtui() || ProjetLabo.user.getVoiture().isOpenDoor()) {
+            new AlertDialog.Builder(MapsActivity.this)
+                    .setTitle("Verifiez votre voiture !")
+                    .setMessage("Votre voiture doit contenir les clés, l'étui ainsi que la porte doivent être fermés.")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            MapsActivity.this.finish();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+            return false;
+        }
+        return true;
+    }
 
     @OnClick(R.id.btnCarDropped)
     public void onClickBtnCarDropped(View v){
@@ -98,7 +114,7 @@ public class MapsActivity extends BaseActivity {
                 .setMessage("La voiture " + ProjetLabo.user.getVoiture().getName() +" a-t-elle bien été stationnée à l'emplacement demandé ?")
                 .setPositiveButton("Je confirme", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        if (MapsActivity.this.rendreVerifPlain()) {
+                        if (MapsActivity.this.rendreVerifPlain() && MapsActivity.this.verifEtatVoiture()) {
                             ProjetLabo.user.getVoiture().setRendu(true);
                             ProjetLabo.user.getVoiture().setToApi(MapsActivity.this);
                             ProjetLabo.user.setVoiture(null);

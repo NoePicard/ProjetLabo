@@ -88,9 +88,6 @@ public class InscriptionActivity extends BaseActivity implements SnackBar.OnMess
         if(!strName.isEmpty() || !strFirstName.isEmpty()) {
             showProgressBar();
 
-            /* J'ai rajouter 3 chiffres aléatoires à la fin du login pour pas avoir de problèmes quand du utilisateur
-                ont le même prénom et nom
-             */
             strLogin = strFirstName.substring(0,1).toLowerCase() + strName.toLowerCase() + randomString(3,false);
             strPassword = randomString(8,true);
 

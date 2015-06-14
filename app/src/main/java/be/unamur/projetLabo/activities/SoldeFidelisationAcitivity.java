@@ -68,7 +68,7 @@ public class SoldeFidelisationAcitivity extends BaseActivity {
         int solde_capital = ProjetLabo.user.getCapital();
         lbl_solde_capital.setText(Integer.toString(solde_capital));
 
-        // Valeur par défaut
+        // Default value
         iv_correct_conseils.setBackground(getResources().getDrawable(R.drawable.correct_v));
         iv_correct_gps.setBackground(getResources().getDrawable(R.drawable.wrong_x));
         iv_correct_plein.setBackground(getResources().getDrawable(R.drawable.wrong_x));
