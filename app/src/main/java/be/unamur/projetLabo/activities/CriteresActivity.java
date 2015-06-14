@@ -165,7 +165,11 @@ public class CriteresActivity extends BaseActivity implements DatePickerFragment
         }
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideProgressBar();
+    }
 
     @OnClick(R.id.btn_next)
     public void onClickBtnNext(View view) {

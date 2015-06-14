@@ -91,7 +91,7 @@ public class MapsActivity extends BaseActivity {
                         markerOptions.snippet("Parkez-vous à l'emplacement '"+ userJSON.getString("place") +"' ");
                         markerOptions.visible(true);
                         mMap.addMarker(markerOptions);
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.4665398, 4.8578139), 10));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.4665398, 4.8578139), 15));
                         ProjetLabo.user.getVoiture().setParking(userJSON.getString("place"));
                     } else {
                         Toast.makeText(MapsActivity.this, "Une erreur réseau est survenue !", Toast.LENGTH_LONG).show();
